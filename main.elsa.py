@@ -53,3 +53,36 @@ def grille_partition(waypoints, res=(10, 10)):
         grid.setdefault((i, j), []).append(wp_id)
 
     return (res, grid), (x1, y1, x2, y2)
+
+
+
+#Détermine le waypoint le plus proche de la localisation du point en entrée
+def determiner_wp_plus_proche(point, waypoints, partition, geometry, fast=True):
+    min_dist = np.inf
+    wp_id = None
+    coordonnees_proche = (None, None)
+
+    if fast:
+        x1, y1, x2, y2 = geometry
+        res = partition[0]
+        grid = partition[1]
+        l = (x2 - x1) / res[0]
+        h = (y2 - y1) / res[1]
+
+        i = min(int(floor((point[0] - y1) / h)), res[1] - 1)
+        j = min(int(floor((point[1] - x1) / l)), res[0] - 1)
+        ids = grid.get((i, j), [])
+
+        if len(ids) <= 1:
+            ids = waypoints.keys()
+    else:
+        ids = waypoints.keys()
+
+    for id_wp in ids:
+        lat_wp, lon_wp = waypoints[id_wp]
+        d = geodesic((point[0], point[1]), (lat_wp, lon_wp)).meters
+        if d < min_dist:
+            min_dist, wp_id = d, id_wp
+            coordonnees_proche = waypoints[id_wp]
+
+    return wp_id, coordonnees_proche[0], coordonnees_proche[1]
