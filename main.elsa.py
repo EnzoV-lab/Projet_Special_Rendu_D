@@ -86,3 +86,20 @@ def determiner_wp_plus_proche(point, waypoints, partition, geometry, fast=True):
             coordonnees_proche = waypoints[id_wp]
 
     return wp_id, coordonnees_proche[0], coordonnees_proche[1]
+
+
+"""# ======== UTILISATION ========
+# 1. Charger la liste de waypoints (liste de tuples)
+waypoints_liste = charger_waypoints("Data/waypoints.csv")
+
+# 2. Convertir en dict {id: (lat, lon)}
+waypoints_dict = {wp_id: (lat, lon) for wp_id, lat, lon in waypoints_liste}
+
+# 3. Créer la partition spatiale
+partition, geometry = grille_partition(waypoints_dict, res=(10, 10))
+
+# 4. Trouver le waypoint le plus proche d'un point donné (ex : New York)
+point_test = (40.7128, -74.0060)
+wp_id, lat, lon = determiner_wp_plus_proche(point_test, waypoints_dict, partition, geometry, fast=True)
+
+print(f"Waypoint le plus proche: {wp_id}, coordonnées: ({lat}, {lon})")"""
