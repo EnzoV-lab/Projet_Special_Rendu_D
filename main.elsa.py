@@ -1,7 +1,9 @@
 
+import csv
+from geopy.distance import geodesic
+import folium
 
-
-#
+# Charge les identifiant et coordonnées des waypoints de la base de données
 def charger_waypoints(fichier_csv):
     waypoints = []
     with open(fichier_csv, newline='', encoding='utf-8') as csvfile:
