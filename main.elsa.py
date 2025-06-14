@@ -88,7 +88,8 @@ def determiner_wp_plus_proche(point, waypoints, partition, geometry, fast=True):
     return wp_id, coordonnees_proche[0], coordonnees_proche[1]
 
 
-"""# ======== UTILISATION ========
+
+ # Test des programme ci-dessus
 # 1. Charger la liste de waypoints (liste de tuples)
 waypoints_liste = charger_waypoints("Data/waypoints.csv")
 
@@ -102,4 +103,20 @@ partition, geometry = grille_partition(waypoints_dict, res=(10, 10))
 point_test = (40.7128, -74.0060)
 wp_id, lat, lon = determiner_wp_plus_proche(point_test, waypoints_dict, partition, geometry, fast=True)
 
-print(f"Waypoint le plus proche: {wp_id}, coordonnées: ({lat}, {lon})")"""
+
+print(f"Waypoint le plus proche: {wp_id}, coordonnées: ({lat}, {lon})")
+
+
+
+def selectionner_waypoints_plus_proches_par_segments(waypoints, depart, arrivee, partition, geometry, n_points=100):
+    points_intermediaires = intercaler_points(depart[0], depart[1], arrivee[0], arrivee[1], n_points)
+    cas_teste = set()
+    waypoints_selectionnes = []
+
+    for point in points_intermediaires:
+        wp = determiner_wp_plus_proche(point, waypoints, partition, geometry, fast=True)
+        if wp[0] not in cas_teste:
+            waypoints_selectionnes.append(wp)
+            cas_teste.add(wp[0])
+    print(waypoints_selectionnes)
+    return waypoints_selectionnes
