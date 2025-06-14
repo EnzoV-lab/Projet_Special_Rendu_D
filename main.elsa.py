@@ -2,6 +2,8 @@
 import csv
 from geopy.distance import geodesic
 import folium
+from math import floor
+import numpy as np
 
 # Charge les identifiant et coordonnées des waypoints de la base de données
 def charger_waypoints(fichier_csv):
@@ -43,13 +45,13 @@ def grille_partition(waypoints, res=(10, 10)):
     x1, x2 = min(longitudes), max(longitudes)
 
     h = (y2 - y1) / res[1] if res[1] > 0 else 1
-    w = (x2 - x1) / res[0] if res[0] > 0 else 1
+    l = (x2 - x1) / res[0] if res[0] > 0 else 1
 
     grid = {}
 
     for wp_id, (lat, lon) in waypoints.items():
         i = min(int(floor((lat - y1) / h)), res[1] - 1) if h > 0 else 0
-        j = min(int(floor((lon - x1) / w)), res[0] - 1) if w > 0 else 0
+        j = min(int(floor((lon - x1) / l)), res[0] - 1) if l > 0 else 0
         grid.setdefault((i, j), []).append(wp_id)
 
     return (res, grid), (x1, y1, x2, y2)
