@@ -25,10 +25,10 @@ def charger_waypoints(fichier_csv):
 
 # Interpolation linéaire entre le point de départ et le point d'arrivée
 def intercaler_points(lat1, lon1, lat2, lon2, n):
-    return [
-        (
-            lat1 + i * (lat2 - lat1) / (n + 1),
-            lon1 + i * (lon2 - lon1) / (n + 1)
-        )
-        for i in range(1, n + 1)
-    ]
+    points_intercale = []
+    for i in range(1, n + 1):
+        x = lat1 + i * (lat2 - lat1) / (n + 1)
+        y = lon1 + i * (lon2 - lon1) / (n + 1)
+        points_intercale.append((x, y))
+
+    return points_intercale
