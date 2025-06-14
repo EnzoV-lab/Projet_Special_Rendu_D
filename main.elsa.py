@@ -32,3 +32,24 @@ def intercaler_points(lat1, lon1, lat2, lon2, n):
         points_intercale.append((x, y))
 
     return points_intercale
+
+
+def grille_partition(waypoints, res=(10, 10)):
+    # waypoints est un dict {id: (lat, lon)}
+    latitudes = [coord[0] for coord in waypoints.values()]
+    longitudes = [coord[1] for coord in waypoints.values()]
+
+    y1, y2 = min(latitudes), max(latitudes)
+    x1, x2 = min(longitudes), max(longitudes)
+
+    h = (y2 - y1) / res[1] if res[1] > 0 else 1
+    w = (x2 - x1) / res[0] if res[0] > 0 else 1
+
+    grid = {}
+
+    for wp_id, (lat, lon) in waypoints.items():
+        i = min(int(floor((lat - y1) / h)), res[1] - 1) if h > 0 else 0
+        j = min(int(floor((lon - x1) / w)), res[0] - 1) if w > 0 else 0
+        grid.setdefault((i, j), []).append(wp_id)
+
+    return (res, grid), (x1, y1, x2, y2)
