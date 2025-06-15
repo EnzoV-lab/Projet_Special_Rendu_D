@@ -6,6 +6,10 @@ import numpy as np
 import pandas as pd
 import requests
 
+
+cle_api ="d9ac5ac56f3d4768abd232315250506"
+
+
 df = pd.read_csv("Data/Waypoints.csv")
 north_america_codes = ['US', 'CA', 'MX']
 df_na = df[df['iso_country'].isin(north_america_codes)]
@@ -145,37 +149,38 @@ def selectionner_waypoints_plus_proches_par_segments(waypoints, depart, arrivee,
     print(waypoints_selectionnes)
     return waypoints_selectionnes
 
-def tracer_trajet(chemin):
-    """
-    Affiche un trajet sur une carte Folium et retourne l'objet carte.
-    `chemin` est une liste de tuples (id, lat, lon)
-    """
-    if not chemin:
-        raise ValueError("Le chemin est vide.")
-
-    lat_centre = sum(p[1] for p in chemin) / len(chemin)
-    lon_centre = sum(p[2] for p in chemin) / len(chemin)
+def tracer_trajet_avec_meteo(chemin, cle_api):
+    lat_centre = sum(place[1] for place in chemin) / len(chemin)
+    lon_centre = sum(place[2] for place in chemin) / len(chemin)
     carte = folium.Map(location=(lat_centre, lon_centre), zoom_start=5)
 
-    for i, (id, lat, lon) in enumerate(chemin):
+    for i, (id_wp, lat, lon) in enumerate(chemin):
+        # Récupération des données météo
+        meteo = DonneesMeteo(cle_api, (lat, lon))
+        meteo.fetch()
+        infos = meteo.get_donnees()
+
+        popup_text = (
+            f"ID: {id_wp}"
+            f" Vent: {infos.get('vent_kph', 'N/A')} km/h {infos.get('direction_cardinal', '')}"
+            f" Condition:{infos.get('condition', 'N/A')}"
+            f" Précipitations: {infos.get('precip_mm', 'N/A')} mm"
+        )
+
         couleur = "green" if i == 0 else "red" if i == len(chemin) - 1 else "blue"
-        folium.Marker(location=(lat, lon), popup=id, icon=folium.Icon(color=couleur)).add_to(carte)
+        folium.Marker(
+            location=(lat, lon),
+            popup=folium.Popup(popup_text, max_width=250),
+            icon=folium.Icon(color=couleur)
+        ).add_to(carte)
 
     folium.PolyLine([(lat, lon) for _, lat, lon in chemin], color="blue", weight=2.5).add_to(carte)
     return carte
 
-"""# 1. Charger la liste de waypoints (liste de tuples)
-waypoints_liste = charger_waypoints("Data/Waypoints.csv")
 
-# 2. Convertir en dict {id: (lat, lon)}
+waypoints_liste = charger_waypoints("Data/waypoints.csv")
 waypoints_dict = {wp_id: (lat, lon) for wp_id, lat, lon in waypoints_liste}
-
-# 3. Créer la partition spatiale
 partition, geometry = grille_partition(waypoints_dict, res=(10, 10))
-
-# 4. Appeler la fonction en passant partition et geometry
 chemin = selectionner_waypoints_plus_proches_par_segments(waypoints_dict, [40.7128, -74.0060], [41.8781, -87.6298], partition, geometry)
-
-#5 Afficher la carte
-carte = tracer_trajet(chemin)
-carte.save("trajet.html")"""
+carte = tracer_trajet_avec_meteo(chemin,cle_api)
+carte.save("trajet.html")
