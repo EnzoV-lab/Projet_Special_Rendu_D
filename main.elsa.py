@@ -134,4 +134,4 @@ waypoints_dict = {wp_id: (lat, lon) for wp_id, lat, lon in waypoints_liste}
 partition, geometry = grille_partition(waypoints_dict, res=(10, 10))
 
 # 4. Appeler la fonction en passant partition et geometry
-selectionner_waypoints_plus_proches_par_segments(waypoints_dict, [40.7128, -74.0060], [41.8781, -87.6298], partition, geometry)"""
+selectionner_waypoints_plus_proches_par_segments(waypoints_dict, [40.7128, -74.0060], [41.8781, -87.6298], partition, geometry)
