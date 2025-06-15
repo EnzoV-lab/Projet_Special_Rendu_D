@@ -6,12 +6,12 @@ import numpy as np
 import pandas as pd
 import requests
 
-df = pd.read_csv("Data/Waypoint.csv")
+df = pd.read_csv("Data/Waypoints.csv")
 north_america_codes = ['US', 'CA', 'MX']
 df_na = df[df['iso_country'].isin(north_america_codes)]
 waypoints = df_na[['ident', 'latitude_deg', 'longitude_deg', 'iso_country']]
 print(waypoints.head())
-waypoints.to_csv("Data/waypoints.csv", index=False)
+waypoints.to_csv("Data/Waypoints.csv", index=False)
 
 
 
@@ -164,3 +164,18 @@ def tracer_trajet(chemin):
     folium.PolyLine([(lat, lon) for _, lat, lon in chemin], color="blue", weight=2.5).add_to(carte)
     return carte
 
+"""# 1. Charger la liste de waypoints (liste de tuples)
+waypoints_liste = charger_waypoints("Data/Waypoints.csv")
+
+# 2. Convertir en dict {id: (lat, lon)}
+waypoints_dict = {wp_id: (lat, lon) for wp_id, lat, lon in waypoints_liste}
+
+# 3. Créer la partition spatiale
+partition, geometry = grille_partition(waypoints_dict, res=(10, 10))
+
+# 4. Appeler la fonction en passant partition et geometry
+chemin = selectionner_waypoints_plus_proches_par_segments(waypoints_dict, [40.7128, -74.0060], [41.8781, -87.6298], partition, geometry)
+
+#5 Afficher la carte
+carte = tracer_trajet(chemin)
+carte.save("trajet.html")"""
