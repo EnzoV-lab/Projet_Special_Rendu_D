@@ -122,3 +122,16 @@ def selectionner_waypoints_plus_proches_par_segments(waypoints, depart, arrivee,
             cas_teste.add(wp[0])
     print(waypoints_selectionnes)
     return waypoints_selectionnes
+
+
+#1. Charger la liste de waypoints (liste de tuples)
+waypoints_liste = charger_waypoints("Data/waypoints.csv")
+
+# 2. Convertir en dict {id: (lat, lon)}
+waypoints_dict = {wp_id: (lat, lon) for wp_id, lat, lon in waypoints_liste}
+
+# 3. Créer la partition spatiale
+partition, geometry = grille_partition(waypoints_dict, res=(10, 10))
+
+# 4. Appeler la fonction en passant partition et geometry
+selectionner_waypoints_plus_proches_par_segments(waypoints_dict, [40.7128, -74.0060], [41.8781, -87.6298], partition, geometry)"""
