@@ -178,9 +178,3 @@ def tracer_trajet_avec_meteo(chemin, cle_api):
     return carte
 
 
-waypoints_liste = charger_waypoints("Data/waypoints.csv")
-waypoints_dict = {wp_id: (lat, lon) for wp_id, lat, lon in waypoints_liste}
-partition, geometry = grille_partition(waypoints_dict, res=(10, 10))
-chemin = selectionner_waypoints_plus_proches_par_segments(waypoints_dict, [40.7128, -74.0060], [41.8781, -87.6298], partition, geometry)
-carte = tracer_trajet_avec_meteo(chemin,cle_api)
-carte.save("trajet.html")
