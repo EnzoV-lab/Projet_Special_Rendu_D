@@ -214,5 +214,3 @@ chemin = selectionner_waypoints_plus_proches_par_segments(waypoints_dict, [40.71
 
 carte = tracer_trajet_avec_meteo_dynamique(chemin,cle_api,twin_otter)
 carte.save("trajet.html")
-
-
