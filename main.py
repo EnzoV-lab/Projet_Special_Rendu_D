@@ -41,10 +41,11 @@ class DonneesMeteo:
             q = f"{self.coordonnees[0]},{self.coordonnees[1]}"
         else:
             raise ValueError("Impossible de récupérer les données.")
-
+        #Utilisation de l'url spécifique pour récupérer les données météo
         url = f"http://api.weatherapi.com/v1/current.json?key={self.cle_api}&q={q}"
         response = requests.get(url)
         if response.status_code == 200:
+            #Récupération des données météos au format JSON
             self.donnees = response.json()
         else:
             print("Erreur lors de la requête:", response.text)
