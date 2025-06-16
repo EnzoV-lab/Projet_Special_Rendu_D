@@ -183,7 +183,7 @@ def tracer_trajet_meteo_dynamique(chemin,cle_api,avion):
             )
 
             # Déterminer la couleur du marker
-            if not avion.peut_voler(infos.get('vent_kph', 0)):
+            if not avion.en_capaciter_de_voler(infos.get('vent_kph', 0)):
                 couleur = "red"
 
             else :
