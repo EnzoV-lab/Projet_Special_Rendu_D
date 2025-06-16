@@ -149,7 +149,7 @@ def selectionner_waypoints_plus_proches_par_segments(waypoints, depart, arrivee,
     print(waypoints_selectionnes)
     return waypoints_selectionnes
 
-Class Avion:
+class Avion:
     def __init__(self, nom, vitesse_max_vent):
         self.nom=nom
         self.vitesse_max_vent=vitesse_max_vent
@@ -168,6 +168,50 @@ Class Avion:
         lon_centre=sum(p[2] for p in chemin)/len(chemin)
         carte=folium.Map(position=(lat_centre, lon_centre), eom_start=5)
 
-        for i
+        for i, (id_wp, lat, lon) in enumerate(chemin):
+            #On récupère les données météo
+            meteo=DonneesMeteo(cle_api,(lat,lon))
+  meteo.fetch()
+        infos = meteo.get_donnees()
+
+        popup_text = (
+            f"ID:{id_wp}"
+            f" Vent: {infos.get('vent_kph', 'N/A')} km/h {infos.get('direction_cardinal', '')}"
+            f" Condition: {infos.get('condition', 'N/A')}"
+            f" Précipitations: {infos.get('precip_mm', 'N/A')} mm"
+        )
+
+        # Déterminer la couleur du marker
+        if not avion.peut_voler(infos.get('vent_kph', 0)):
+            couleur = "red"
+
+        else :
+            couleur = "green"
+        folium.Marker(
+            location=(lat, lon),
+            popup=folium.Popup(popup_text, max_width=250),
+            icon=folium.Icon(color=couleur)
+        ).add_to(carte)
+
+    folium.PolyLine([(lat, lon) for _, lat, lon in chemin], color="blue", weight=2.5).add_to(carte)
+    return carte
+
+twin_otter = Avion("DHC-6 Twin Otter", 10)
+
+# 1. Charger la liste de waypoints (liste de tuples)
+waypoints_liste = charger_waypoints("Data/waypoints.csv")
+
+# 2. Convertir en dict {id: (lat, lon)}
+waypoints_dict = {wp_id: (lat, lon) for wp_id, lat, lon in waypoints_liste}
+
+# 3. Créer la partition spatiale
+partition, geometry = grille_partition(waypoints_dict, res=(10, 10))
+
+
+chemin = selectionner_waypoints_plus_proches_par_segments(waypoints_dict, [40.7128, -74.0060], [41.8781, -87.6298], partition, geometry)
+
+
+carte = tracer_trajet_avec_meteo_dynamique(chemin,cle_api,twin_otter)
+carte.save("trajet.html")
 
 
