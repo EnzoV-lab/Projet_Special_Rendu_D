@@ -196,7 +196,7 @@ while categorie.lower() not in ["hélice", "turbopropulseur"]:
 # Filtrage
 avions_filtres = [avion for avion in avions if avion.categorie == categorie]
 
-# === Affichage des avions disponibles ===
+#  Affichage des avions disponibles
 print("\nAvions disponibles :")
 for i, avion in enumerate(avions_filtres, 1):
     print(f"{i}. {avion}")
@@ -205,7 +205,7 @@ for i, avion in enumerate(avions_filtres, 1):
 choix = -1
 while choix < 1 or choix > len(avions_filtres):
     try:
-        choix = int(input(f"\nChoisis un avion (1 à {len(avions_filtres)}) : "))
+        choix = int(input(f"\nChoisissez un avion (1 à {len(avions_filtres)}) : "))
     except ValueError:
         continue
 
