@@ -45,11 +45,9 @@ class DonneesMeteo:
         url = f"http://api.weatherapi.com/v1/current.json?key={self.cle_api}&q={q}"
         reponse = requests.get(url)
         if reponse.status_code == 200:
-            #Récupération des données météos au format JSON
-            self.donnees = reponse.json()
+            self.donnees = reponse.json() #Récupération des données météos au format JSON
         else:
-            #Affiche l'erreur si nécessaire
-            print("Erreur lors de la requête:", reponse.text)
+            print("Erreur lors de la requête:", reponse.text) #Affiche l'erreur si nécessaire
 
     #Extraction des données nécessaires
     def get_donnees(self):
@@ -59,8 +57,7 @@ class DonneesMeteo:
         current = self.donnees.get("current", {})
         condition = current.get("condition", {}).get("text", "")
         return {
-            #Extraction des données sur la vitesse du vent
-            "vent_km_h": current.get("wind_kph"),
+            "vent_km_h": current.get("wind_kph"), #Extraction des données sur la vitesse du vent
             #Extraction des données sur la direction du vent
             "direction_cardinal": current.get("wind_dir", "N/A"),
             "direction_deg": current.get("wind_degree", 0),
