@@ -355,7 +355,7 @@ for wp_id, lat, lon in chemin:
     else:
         alt = trouver_waypoint_alternatif(wp_id, lat, lon, avion_selectionne, cle_api, waypoints_dict, partition, geometry)
         chemin_robuste.append(alt)
-
+#
 # Remplacer chemin par chemin_robuste pour la carte
 carte = tracer_trajet_meteo_dynamique(chemin_robuste, cle_api, avion_selectionne)
 carte.save("trajet_robuste.html")
