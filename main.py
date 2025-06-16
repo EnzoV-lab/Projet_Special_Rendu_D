@@ -193,7 +193,23 @@ def closest_to_point(point, waypoints, partition, geometry, fast=True):
 
 
 def selectionner_waypoints_plus_proches_par_segments(waypoints, depart, arrivee, partition, geometry, n_points=100):
+""" Sélectionne les waypoints les plus proches d'une trajectoire segmentée entre un point de départ et un point d'arrivée.
 
+    Cette fonction génère une série de points intermédiaires entre deux coordonnées (départ et arrivée)
+    selon une interpolation linéaire. Pour chaque point intermédiaire, elle détermine le waypoint
+    le plus proche à l'aide d'une grille spatiale afin d'accélérer la recherche.
+    Les doublons sont évités pour ne conserver qu’un seul exemplaire de chaque waypoint.
+
+    Arguments d'entrée :
+    waypoints : ictionnaire des waypoints sous la forme {id: (latitude, longitude)}.
+    depart : tuple de float, coordonnées (latitude, longitude) du point de départ.
+    arrivee : tuple of float, coordonnées (latitude, longitude) du point d'arrivée.
+    partition : tuple, résultat de la fonction de partition spatiale, sous la forme (res, grid) :
+            - res : résolution de la grille (colonnes, lignes),
+            - grid : dictionnaire {(i, j): [ids]} associant une cellule à ses waypoints.
+    geometry : tuple englobant les extremum des longitudes et latitudes de la grille sous la forme (x1, y1, x2, y2).
+    n_points : nombre entier de points intermédiaires à générer entre le départ et l'arrivée (par défaut 100).
+    """
 
     points_intermediaires = intercaler_points(depart[0], depart[1], arrivee[0], arrivee[1], n_points)
     cas_teste = set()
