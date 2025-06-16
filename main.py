@@ -150,6 +150,43 @@ def selectionner_waypoints_plus_proches_par_segments(waypoints, depart, arrivee,
     print(waypoints_selectionnes)
     return waypoints_selectionnes
 
+def tracer_trajet_meteo_dynamique(chemin, cle_api, avion):
+    if not chemin:
+        raise ValueError("Le chemin n'existe pas")
+
+    lat_centre = sum(p[1] for p in chemin) / len(chemin)
+    lon_centre = sum(p[2] for p in chemin) / len(chemin)
+    carte = folium.Map(position=(lat_centre, lon_centre), eom_start=5)
+
+    for i, (id_wp, lat, lon) in enumerate(chemin):
+        # On récupère les données météo
+        meteo = DonneesMeteo(cle_api, (lat, lon))
+        meteo.fetch()
+        infos = meteo.get_donnees()
+
+        popup_text = (
+            f"ID:{id_wp}"
+            f" Vent: {infos.get('vent_kph', 'N/A')} km/h {infos.get('direction_cardinal', '')}"
+            f" Condition: {infos.get('condition', 'N/A')}"
+            f" Précipitations: {infos.get('precip_mm', 'N/A')} mm"
+        )
+
+        # Déterminer la couleur du marker
+        if not avion.en_capaciter_de_voler(infos.get('vent_kph', 0)):
+            couleur = "red"
+
+        else:
+            couleur = "green"
+        folium.Marker(
+            location=(lat, lon),
+            popup=folium.Popup(popup_text, max_width=250),
+            icon=folium.Icon(color=couleur)
+        ).add_to(carte)
+
+    folium.PolyLine([(lat, lon) for _, lat, lon in chemin], color="blue", weight=2.5).add_to(carte)
+    return carte
+
+
 class Avion:
     def __init__(self, nom, vitesse_vent_max, categorie):
         """
@@ -189,6 +226,62 @@ avions = [
     Avion("ATR 72", 90, "turbopropulseur")
 ]
 
+villes_coordonnees = {
+    "New York": (40.7128, -74.0060),
+    "Los Angeles": (34.0522, -118.2437),
+    "Chicago": (41.8781, -87.6298),
+    "Houston": (29.7604, -95.3698),
+    "Phoenix": (33.4484, -112.0740),
+    "Philadelphia": (39.9526, -75.1652),
+    "San Antonio": (29.4241, -98.4936),
+    "San Diego": (32.7157, -117.1611),
+    "Dallas": (32.7767, -96.7970),
+    "San Jose": (37.3382, -121.8863),
+    "Austin": (30.2672, -97.7431),
+    "Jacksonville": (30.3322, -81.6557),
+    "Fort Worth": (32.7555, -97.3308),
+    "Columbus": (39.9612, -82.9988),
+    "Charlotte": (35.2271, -80.8431),
+    "San Francisco": (37.7749, -122.4194),
+    "Indianapolis": (39.7684, -86.1581),
+    "Seattle": (47.6062, -122.3321),
+    "Denver": (39.7392, -104.9903),
+    "Washington": (38.9072, -77.0369),
+    "Boston": (42.3601, -71.0589),
+    "Nashville": (36.1627, -86.7816),
+    "El Paso": (31.7619, -106.4850),
+    "Detroit": (42.3314, -83.0458),
+    "Memphis": (35.1495, -90.0490),
+    "Portland": (45.5152, -122.6784),
+    "Las Vegas": (36.1699, -115.1398),
+    "Louisville": (38.2527, -85.7585),
+    "Baltimore": (39.2904, -76.6122),
+    "Milwaukee": (43.0389, -87.9065),
+    "Albuquerque": (35.0844, -106.6504),
+    "Tucson": (32.2226, -110.9747),
+    "Fresno": (36.7378, -119.7871),
+    "Mesa": (33.4152, -111.8315),
+    "Sacramento": (38.5816, -121.4944),
+    "Atlanta": (33.7490, -84.3880),
+    "Kansas City": (39.0997, -94.5786),
+    "Colorado Springs": (38.8339, -104.8214),
+    "Miami": (25.7617, -80.1918),
+    "Raleigh": (35.7796, -78.6382),
+    "Omaha": (41.2565, -95.9345),
+    "Long Beach": (33.7701, -118.1937),
+    "Virginia Beach": (36.8529, -75.9780),
+    "Oakland": (37.8044, -122.2712),
+    "Minneapolis": (44.9778, -93.2650),
+    "Tulsa": (36.1539, -95.9928),
+    "Tampa": (27.9506, -82.4572),
+    "Arlington": (32.7357, -97.1081),
+    "New Orleans": (29.9511, -90.0715),
+    "Wichita": (37.6872, -97.3301)
+}
+
+depart = input("Quel est votre ville de départ : ")
+arrivee = input("Quel est votre ville d'arrivée : ")
+
 categorie = ""
 while categorie.lower() not in ["hélice", "turbopropulseur"]:
     categorie = input("Quel type d’avion veux-tu utiliser ? (hélice / turbopropulseur) : ").strip().lower()
@@ -212,56 +305,4 @@ while choix < 1 or choix > len(avions_filtres):
 avion_selectionne = avions_filtres[choix - 1]
 print(f"\n Vous avez selectionné : {avion_selectionne.nom} (vent max : {avion_selectionne.vitesse_vent_max} km/h)")
 
-def tracer_trajet_meteo_dynamique(chemin,cle_api,avion):
-        if not chemin:
-            raise ValueError("Le chemin n'existe pas")
 
-        lat_centre=sum(p[1] for p in chemin)/len(chemin)
-        lon_centre=sum(p[2] for p in chemin)/len(chemin)
-        carte=folium.Map(position=(lat_centre, lon_centre), eom_start=5)
-
-        for i, (id_wp, lat, lon) in enumerate(chemin):
-            #On récupère les données météo
-            meteo=DonneesMeteo(cle_api,(lat,lon))
-            meteo.fetch()
-            infos = meteo.get_donnees()
-
-            popup_text = (
-                f"ID:{id_wp}"
-                f" Vent: {infos.get('vent_kph', 'N/A')} km/h {infos.get('direction_cardinal', '')}"
-                f" Condition: {infos.get('condition', 'N/A')}"
-                f" Précipitations: {infos.get('precip_mm', 'N/A')} mm"
-            )
-
-            # Déterminer la couleur du marker
-            if not avion.en_capaciter_de_voler(infos.get('vent_kph', 0)):
-                couleur = "red"
-
-            else :
-                couleur = "green"
-            folium.Marker(
-                location=(lat, lon),
-                popup=folium.Popup(popup_text, max_width=250),
-                icon=folium.Icon(color=couleur)
-            ).add_to(carte)
-
-        folium.PolyLine([(lat, lon) for _, lat, lon in chemin], color="blue", weight=2.5).add_to(carte)
-        return carte
-
-
-
-# 1. Charger la liste de waypoints (liste de tuples)
-waypoints_liste = charger_waypoints("Data/Waypoints.csv")
-
-# 2. Convertir en dict {id: (lat, lon)}
-waypoints_dict = {wp_id: (lat, lon) for wp_id, lat, lon in waypoints_liste}
-
-# 3. Créer la partition spatiale
-partition, geometry = grille_partition(waypoints_dict, res=(10, 10))
-
-
-chemin = selectionner_waypoints_plus_proches_par_segments(waypoints_dict, [40.7128, -74.0060], [41.8781, -87.6298], partition, geometry)
-
-
-carte=tracer_trajet_meteo_dynamique(chemin,cle_api,avion_selectionne)
-carte.save("trajet.html")
