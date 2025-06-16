@@ -105,7 +105,7 @@ def grille_partition(waypoints, res=(10, 10)): # res (colonne, ligne)
     waypoints sont assignés au numéro de colonne et de ligne.
 
     Arguments d'entrée :
-    waypoints : dictionnaire contenant les waypoints au format {id: (lat, lon)}
+    waypoints : dictionnaire de waypoints au format {id: (lat, lon)}
     res : tuple contenant des entier, résolution de la grille sous format (colonnes, lignes)
 
     Renvoie :
@@ -135,7 +135,33 @@ def grille_partition(waypoints, res=(10, 10)): # res (colonne, ligne)
 
 
 #Détermine le waypoint le plus proche de la localisation du point en entrée
-def determiner_wp_plus_proche(point, waypoints, partition, geometry, fast=True):
+def closest_to_point(point, waypoints, partition, geometry, fast=True):
+    """ Trouve le waypoint le plus proche d'un point donné, avec ou sans optimisation par grille spatiale.
+
+    Cette fonction calcule la distance géodésique entre un point de référence (ex : point de départ)
+    et un ensemble de waypoints pour déterminer le plus proche. Si le mode rapide (`fast=True`) est activé,
+    la recherche est restreinte aux waypoints contenus dans une cellule locale de la grille spatiale. Si cette cellule
+    contient 0 ou 1 waypoint, une recherche globale est utilisée comme solution de repli.
+
+    Arguments d'entrée :
+    point : tuple contenant les coordonnées du point de référence
+    waypoints : dictionnaire de waypoints au format {id: (lat, lon)}
+    partition : tuple (res, grid)
+        - res : la résolution de la grille
+        - grid : dictionnaire {(i, j): [ids]} associant chaque cellule à une liste d'identifiants de waypoints.
+    geometry : tuple en format (x1, y1, x2, y2)
+        - x1, y1 : longitude et latitude minimales
+        - x2, y2 : longitude et latitude maximales
+    fast : booléen testant la méthode rapide
+        - si True, active la recherche optimisée
+        - si False, active la recherche globale
+
+    Renvoie :
+    wp_id : str or None, identifiant du waypoint le plus proche.
+    lat_proche : float or None, latitude du waypoint le plus proche.
+    lon_proche : float or None, longitude du waypoint le plus proche.
+    """
+
     min_dist = np.inf
     wp_id = None
     coordonnees_proche = (None, None)
@@ -167,12 +193,14 @@ def determiner_wp_plus_proche(point, waypoints, partition, geometry, fast=True):
 
 
 def selectionner_waypoints_plus_proches_par_segments(waypoints, depart, arrivee, partition, geometry, n_points=100):
+
+
     points_intermediaires = intercaler_points(depart[0], depart[1], arrivee[0], arrivee[1], n_points)
     cas_teste = set()
     waypoints_selectionnes = []
 
     for point in points_intermediaires:
-        wp = determiner_wp_plus_proche(point, waypoints, partition, geometry, fast=True)
+        wp = closest_to_point(point, waypoints, partition, geometry, fast=True)
         if wp[0] not in cas_teste:
             waypoints_selectionnes.append(wp)
             cas_teste.add(wp[0])
