@@ -316,6 +316,36 @@ while choix < 1 or choix > len(avions_filtres):
 avion_selectionne = avions_filtres[choix - 1]
 print(f"\n Vous avez selectionné : {avion_selectionne.nom} (vent max : {avion_selectionne.vitesse_vent_max} km/h)")
 
+def trouver_waypoint_alternatif(wp_id, lat, lon, avion, cle_api, waypoints_dict, partition, geometry, rayon_max=50000):
+    """
+    Trouve un waypoint alternatif proche (rayon_max en mètres) avec météo acceptable.
+    Retourne un tuple (id, lat, lon). Si aucun trouvé, retourne le waypoint original.
+    """
+    from geopy.distance import distance
+
+    # Chercher dans une zone proche (ex: 50km)
+    voisins = []
+    for id_voisin, (lat_v, lon_v) in waypoints_dict.items():
+        if id_voisin == wp_id:
+            continue
+        dist = distance((lat, lon), (lat_v, lon_v)).meters
+        if dist <= rayon_max:
+            voisins.append((id_voisin, lat_v, lon_v, dist))
+
+    # Trier voisins par distance croissante
+    voisins.sort(key=lambda x: x[3])
+
+    # Tester la météo sur chaque voisin
+    for id_v, lat_v, lon_v, _ in voisins:
+        meteo = DonneesMeteo(cle_api, (lat_v, lon_v))
+        meteo.fetch()
+        infos = meteo.get_donnees()
+        if avion.en_capaciter_de_voler(infos.get('vent_kph', 0)):
+            return (id_v, lat_v, lon_v)
+
+    # Sinon renvoyer le waypoint d’origine
+    return (wp_id, lat, lon)
+
 
 waypoints_liste = charger_waypoints("Data/Waypoints.csv")
 
@@ -325,5 +355,19 @@ partition, geometry = grille_partition(waypoints_dict, res=(10, 10))
 
 chemin = selectionner_waypoints_plus_proches_par_segments(waypoints_dict, villes_coordonnees[depart],villes_coordonnees[arrivee] , partition, geometry)
 
-carte=tracer_trajet_meteo_dynamique(chemin,cle_api,avion_selectionne)
-carte.save("trajet.html")
+chemin_robuste = []
+for wp_id, lat, lon in chemin:
+    meteo = DonneesMeteo(cle_api, (lat, lon))
+    meteo.fetch()
+    infos = meteo.get_donnees()
+    vent = infos.get('vent_kph', 0)
+    if avion_selectionne.en_capaciter_de_voler(vent):
+        chemin_robuste.append((wp_id, lat, lon))
+    else:
+        alt = trouver_waypoint_alternatif(wp_id, lat, lon, avion_selectionne, cle_api, waypoints_dict, partition, geometry)
+        chemin_robuste.append(alt)
+#
+# Remplacer chemin par chemin_robuste pour la carte
+carte = tracer_trajet_meteo_dynamique(chemin_robuste, cle_api, avion_selectionne)
+carte.save("trajet_robuste.html")
+
