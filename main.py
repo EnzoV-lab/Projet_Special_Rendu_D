@@ -17,24 +17,30 @@ df = pd.read_csv(filepath)
 # On conserve que les waypoints en amérique du Nord
 north_america_codes = ['US', 'CA', 'MX']
 
+#Selection de l'identifiant et des données de latitude et de longitudes
 df_na = df[df['iso_country'].isin(north_america_codes)]
 waypoints = df_na[['ident', 'latitude_deg', 'longitude_deg', 'iso_country']]
 print(waypoints.head())
+#Nouvelle écriture des données dans le même fichier csv
 waypoints.to_csv("Data/Waypoints.csv", index=False)
 
 
-
+#Création de la classe et des fonctions qui permettent de gérer la météo
 class DonneesMeteo:
+    #Initialisation de la clé API et des coordonnés
     def __init__(self, cle_api, coordonnees=None):
         self.coordonnees = coordonnees
         self.cle_api = cle_api
         self.donnees = None
 
+    #Cette fonction permet de récupérer les données météos actuelles
     def fetch(self):
+        #Vérification de la présence ou nom de coordonnées
         if self.coordonnees:
+            #formatage des données en une chaine "lat,lon"
             q = f"{self.coordonnees[0]},{self.coordonnees[1]}"
         else:
-            raise ValueError("Il faut fournir des coordonnées.")
+            raise ValueError("Impossible de récupérer les données.")
 
         url = f"http://api.weatherapi.com/v1/current.json?key={self.cle_api}&q={q}"
         response = requests.get(url)
