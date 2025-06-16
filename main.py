@@ -56,19 +56,15 @@ class DonneesMeteo:
         if not self.donnees:
             return {}
 
-        donnee_actuelle = self.donnees.get("données actuelless", {})
-        condition = donnee_actuelle.get("condition", {}).get("text", "")
+        current = self.donnees.get("current", {})
+        condition = current.get("condition", {}).get("text", "")
         return {
-            #extraction de la vitesse du vent
-            "vent_kph": donnee_actuelle.get("vitesse_vent_km/h"),
-            # extraction de la direction du vent en degré
-            "direction_cardinal": donnee_actuelle.get("direction_vent", "N/A"),
-            "direction_deg": donnee_actuelle.get("vent_degré", 0),
-            # extraction des conditions météo(venteux, nuageux..)
+            "vent_kph": current.get("wind_kph"),
+            "direction_cardinal": current.get("wind_dir", "N/A"),
+            "direction_deg": current.get("wind_degree", 0),
             "condition": condition,
-            "precip_mm": donnee_actuelle.get("precip_mm", 0)
+            "precip_mm": current.get("precip_mm", 0)
         }
-
 # Charge les identifiant et coordonnées des waypoints de la base de données
 def charger_waypoints(fichier_csv):
     waypoints = []
