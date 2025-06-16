@@ -306,3 +306,13 @@ avion_selectionne = avions_filtres[choix - 1]
 print(f"\n Vous avez selectionné : {avion_selectionne.nom} (vent max : {avion_selectionne.vitesse_vent_max} km/h)")
 
 
+waypoints_liste = charger_waypoints("Data/Waypoints.csv")
+
+waypoints_dict = {wp_id: (lat, lon) for wp_id, lat, lon in waypoints_liste}
+
+partition, geometry = grille_partition(waypoints_dict, res=(10, 10))
+
+chemin = selectionner_waypoints_plus_proches_par_segments(waypoints_dict, villes_coordonnees[depart],villes_coordonnees[arrivee] , partition, geometry)
+
+carte=tracer_trajet_meteo_dynamique(chemin,cle_api,avion_selectionne)
+carte.save("trajet.html")
