@@ -5,12 +5,13 @@ from math import floor
 import numpy as np
 import pandas as pd
 import requests
-
+import os
 
 cle_api ="d9ac5ac56f3d4768abd232315250506"
 
 
-df = pd.read_csv("Data/Waypoints.csv")
+filepath = os.path.join("Data", "Waypoints.csv")
+df = pd.read_csv(filepath)
 north_america_codes = ['US', 'CA', 'MX']
 df_na = df[df['iso_country'].isin(north_america_codes)]
 waypoints = df_na[['ident', 'latitude_deg', 'longitude_deg', 'iso_country']]
