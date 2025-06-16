@@ -55,13 +55,16 @@ class DonneesMeteo:
     def get_donnees(self):
         if not self.donnees:
             return {}
-
+        #Extraction des données actuelles
         current = self.donnees.get("current", {})
         condition = current.get("condition", {}).get("text", "")
         return {
-            "vent_kph": current.get("wind_kph"),
+            #Extraction des données sur la vitesse du vent
+            "vent_km_h": current.get("wind_kph"),
+            #Extraction des données sur la direction du vent
             "direction_cardinal": current.get("wind_dir", "N/A"),
             "direction_deg": current.get("wind_degree", 0),
+            #Extraction des conditions (venteux, nuageux...)
             "condition": condition,
             "precip_mm": current.get("precip_mm", 0)
         }
@@ -212,14 +215,14 @@ class Avion:
         self.vitesse_vent_max = vitesse_vent_max
         self.categorie = categorie
 
-    def en_capaciter_de_voler(self, vent_kph):
+    def en_capaciter_de_voler(self, vent_km_h):
         """
         Vérifie si l'avion peut voler avec la vitesse de vent donnée.
 
         :param vent_kph: vitesse du vent en km/h (float)
         :return: True si l'avion peut voler, sinon False
         """
-        return vent_kph <= self.vitesse_vent_max
+        return vent_km_h <= self.vitesse_vent_max
 
     def __str__(self):
         return f"Avion {self.nom} (vent max: {self.vitesse_vent_max} km/h)"
