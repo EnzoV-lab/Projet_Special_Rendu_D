@@ -48,21 +48,27 @@ class DonneesMeteo:
             #Récupération des données météos au format JSON
             self.donnees = reponse.json()
         else:
+            #Affiche l'erreur si nécessaire
             print("Erreur lors de la requête:", reponse.text)
 
+    #Extraction des données nécessaires
     def get_donnees(self):
         if not self.donnees:
             return {}
 
-        current = self.donnees.get("current", {})
-        condition = current.get("condition", {}).get("text", "")
+        donnee_actuelle = self.donnees.get("données actuelless", {})
+        condition = donnee_actuelle.get("condition", {}).get("text", "")
         return {
-            "vent_kph": current.get("wind_kph"),
-            "direction_cardinal": current.get("wind_dir", "N/A"),
-            "direction_deg": current.get("wind_degree", 0),
+            #extraction de la vitesse du vent
+            "vent_kph": donnee_actuelle.get("vitesse_vent_km/h"),
+            # extraction de la direction du vent en degré
+            "direction_cardinal": donnee_actuelle.get("direction_vent", "N/A"),
+            "direction_deg": donnee_actuelle.get("vent_degré", 0),
+            # extraction des conditions météo(venteux, nuageux..)
             "condition": condition,
-            "precip_mm": current.get("precip_mm", 0)
+            "precip_mm": donnee_actuelle.get("precip_mm", 0)
         }
+
 # Charge les identifiant et coordonnées des waypoints de la base de données
 def charger_waypoints(fichier_csv):
     waypoints = []
