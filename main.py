@@ -171,30 +171,30 @@ class Avion:
         for i, (id_wp, lat, lon) in enumerate(chemin):
             #On récupère les données météo
             meteo=DonneesMeteo(cle_api,(lat,lon))
-  meteo.fetch()
-        infos = meteo.get_donnees()
+            meteo.fetch()
+            infos = meteo.get_donnees()
 
-        popup_text = (
-            f"ID:{id_wp}"
-            f" Vent: {infos.get('vent_kph', 'N/A')} km/h {infos.get('direction_cardinal', '')}"
-            f" Condition: {infos.get('condition', 'N/A')}"
-            f" Précipitations: {infos.get('precip_mm', 'N/A')} mm"
-        )
+            popup_text = (
+                f"ID:{id_wp}"
+                f" Vent: {infos.get('vent_kph', 'N/A')} km/h {infos.get('direction_cardinal', '')}"
+                f" Condition: {infos.get('condition', 'N/A')}"
+                f" Précipitations: {infos.get('precip_mm', 'N/A')} mm"
+            )
 
-        # Déterminer la couleur du marker
-        if not avion.peut_voler(infos.get('vent_kph', 0)):
-            couleur = "red"
+            # Déterminer la couleur du marker
+            if not avion.peut_voler(infos.get('vent_kph', 0)):
+                couleur = "red"
 
-        else :
-            couleur = "green"
-        folium.Marker(
-            location=(lat, lon),
-            popup=folium.Popup(popup_text, max_width=250),
-            icon=folium.Icon(color=couleur)
-        ).add_to(carte)
+            else :
+                couleur = "green"
+            folium.Marker(
+                location=(lat, lon),
+                popup=folium.Popup(popup_text, max_width=250),
+                icon=folium.Icon(color=couleur)
+            ).add_to(carte)
 
-    folium.PolyLine([(lat, lon) for _, lat, lon in chemin], color="blue", weight=2.5).add_to(carte)
-    return carte
+        folium.PolyLine([(lat, lon) for _, lat, lon in chemin], color="blue", weight=2.5).add_to(carte)
+        return carte
 
 twin_otter = Avion("DHC-6 Twin Otter", 10)
 
