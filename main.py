@@ -5,12 +5,13 @@ from math import floor
 import numpy as np
 import pandas as pd
 import requests
-
+import os
 
 cle_api ="d9ac5ac56f3d4768abd232315250506"
 
 
-df = pd.read_csv("Data/Waypoints.csv")
+filepath = os.path.join("Data", "Waypoints.csv")
+df = pd.read_csv(filepath)
 north_america_codes = ['US', 'CA', 'MX']
 df_na = df[df['iso_country'].isin(north_america_codes)]
 waypoints = df_na[['ident', 'latitude_deg', 'longitude_deg', 'iso_country']]
@@ -149,32 +150,118 @@ def selectionner_waypoints_plus_proches_par_segments(waypoints, depart, arrivee,
     print(waypoints_selectionnes)
     return waypoints_selectionnes
 
-def tracer_trajet_avec_meteo(chemin, cle_api):
-    lat_centre = sum(place[1] for place in chemin) / len(chemin)
-    lon_centre = sum(place[2] for place in chemin) / len(chemin)
-    carte = folium.Map(location=(lat_centre, lon_centre), zoom_start=5)
+class Avion:
+    def __init__(self, nom, vitesse_vent_max, categorie):
+        """
+        Initialise un objet Avion.
 
-    for i, (id_wp, lat, lon) in enumerate(chemin):
-        # Récupération des données météo
-        meteo = DonneesMeteo(cle_api, (lat, lon))
-        meteo.fetch()
-        infos = meteo.get_donnees()
+        :param nom: Nom ou modèle de l'avion (str)
+        :param vitesse_vent_max: Vitesse maximale de vent tolérée (en km/h)
+        """
+        self.nom = nom
+        self.vitesse_vent_max = vitesse_vent_max
+        self.categorie = categorie
 
-        popup_text = (
-            f"ID: {id_wp}"
-            f" Vent: {infos.get('vent_kph', 'N/A')} km/h {infos.get('direction_cardinal', '')}"
-            f" Condition:{infos.get('condition', 'N/A')}"
-            f" Précipitations: {infos.get('precip_mm', 'N/A')} mm"
-        )
+    def en_capaciter_de_voler(self, vent_kph):
+        """
+        Vérifie si l'avion peut voler avec la vitesse de vent donnée.
 
-        couleur = "green" if i == 0 else "red" if i == len(chemin) - 1 else "blue"
-        folium.Marker(
-            location=(lat, lon),
-            popup=folium.Popup(popup_text, max_width=250),
-            icon=folium.Icon(color=couleur)
-        ).add_to(carte)
+        :param vent_kph: vitesse du vent en km/h (float)
+        :return: True si l'avion peut voler, sinon False
+        """
+        return vent_kph <= self.vitesse_vent_max
 
-    folium.PolyLine([(lat, lon) for _, lat, lon in chemin], color="blue", weight=2.5).add_to(carte)
-    return carte
+    def __str__(self):
+        return f"Avion {self.nom} (vent max: {self.vitesse_vent_max} km/h)"
+
+    # === Création des avions ===
 
 
+avions = [
+    # Hélice
+    Avion("Cessna 172", 10, "hélice"),
+    Avion("Piper PA-28 Cherokee", 60, "hélice"),
+    Avion("Diamond DA40", 65, "hélice"),
+
+    # Turbopropulseur
+    Avion("DHC-6 Twin Otter", 70, "turbopropulseur"),
+    Avion("Beechcraft King Air 350", 80, "turbopropulseur"),
+    Avion("ATR 72", 90, "turbopropulseur")
+]
+
+categorie = ""
+while categorie.lower() not in ["hélice", "turbopropulseur"]:
+    categorie = input("Quel type d’avion veux-tu utiliser ? (hélice / turbopropulseur) : ").strip().lower()
+
+# Filtrage
+avions_filtres = [avion for avion in avions if avion.categorie == categorie]
+
+#  Affichage des avions disponibles
+print("\nAvions disponibles :")
+for i, avion in enumerate(avions_filtres, 1):
+    print(f"{i}. {avion}")
+
+# Choix de l'avion
+choix = -1
+while choix < 1 or choix > len(avions_filtres):
+    try:
+        choix = int(input(f"\nChoisissez un avion (1 à {len(avions_filtres)}) : "))
+    except ValueError:
+        continue
+
+avion_selectionne = avions_filtres[choix - 1]
+print(f"\n Vous avez selectionné : {avion_selectionne.nom} (vent max : {avion_selectionne.vitesse_vent_max} km/h)")
+
+def tracer_trajet_meteo_dynamique(chemin,cle_api,avion):
+        if not chemin:
+            raise ValueError("Le chemin n'existe pas")
+
+        lat_centre=sum(p[1] for p in chemin)/len(chemin)
+        lon_centre=sum(p[2] for p in chemin)/len(chemin)
+        carte=folium.Map(position=(lat_centre, lon_centre), eom_start=5)
+
+        for i, (id_wp, lat, lon) in enumerate(chemin):
+            #On récupère les données météo
+            meteo=DonneesMeteo(cle_api,(lat,lon))
+            meteo.fetch()
+            infos = meteo.get_donnees()
+
+            popup_text = (
+                f"ID:{id_wp}"
+                f" Vent: {infos.get('vent_kph', 'N/A')} km/h {infos.get('direction_cardinal', '')}"
+                f" Condition: {infos.get('condition', 'N/A')}"
+                f" Précipitations: {infos.get('precip_mm', 'N/A')} mm"
+            )
+
+            # Déterminer la couleur du marker
+            if not avion.en_capaciter_de_voler(infos.get('vent_kph', 0)):
+                couleur = "red"
+
+            else :
+                couleur = "green"
+            folium.Marker(
+                location=(lat, lon),
+                popup=folium.Popup(popup_text, max_width=250),
+                icon=folium.Icon(color=couleur)
+            ).add_to(carte)
+
+        folium.PolyLine([(lat, lon) for _, lat, lon in chemin], color="blue", weight=2.5).add_to(carte)
+        return carte
+
+twin_otter = Avion("DHC-6 Twin Otter", 10)
+
+# 1. Charger la liste de waypoints (liste de tuples)
+waypoints_liste = charger_waypoints("Data/Waypoints.csv")
+
+# 2. Convertir en dict {id: (lat, lon)}
+waypoints_dict = {wp_id: (lat, lon) for wp_id, lat, lon in waypoints_liste}
+
+# 3. Créer la partition spatiale
+partition, geometry = grille_partition(waypoints_dict, res=(10, 10))
+
+
+chemin = selectionner_waypoints_plus_proches_par_segments(waypoints_dict, [40.7128, -74.0060], [41.8781, -87.6298], partition, geometry)
+
+
+carte=tracer_trajet_meteo_dynamique(chemin,cle_api,twin_otter)
+carte.save("trajet.html")
