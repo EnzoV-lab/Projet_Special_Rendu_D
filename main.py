@@ -70,20 +70,18 @@ def charger_waypoints(fichier_csv):
     waypoints = []
     with open(fichier_csv, newline='', encoding='utf-8') as csvfile:
         lecteur = csv.reader(csvfile) #lit le fichier ligne par ligne
-        next(lecteur)  # Ignore l'en-tête et les lignes incompletes
+        next(lecteur)  # Ignore l'en-tête et les lignes incomplètes
         for ligne in lecteur:
             if len(ligne) < 3:
-                continue
+                continue #ignore les lignes incomplètes de moins de 3 colonnes
             try:
-                id_wp = ligne[0]
-                lat = float(ligne[1])
-                lon = float(ligne[2])
-                waypoints.append((id_wp, lat, lon))
+                id_wp = ligne[0] #la première colonne représente l'identifiant du waypoint
+                lat = float(ligne[1]) #la deuxième colonne représente la latitude
+                lon = float(ligne[2]) #la troisième colonne représente la longitude
+                waypoints.append((id_wp, lat, lon)) #ajoute les éléments précedents à la liste
             except ValueError:
                 continue
-    return waypoints
-# Renvoie une liste de tuple ('ID', (latitude, longitude))
-
+    return waypoints # Renvoie une liste de tuple ('ID', (latitude, longitude))
 
 # Interpolation linéaire entre le point de départ et le point d'arrivée
 def intercaler_points(lat1, lon1, lat2, lon2, n):
