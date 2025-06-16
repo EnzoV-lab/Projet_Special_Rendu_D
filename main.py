@@ -151,15 +151,66 @@ def selectionner_waypoints_plus_proches_par_segments(waypoints, depart, arrivee,
     return waypoints_selectionnes
 
 class Avion:
-    def __init__(self, nom, vitesse_max_vent):
-        self.nom=nom
-        self.vitesse_max_vent=vitesse_max_vent
+    def __init__(self, nom, vitesse_vent_max, categorie):
+        """
+        Initialise un objet Avion.
 
-    def en_capaciter_de_voler (self,vent_km_h):
-        return vent_km_h<=self.vitesse_max_vent
+        :param nom: Nom ou modèle de l'avion (str)
+        :param vitesse_vent_max: Vitesse maximale de vent tolérée (en km/h)
+        """
+        self.nom = nom
+        self.vitesse_vent_max = vitesse_vent_max
+        self.categorie = categorie
+
+    def en_capaciter_de_voler(self, vent_kph):
+        """
+        Vérifie si l'avion peut voler avec la vitesse de vent donnée.
+
+        :param vent_kph: vitesse du vent en km/h (float)
+        :return: True si l'avion peut voler, sinon False
+        """
+        return vent_kph <= self.vitesse_vent_max
 
     def __str__(self):
-        return f"Avion{self.nom}(vent max: {self.vitesse_max_vent}km/h)"
+        return f"Avion {self.nom} (vent max: {self.vitesse_vent_max} km/h)"
+
+    # === Création des avions ===
+
+
+avions = [
+    # Hélice
+    Avion("Cessna 172", 10, "hélice"),
+    Avion("Piper PA-28 Cherokee", 60, "hélice"),
+    Avion("Diamond DA40", 65, "hélice"),
+
+    # Turbopropulseur
+    Avion("DHC-6 Twin Otter", 70, "turbopropulseur"),
+    Avion("Beechcraft King Air 350", 80, "turbopropulseur"),
+    Avion("ATR 72", 90, "turbopropulseur")
+]
+
+categorie = ""
+while categorie.lower() not in ["hélice", "turbopropulseur"]:
+    categorie = input("Quel type d’avion veux-tu utiliser ? (hélice / turbopropulseur) : ").strip().lower()
+
+# Filtrage
+avions_filtres = [avion for avion in avions if avion.categorie == categorie]
+
+# === Affichage des avions disponibles ===
+print("\nAvions disponibles :")
+for i, avion in enumerate(avions_filtres, 1):
+    print(f"{i}. {avion}")
+
+# Choix de l'avion
+choix = -1
+while choix < 1 or choix > len(avions_filtres):
+    try:
+        choix = int(input(f"\nChoisis un avion (1 à {len(avions_filtres)}) : "))
+    except ValueError:
+        continue
+
+avion_selectionne = avions_filtres[choix - 1]
+print(f"\n Vous avez selectionné : {avion_selectionne.nom} (vent max : {avion_selectionne.vitesse_vent_max} km/h)")
 
 def tracer_trajet_meteo_dynamique(chemin,cle_api,avion):
         if not chemin:
