@@ -199,7 +199,7 @@ class Avion:
 twin_otter = Avion("DHC-6 Twin Otter", 10)
 
 # 1. Charger la liste de waypoints (liste de tuples)
-waypoints_liste = charger_waypoints("Data/waypoints.csv")
+waypoints_liste = charger_waypoints("Data/Waypoints.csv")
 
 # 2. Convertir en dict {id: (lat, lon)}
 waypoints_dict = {wp_id: (lat, lon) for wp_id, lat, lon in waypoints_liste}
