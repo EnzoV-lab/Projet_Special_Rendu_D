@@ -212,5 +212,5 @@ partition, geometry = grille_partition(waypoints_dict, res=(10, 10))
 chemin = selectionner_waypoints_plus_proches_par_segments(waypoints_dict, [40.7128, -74.0060], [41.8781, -87.6298], partition, geometry)
 
 
-carte = tracer_trajet_avec_meteo_dynamique(chemin,cle_api,twin_otter)
+carte = tracer_trajet_meteo_dynamique(chemin,cle_api,twin_otter)
 carte.save("trajet.html")
