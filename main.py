@@ -1,4 +1,4 @@
-import csv
+=import csv
 from geopy.distance import geodesic
 import folium
 from math import floor
@@ -54,6 +54,14 @@ class DonneesMeteo:
         }
 # Charge les identifiant et coordonnées des waypoints de la base de données
 def charger_waypoints(fichier_csv):
+    """" Importe les données d'un fichier csv contenant les identifiants
+    et coorodnnées des waypoints.
+
+    Arguments d'entrée :
+   - fichier en format csv
+
+   Retourne une liste contenant les données des waypoints
+   """
     waypoints = []
     with open(fichier_csv, newline='', encoding='utf-8') as csvfile:
         reader = csv.reader(csvfile)
