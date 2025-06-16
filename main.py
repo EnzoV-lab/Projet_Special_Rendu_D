@@ -1,18 +1,22 @@
+# Ces modules sont à télécharger avant d'exécuter le script
 import csv
 from geopy.distance import geodesic
-import folium
-from math import floor
+import folium #ce module permet de générer une carte intéractive
+from math import floor #floor permet d'arrondir à l'entier inférieure
 import numpy as np
 import pandas as pd
-import requests
-import os
+import requests # Nécessaire afin d'effectuer des requêtes  http
+import os # Permet une meilleure gestion du chemin des fichiers
 
+#La clé API est utilisée pour accéder aux données météo depuis le service weatherapi.com
 cle_api ="d9ac5ac56f3d4768abd232315250506"
 
-
+#------Chargement--des--WAYPOINTS
 filepath = os.path.join("Data", "Waypoints.csv")
 df = pd.read_csv(filepath)
+# On conserve que les waypoints en amérique du Nord
 north_america_codes = ['US', 'CA', 'MX']
+
 df_na = df[df['iso_country'].isin(north_america_codes)]
 waypoints = df_na[['ident', 'latitude_deg', 'longitude_deg', 'iso_country']]
 print(waypoints.head())
