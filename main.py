@@ -149,32 +149,25 @@ def selectionner_waypoints_plus_proches_par_segments(waypoints, depart, arrivee,
     print(waypoints_selectionnes)
     return waypoints_selectionnes
 
-def tracer_trajet_avec_meteo(chemin, cle_api):
-    lat_centre = sum(place[1] for place in chemin) / len(chemin)
-    lon_centre = sum(place[2] for place in chemin) / len(chemin)
-    carte = folium.Map(location=(lat_centre, lon_centre), zoom_start=5)
+Class Avion:
+    def __init__(self, nom, vitesse_max_vent):
+        self.nom=nom
+        self.vitesse_max_vent=vitesse_max_vent
 
-    for i, (id_wp, lat, lon) in enumerate(chemin):
-        # Récupération des données météo
-        meteo = DonneesMeteo(cle_api, (lat, lon))
-        meteo.fetch()
-        infos = meteo.get_donnees()
+    def en_capaciter_de_voler (self,vent_km_h):
+        return vent_km_h<=self.vitesse_max_vent
 
-        popup_text = (
-            f"ID: {id_wp}"
-            f" Vent: {infos.get('vent_kph', 'N/A')} km/h {infos.get('direction_cardinal', '')}"
-            f" Condition:{infos.get('condition', 'N/A')}"
-            f" Précipitations: {infos.get('precip_mm', 'N/A')} mm"
-        )
+    def __str__(self):
+        return f"Avion{self.nom}(vent max: {self.vitesse_max_vent}km/h)"
 
-        couleur = "green" if i == 0 else "red" if i == len(chemin) - 1 else "blue"
-        folium.Marker(
-            location=(lat, lon),
-            popup=folium.Popup(popup_text, max_width=250),
-            icon=folium.Icon(color=couleur)
-        ).add_to(carte)
+    def tracer_trajet_meteo_dynamique (chemin,cle_api,avion):
+        if not chemin:
+            raise ValueError("Le chemin n'existe pas")
 
-    folium.PolyLine([(lat, lon) for _, lat, lon in chemin], color="blue", weight=2.5).add_to(carte)
-    return carte
+        lat_centre=sum(p[1] for p in chemin)/len(chemin)
+        lon_centre=sum(p[2] for p in chemin)/len(chemin)
+        carte=folium.Map(position=(lat_centre, lon_centre), eom_start=5)
+
+        for i
 
 
