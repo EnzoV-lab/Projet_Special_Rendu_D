@@ -69,9 +69,9 @@ class DonneesMeteo:
 def charger_waypoints(fichier_csv):
     waypoints = []
     with open(fichier_csv, newline='', encoding='utf-8') as csvfile:
-        reader = csv.reader(csvfile)
-        next(reader)  # sauter l'en-tête
-        for ligne in reader:
+        lecteur = csv.reader(csvfile) #lit le fichier ligne par ligne
+        next(lecteur)  # Ignore l'en-tête et les lignes incompletes
+        for ligne in lecteur:
             if len(ligne) < 3:
                 continue
             try:
