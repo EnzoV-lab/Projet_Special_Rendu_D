@@ -248,7 +248,7 @@ def tracer_trajet_meteo_dynamique(chemin,cle_api,avion):
         folium.PolyLine([(lat, lon) for _, lat, lon in chemin], color="blue", weight=2.5).add_to(carte)
         return carte
 
-twin_otter = Avion("DHC-6 Twin Otter", 10)
+
 
 # 1. Charger la liste de waypoints (liste de tuples)
 waypoints_liste = charger_waypoints("Data/Waypoints.csv")
@@ -263,5 +263,5 @@ partition, geometry = grille_partition(waypoints_dict, res=(10, 10))
 chemin = selectionner_waypoints_plus_proches_par_segments(waypoints_dict, [40.7128, -74.0060], [41.8781, -87.6298], partition, geometry)
 
 
-carte=tracer_trajet_meteo_dynamique(chemin,cle_api,twin_otter)
+carte=tracer_trajet_meteo_dynamique(chemin,cle_api,avion_selectionne)
 carte.save("trajet.html")
