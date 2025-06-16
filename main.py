@@ -58,7 +58,7 @@ def charger_waypoints(fichier_csv):
     et coorodnnées des waypoints.
 
     Arguments d'entrée :
-   - fichier en format csv
+    fichier en format csv
 
    Retourne une liste contenant les données des waypoints
    """
@@ -82,6 +82,14 @@ def charger_waypoints(fichier_csv):
 
 # Interpolation linéaire entre le point de départ et le point d'arrivée
 def intercaler_points(lat1, lon1, lat2, lon2, n):
+    """" Crée des points alignés sur le segment reliant la localisation
+    de départ à celle d'arrivée.
+
+    Arguments d'entrée :
+    lat1, lon1 : coordonnées point de départ
+    lat2, lon2 : coordonnées point d'arrivée
+
+    Retourne une liste 'points_intercale' sous forme de tuple (lat, lon) de chaque point """
     points_intercale = []
     for i in range(1, n + 1):
         x = lat1 + i * (lat2 - lat1) / (n + 1)
@@ -91,8 +99,21 @@ def intercaler_points(lat1, lon1, lat2, lon2, n):
     return points_intercale
 
 
-def grille_partition(waypoints, res=(10, 10)):
-    # waypoints est un dict {id: (lat, lon)}
+def grille_partition(waypoints, res=(10, 10)): # res (colonne, ligne)
+    """ Partitionne une carte en une grille spatiale régulière. Elle divise la carte
+    géographique contenant les waypoints en une grille de dimension (10 x 10). L'emplacement des
+    waypoints sont assignés au numéro de colonne et de ligne.
+
+    Arguments d'entrée :
+    waypoints : dictionnaire contenant les waypoints au format {id: (lat, lon)}
+    res : tuple contenant des entier, résolution de la grille sous format (colonnes, lignes)
+
+    Renvoie :
+    partition : tuple (res, grid)
+        - res : la résolution de la grille
+        - grid : dictionnaire {(i, j): [ids]} associant chaque cellule à une liste d'identifiants de waypoints.
+    """
+
     latitudes = [coord[0] for coord in waypoints.values()]
     longitudes = [coord[1] for coord in waypoints.values()]
 
