@@ -161,7 +161,7 @@ class Avion:
     def __str__(self):
         return f"Avion{self.nom}(vent max: {self.vitesse_max_vent}km/h)"
 
-    def tracer_trajet_meteo_dynamique (chemin,cle_api,avion):
+    def tracer_trajet_meteo_dynamique(chemin,cle_api,avion):
         if not chemin:
             raise ValueError("Le chemin n'existe pas")
 
