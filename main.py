@@ -110,7 +110,7 @@ def grille_partition(waypoints, res=(10, 10)):
     x1, x2 = min(longitudes), max(longitudes) #de l'ouest à l'est
 
     h = (y2 - y1) / res[1] if res[1] > 0 else 1 #hauteur d'une case
-    l = (x2 - x1) / res[0] if res[0] > 0 else 1 #longueur d'une case
+    l = (x2 - x1) / res[0] if res[0] > 0 else 1 #largeur d'une case
 
     grid = {} #permet de stocker les cases de la grille
 
@@ -118,40 +118,52 @@ def grille_partition(waypoints, res=(10, 10)):
         i = min(int(floor((lat - y1) / h)), res[1] - 1) if h > 0 else 0 #ligne de la case où se trouve le point
         j = min(int(floor((lon - x1) / l)), res[0] - 1) if l > 0 else 0 #colonne de la case où se trouve le point
         grid.setdefault((i, j), []).append(wp_id)
-
+    #la fonction retourne la grille de répartition et les coordonnées géographiques
     return (res, grid), (x1, y1, x2, y2)
 
 
 
-#Détermine le waypoint le plus proche de la localisation du point en entrée
+#Détermine le point de navigation (waypoint) le plus proche de la localisation du point en entrée
 def determiner_wp_plus_proche(point, waypoints, partition, geometry, fast=True):
-    min_dist = np.inf
-    wp_id = None
-    coordonnees_proche = (None, None)
+    min_dist = np.inf #initialisation de la distance minimale entre deux waypoints
+    wp_id = None #initialisation de l'identifiant du point de navigation le plus proche
+    coordonnees_proche = (None, None) #coordonnée du point le plus proche
 
+    #recherche locale des waypoints les plus proches
     if fast:
-        x1, y1, x2, y2 = geometry
-        res = partition[0]
-        grid = partition[1]
-        l = (x2 - x1) / res[0]
-        h = (y2 - y1) / res[1]
-
+        x1, y1, x2, y2 = geometry #on prend les coordonnées des points au coin de la case
+        res = partition[0] #résolution
+        grid = partition[1] # on récupère la liste des waypoints dans la case
+        l = (x2 - x1) / res[0] #largeur (longitude)
+        h = (y2 - y1) / res[1] #hauteur (latitude)
+        #identification de la case (i,j) où se trouve le point de navigation
         i = min(int(floor((point[0] - y1) / h)), res[1] - 1)
         j = min(int(floor((point[1] - x1) / l)), res[0] - 1)
-        ids = grid.get((i, j), [])
+        ids = grid.get((i, j), []) #liste des identifiants des waypoints
 
+        #Dans le cas où le nombre de waypoints inf à 1 on élargie la recherche
         if len(ids) <= 1:
             ids = waypoints.keys()
-    else:
-        ids = waypoints.keys()
 
+    else:
+        """
+        Dans le cas où le nombre de waypoints inf à 1 on élargie la recherche
+        on ignore la grille donc le temps de recherche est plus elevé
+        """
+        ids = waypoints.keys()
+    """
+    Pour chaque point de navigation (waypoints) dans l'ids on calcule la distance entre le point
+    et le way point et on prend la distance la plus petite
+    """
     for id_wp in ids:
-        lat_wp, lon_wp = waypoints[id_wp]
-        d = geodesic((point[0], point[1]), (lat_wp, lon_wp)).meters
+        lat_wp, lon_wp = waypoints[id_wp] #récupération des coordonnées
+        d = geodesic((point[0], point[1]), (lat_wp, lon_wp)).meters #calcul de la distance en mètre
         if d < min_dist:
+            #mis à jour de la distance minimale
             min_dist, wp_id = d, id_wp
             coordonnees_proche = waypoints[id_wp]
 
+    #renvoie l'identifiant, la latitude et la longitude du waypoint le plus proche
     return wp_id, coordonnees_proche[0], coordonnees_proche[1]
 
 
