@@ -156,7 +156,9 @@ def tracer_trajet_meteo_dynamique(chemin, cle_api, avion):
 
     lat_centre = sum(p[1] for p in chemin) / len(chemin)
     lon_centre = sum(p[2] for p in chemin) / len(chemin)
-    carte = folium.Map(position=(lat_centre, lon_centre), eom_start=5)
+    carte = folium.Map(location=(lat_centre, lon_centre), zoom_start=5)
+
+    points_rouges = []
 
     for i, (id_wp, lat, lon) in enumerate(chemin):
         # On récupère les données météo
@@ -174,9 +176,10 @@ def tracer_trajet_meteo_dynamique(chemin, cle_api, avion):
         # Déterminer la couleur du marker
         if not avion.en_capaciter_de_voler(infos.get('vent_kph', 0)):
             couleur = "red"
-
+            points_rouges.append((lat, lon))  # <-- on stocke les points rouges
         else:
             couleur = "green"
+
         folium.Marker(
             location=(lat, lon),
             popup=folium.Popup(popup_text, max_width=250),
@@ -184,7 +187,8 @@ def tracer_trajet_meteo_dynamique(chemin, cle_api, avion):
         ).add_to(carte)
 
     folium.PolyLine([(lat, lon) for _, lat, lon in chemin], color="blue", weight=2.5).add_to(carte)
-    return carte
+
+    return carte, points_rouges  # <-- on retourne aussi les points rouges
 
 
 class Avion:
@@ -319,8 +323,32 @@ def split_trajet(waypoints_selectionnes):
         # Ajouter chaque point avec le numéro de segment
         for point in inter:
             points_intermediaires.append((i, point[0], point[1]))
-
+    print(points_intermediaires)
     return points_intermediaires
+
+
+def verifier_segments_par_points_rouges(points_intermediaires, points_rouges, seuil_depassement=5):
+    """
+    Vérifie pour chaque segment si le nombre de points rouges dépasse le seuil.
+
+    Args:
+        points_intermediaires: list de (num_segment, lat, lon)
+        points_rouges: list de (lat, lon)
+        seuil_depassement: int
+
+    Returns:
+        dict: {num_segment: True/False}
+    """
+    from collections import defaultdict
+
+    resultats = defaultdict(int)
+
+    for num_segment, lat, lon in points_intermediaires:
+        if (lat, lon) in points_rouges:
+            resultats[num_segment] += 1
+
+    # Retourne True si le segment est acceptable (<= seuil), False sinon
+    return {seg: (count <= seuil_depassement) for seg, count in resultats.items()}
 
 
 waypoints_liste = charger_waypoints("Data/Waypoints.csv")
@@ -332,9 +360,12 @@ partition, geometry = grille_partition(waypoints_dict, res=(10, 10))
 chemin = selectionner_waypoints_plus_proches_par_segments(waypoints_dict, villes_coordonnees[depart],villes_coordonnees[arrivee] , partition, geometry)
 
 chemin_vrai = split_trajet(chemin)
+carte, points_rouges = tracer_trajet_meteo_dynamique(chemin_vrai, cle_api, avion)
+etat_segments = verifier_segments_par_points_rouges(chemin_vrai, points_rouges, seuil_depassement=5)
+print(points_rouges)
 
-carte = tracer_trajet_meteo_dynamique(chemin_vrai,cle_api, avion_selectionne)
-carte.save("trajet.html")
+
+
 
 
 
