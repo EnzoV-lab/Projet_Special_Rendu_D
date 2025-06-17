@@ -334,7 +334,7 @@ chemin = selectionner_waypoints_plus_proches_par_segments(waypoints_dict, villes
 chemin_vrai = split_trajet(chemin)
 
 carte = tracer_trajet_meteo_dynamique(chemin_vrai,cle_api, avion_selectionne)
-
+carte.save("trajet.html")
 
 
 
