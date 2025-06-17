@@ -114,7 +114,7 @@ def distance(p1, p2):
     c = 2 * math.asin(math.sqrt(a))
     return R * c
 
-def trouver_point_suivant(depart, arrivee, points_utilises, fichier_csv='Data/Waypoints.csv', rayon_max_km=100):
+def trouver_point_suivant(depart, arrivee, points_utilises, fichier_csv='Data/Waypoints.csv', rayon_max_km=200):
     """
     Trouve un point proche de `depart` (mais pas utilisé), dans la direction générale de `arrivee`.
     """
@@ -135,8 +135,8 @@ def trouver_point_suivant(depart, arrivee, points_utilises, fichier_csv='Data/Wa
     df['angle'] = df.apply(lambda row: calcul_angle(depart, (row['latitude_deg'], row['longitude_deg']), arrivee), axis=1)
     df['distance'] = df.apply(lambda row: distance(depart, (row['latitude_deg'], row['longitude_deg'])), axis=1)
 
-    # Garder les points dans la direction (angle ≤ 90°) et proches (distance ≤ rayon_max_km)
-    df_filtre = df[(df['angle'] <= math.pi / 2) & (df['distance'] <= rayon_max_km)]
+    # Garder les points dans la direction (angle ≤ 179°) et proches (distance ≤ rayon_max_km)
+    df_filtre = df[(df['angle'] <= math.radians(179)) & (df['distance'] <= rayon_max_km)]
 
     if df_filtre.empty:
         return None
@@ -149,8 +149,25 @@ def trouver_point_suivant(depart, arrivee, points_utilises, fichier_csv='Data/Wa
 import time  # pour respecter les limites d'appels à l'API
 
 
-def verifier_conditions_meteo(coordonnees, cle_api, seuil_vent_kph=13, max_depassements=4, pause=1):
+def verifier_conditions_meteo(coordonnees, cle_api, seuil_vent_kph, max_depassements=3, pause=1):
+    """
+    Vérifie les conditions météo pour un segment.
+
+    Args:
+        coordonnees: liste de (lat, lon)
+        cle_api: str, clé WeatherAPI
+        seuil_vent_kph: float, vent max autorisé
+        max_depassements: int, nombre max de points dépassant le seuil
+        pause: float, pause entre les appels API
+
+    Returns:
+        tuple:
+            - état (bool): True si segment valide, False sinon
+            - liste des coordonnées [(lat, lon), ...]
+            - liste des données météo [(lat, lon, vent_kph ou None), ...]
+    """
     depassements = 0
+    liste_coords = []
     donnees_meteo_segment = []
 
     for lat, lon in coordonnees:
@@ -158,22 +175,25 @@ def verifier_conditions_meteo(coordonnees, cle_api, seuil_vent_kph=13, max_depas
         try:
             meteo.fetch()
             donnees = meteo.get_donnees()
-            vent = donnees.get("vent_kph", 0)
-            donnees_meteo_segment.append((lat, lon, vent))  # ← stocker vent
+            vent = donnees.get("vent_kph", None)
+
+            liste_coords.append((lat, lon))
+            donnees_meteo_segment.append((lat, lon, vent))
 
             if vent is not None and vent > seuil_vent_kph:
                 depassements += 1
-
-            if depassements > max_depassements:
-                return False, donnees_meteo_segment
+                if depassements > max_depassements:
+                    return False, liste_coords, donnees_meteo_segment
 
         except Exception as e:
-            print(f"Erreur pour le point ({lat}, {lon}) : {e}")
-            donnees_meteo_segment.append((lat, lon, None))  # ← None si erreur
+            print(f"❌ Erreur pour le point ({lat}, {lon}) : {e}")
+            liste_coords.append((lat, lon))
+            donnees_meteo_segment.append((lat, lon, None))
 
         time.sleep(pause)
 
-    return True, donnees_meteo_segment
+    return True, liste_coords, donnees_meteo_segment
+
 
 
 
@@ -181,9 +201,12 @@ def tracer_chemin(depart, arrivee, seuil):
     point = depart
     liste_point_utilisees = []
     liste_finale = []
-    liste_points_meteo = []  # ← ajouter
+    liste_points_meteo = []
+    print(f"🔍 Distance initiale au but : {distance(point, arrivee)} km")
+    while distance(point, arrivee) > 30:
 
-    while distance(point, arrivee) > 20:
+        print(f"📏 Distance actuelle entre {point} et {arrivee} : {distance(point, arrivee)} km")
+
         prochain_point = trouver_point_suivant(point, arrivee, liste_point_utilisees)
 
         if prochain_point is None:
@@ -194,15 +217,15 @@ def tracer_chemin(depart, arrivee, seuil):
 
         coord_seg = intercaler_points(point[0], point[1],
                                       prochain_point[0], prochain_point[1],
-                                      10)
+                                      6)
 
-        Etat, donnees_meteo = verifier_conditions_meteo(coord_seg, cle_api, seuil)
+        Etat, liste_coordonnees,donnees_meteo = verifier_conditions_meteo(coord_seg, cle_api, seuil)
         print(f"   → État météo valide ?", Etat)
 
 
 
         if Etat:
-            liste_finale.append([point] + [(lat, lon) for lat, lon, _ in donnees_meteo] + [prochain_point])
+            liste_finale.append(liste_coordonnees)
             liste_points_meteo.extend(donnees_meteo)
             liste_point_utilisees.append(prochain_point)
             point = prochain_point
@@ -212,6 +235,7 @@ def tracer_chemin(depart, arrivee, seuil):
             continue
 
     liste_finale.append([arrivee])
+    print(liste_finale)
     return liste_finale, liste_points_meteo
 
 
@@ -384,23 +408,23 @@ def afficher_meteo_sur_carte(points_meteo,seuille, itineraire=None):
 
 
 
+print(distance((np.float64(35.157798767089844), np.float64(-81.02030181884766)),(35.2271, -80.8431)))
 
-depart = (47.6062, -122.3321)
-arrivee = (45.5152, -122.6784)
+depart = (34.0522, -118.2437)
+arrivee = (47.6062, -122.3321)
 
 
 """itineraire, points_meteo = tracer_chemin(depart, arrivee, seuil=18)
 carte = afficher_meteo_sur_carte(points_meteo,15, itineraire=itineraire)
 carte.save("carte_avec_meteo_autre.html")"""
 
-itineraire1, points_meteo1 = tracer_chemin(depart, arrivee, seuil=40)
+itineraire1, points_meteo1 = tracer_chemin(depart, arrivee,1000)
 carte1 = afficher_meteo_sur_carte(points_meteo1,15, itineraire=itineraire1)
-carte1.save("carte_avec_meteo_autre1.html")
+carte1.save("carte_avec_meteo_autre.html")
 
-itineraire, points_meteo = tracer_chemin(depart, arrivee, seuil=15)
+itineraire, points_meteo = tracer_chemin(depart, arrivee,15)
 carte = afficher_meteo_sur_carte(points_meteo,15, itineraire=itineraire)
-carte.save("carte_avec_meteo_autre.html")
-
+carte.save("carte_avec_meteo_autre1.html")
 
 
 
