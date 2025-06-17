@@ -41,6 +41,7 @@ class DonneesMeteo:
             q = f"{self.coordonnees[0]},{self.coordonnees[1]}"
         else:
             raise ValueError("Impossible de récupérer les données.")
+
         #Utilisation de l'url spécifique pour récupérer les données météo
         url = f"http://api.weatherapi.com/v1/current.json?key={self.cle_api}&q={q}"
         reponse = requests.get(url)
@@ -62,6 +63,7 @@ class DonneesMeteo:
             "direction_cardinal": current.get("wind_dir", "N/A"),
             "direction_deg": current.get("wind_degree", 0),
             #Extraction des conditions (venteux, nuageux...)
+
             "condition": condition,
             "precip_mm": current.get("precip_mm", 0)
         }
@@ -69,6 +71,7 @@ class DonneesMeteo:
 def charger_waypoints(fichier_csv):
     waypoints = []
     with open(fichier_csv, newline='', encoding='utf-8') as csvfile:
+
         lecteur = csv.reader(csvfile) #lit le fichier ligne par ligne
         next(lecteur)  # Ignore l'en-tête et les lignes incomplètes
         for ligne in lecteur:
@@ -88,10 +91,12 @@ permet de générer des points intermédiaires entre deux coordonnées géograph
 """
 def intercaler_points(lat1, lon1, lat2, lon2, n):
     points_intercale = [] # on stocke les points ici
+
     for i in range(1, n + 1):
         x = lat1 + i * (lat2 - lat1) / (n + 1)
         y = lon1 + i * (lon2 - lon1) / (n + 1)
         points_intercale.append((x, y))
+
 
     return points_intercale #retourne la liste de points intermédiares
 
@@ -119,7 +124,9 @@ def grille_partition(waypoints, res=(10, 10)):
         j = min(int(floor((lon - x1) / l)), res[0] - 1) if l > 0 else 0 #colonne de la case où se trouve le point
         grid.setdefault((i, j), []).append(wp_id)
     #la fonction retourne la grille de répartition et les coordonnées géographiques
+
     return (res, grid), (x1, y1, x2, y2)
+
 
 
 
@@ -168,6 +175,7 @@ def determiner_wp_plus_proche(point, waypoints, partition, geometry, fast=True):
 
 
 def selectionner_waypoints_plus_proches_par_segments(waypoints, depart, arrivee, partition, geometry, n_points=100):
+
     points_intermediaires = intercaler_points(depart[0], depart[1], arrivee[0], arrivee[1], n_points)
     cas_teste = set()
     waypoints_selectionnes = []
@@ -201,9 +209,11 @@ def tracer_trajet_meteo_dynamique(chemin, cle_api, avion):
             f" Précipitations: {infos.get('precip_mm', 'N/A')} mm"
         )
 
+
         # Déterminer la couleur du marker
         if not avion.en_capaciter_de_voler(infos.get('vent_kph', 0)):
             couleur = "red"
+
 
         else:
             couleur = "green"
@@ -229,14 +239,18 @@ class Avion:
         self.vitesse_vent_max = vitesse_vent_max
         self.categorie = categorie
 
+
     def en_capaciter_de_voler(self, vent_km_h):
+
         """
         Vérifie si l'avion peut voler avec la vitesse de vent donnée.
 
         :param vent_kph: vitesse du vent en km/h (float)
         :return: True si l'avion peut voler, sinon False
         """
+
         return vent_km_h <= self.vitesse_vent_max
+
 
     def __str__(self):
         return f"Avion {self.nom} (vent max: {self.vitesse_vent_max} km/h)"
@@ -246,7 +260,9 @@ class Avion:
 
 avions = [
     # Hélice
-    Avion("Cessna 172", 10, "hélice"),
+
+    Avion("Cessna 172", 20, "hélice"),
+
     Avion("Piper PA-28 Cherokee", 60, "hélice"),
     Avion("Diamond DA40", 65, "hélice"),
 
@@ -335,34 +351,40 @@ while choix < 1 or choix > len(avions_filtres):
 avion_selectionne = avions_filtres[choix - 1]
 print(f"\n Vous avez selectionné : {avion_selectionne.nom} (vent max : {avion_selectionne.vitesse_vent_max} km/h)")
 
-def trouver_waypoint_alternatif(wp_id, lat, lon, avion, cle_api, waypoints_dict, partition, geometry, rayon_max=50000):
+
+def trouver_waypoint_alternatif(wp_id, lat, lon, avion, cle_api, waypoints_dict, partition, geometry,
+                                rayon_initial=50000, rayon_max=300000, increment=25000):
     """
-    Trouve un waypoint alternatif proche (rayon_max en mètres) avec météo acceptable.
-    Retourne un tuple (id, lat, lon). Si aucun trouvé, retourne le waypoint original.
+    Cherche un waypoint alternatif proche avec météo acceptable.
+    Étend progressivement le rayon de recherche si aucun n'est trouvé.
     """
     from geopy.distance import distance
 
-    # Chercher dans une zone proche (ex: 50km)
-    voisins = []
-    for id_voisin, (lat_v, lon_v) in waypoints_dict.items():
-        if id_voisin == wp_id:
-            continue
-        dist = distance((lat, lon), (lat_v, lon_v)).meters
-        if dist <= rayon_max:
-            voisins.append((id_voisin, lat_v, lon_v, dist))
+    rayon = rayon_initial
+    while rayon <= rayon_max:
+        voisins = []
+        for id_voisin, (lat_v, lon_v) in waypoints_dict.items():
+            if id_voisin == wp_id:
+                continue
+            dist = distance((lat, lon), (lat_v, lon_v)).meters
+            if dist <= rayon:
+                voisins.append((id_voisin, lat_v, lon_v, dist))
 
-    # Trier voisins par distance croissante
-    voisins.sort(key=lambda x: x[3])
+        # Trier les voisins par distance
+        voisins.sort(key=lambda x: x[3])
 
-    # Tester la météo sur chaque voisin
-    for id_v, lat_v, lon_v, _ in voisins:
-        meteo = DonneesMeteo(cle_api, (lat_v, lon_v))
-        meteo.fetch()
-        infos = meteo.get_donnees()
-        if avion.en_capaciter_de_voler(infos.get('vent_kph', 0)):
-            return (id_v, lat_v, lon_v)
+        # Tester la météo sur chaque voisin
+        for id_v, lat_v, lon_v, _ in voisins:
+            meteo = DonneesMeteo(cle_api, (lat_v, lon_v))
+            meteo.fetch()
+            infos = meteo.get_donnees()
+            if avion.en_capaciter_de_voler(infos.get('vent_kph', 0)):
+                return (id_v, lat_v, lon_v)
 
-    # Sinon renvoyer le waypoint d’origine
+        rayon += increment
+
+    # Aucun voisin acceptable trouvé
+
     return (wp_id, lat, lon)
 
 
