@@ -220,7 +220,7 @@ class Avion:
 
 avions = [
     # Hélice
-    Avion("Cessna 172", 10, "hélice"),
+    Avion("Cessna 172", 18, "hélice"),
     Avion("Piper PA-28 Cherokee", 60, "hélice"),
     Avion("Diamond DA40", 65, "hélice"),
 
@@ -360,10 +360,10 @@ partition, geometry = grille_partition(waypoints_dict, res=(10, 10))
 chemin = selectionner_waypoints_plus_proches_par_segments(waypoints_dict, villes_coordonnees[depart],villes_coordonnees[arrivee] , partition, geometry)
 
 chemin_vrai = split_trajet(chemin)
-carte, points_rouges = tracer_trajet_meteo_dynamique(chemin_vrai, cle_api, avion)
+carte, points_rouges = tracer_trajet_meteo_dynamique(chemin_vrai, cle_api, avion_selectionne)
 etat_segments = verifier_segments_par_points_rouges(chemin_vrai, points_rouges, seuil_depassement=5)
-print(points_rouges)
-
+print(etat_segments)
+carte.save("trajet_robuste.html")
 
 
 
