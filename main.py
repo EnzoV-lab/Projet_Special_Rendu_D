@@ -156,7 +156,7 @@ def determiner_wp_plus_proche(point, waypoints, partition, geometry, fast=True):
     et le way point et on prend la distance la plus petite
     """
     for id_wp in ids:
-        lat_wp, lon_wp = waypoints[id_wp] #récupération des coordonnées
+        lat_wp, lon_wp = waypoints[id_wp] # récupération des coordonnées
         d = geodesic((point[0], point[1]), (lat_wp, lon_wp)).meters #calcul de la distance en mètre
         if d < min_dist:
             #mis à jour de la distance minimale
