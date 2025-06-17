@@ -228,17 +228,19 @@ def tracer_trajet_meteo_dynamique(chemin, cle_api, avion):
 
 
 class Avion:
-    def __init__(self, nom, vitesse_vent_max, categorie):
+    def __init__(self, nom, vitesse_vent_max, categorie, vitesse_croisiere):
         """
         Initialise un objet Avion.
 
         :param nom: Nom ou modèle de l'avion (str)
         :param vitesse_vent_max: Vitesse maximale de vent tolérée (en km/h)
+        :param categorie: Type d'avion (hélice, turbopropulseur)
+        :param vitesse_croisiere: Vitesse de croisière en km/h (float)
         """
         self.nom = nom
         self.vitesse_vent_max = vitesse_vent_max
         self.categorie = categorie
-
+        self.vitesse_croisiere = vitesse_croisiere
 
     def en_capaciter_de_voler(self, vent_km_h):
 
@@ -253,24 +255,29 @@ class Avion:
 
 
     def __str__(self):
-        return f"Avion {self.nom} (vent max: {self.vitesse_vent_max} km/h)"
+        return f"Avion {self.nom} (vent max: {self.vitesse_vent_max} km/h, croisière: {self.vitesse_croisiere} km/h)"
 
     # === Création des avions ===
 
 
 avions = [
     # Hélice
-
-    Avion("Cessna 172", 20, "hélice"),
-
-    Avion("Piper PA-28 Cherokee", 60, "hélice"),
-    Avion("Diamond DA40", 65, "hélice"),
+    Avion("Cessna 172", 20, "hélice", 190),
+    Avion("Piper PA-28 Cherokee", 60, "hélice", 210),
+    Avion("Diamond DA40", 65, "hélice", 285),
 
     # Turbopropulseur
-    Avion("DHC-6 Twin Otter", 70, "turbopropulseur"),
-    Avion("Beechcraft King Air 350", 80, "turbopropulseur"),
-    Avion("ATR 72", 90, "turbopropulseur")
+    Avion("DHC-6 Twin Otter", 70, "turbopropulseur", 320),
+    Avion("Beechcraft King Air 350", 80, "turbopropulseur", 540),
+    Avion("ATR 72", 90, "turbopropulseur", 510),
+
+    #Jet
+    Avion("Airbus A320neo", 100, "jet", 830),
+    Avion("Airbus A350-900", 120, "jet", 900),
+    Avion("Boeing 737 MAX 8", 100, "jet", 840),
+    Avion("Boeing 787-9 Dreamliner", 120, "jet", 913),
 ]
+
 
 villes_coordonnees = {
     "New York": (40.7128, -74.0060),
@@ -329,8 +336,8 @@ depart = input("Quel est votre ville de départ : ")
 arrivee = input("Quel est votre ville d'arrivée : ")
 
 categorie = ""
-while categorie.lower() not in ["hélice", "turbopropulseur"]:
-    categorie = input("Quel type d’avion veux-tu utiliser ? (hélice / turbopropulseur) : ").strip().lower()
+while categorie.lower() not in ["hélice", "turbopropulseur", "jet"]:
+    categorie = input("Quel type d’avion veux-tu utiliser ? (hélice / turbopropulseur/ jet) : ").strip().lower()
 
 # Filtrage
 avions_filtres = [avion for avion in avions if avion.categorie == categorie]
@@ -408,6 +415,31 @@ for wp_id, lat, lon in chemin:
         alt = trouver_waypoint_alternatif(wp_id, lat, lon, avion_selectionne, cle_api, waypoints_dict, partition, geometry)
         chemin_robuste.append(alt)
 #
+
+def calculer_distance(trajet):
+    #Calcule la distance totale en kilomètres d'un trajet donné sous forme de liste de (id, lat, lon)
+    distance_totale = 0.0
+    for i in range(len(trajet) - 1):
+        coord1 = (trajet[i][1], trajet[i][2])  # (lat, lon)
+        coord2 = (trajet[i + 1][1], trajet[i + 1][2])
+        distance_totale += geodesic(coord1, coord2).kilometers
+    return distance_totale
+
+
+def calcul_temps_vol(trajet, vitesse_km_h):
+    distance = calculer_distance(trajet)
+    temps_heures = distance / vitesse_km_h
+    heures = int(temps_heures)
+    minutes = int((temps_heures - heures) * 60)
+
+    #Retourne le temps de vol estimé en heures, minutes
+    return heures, minutes, distance
+
+
+h, m, d = calcul_temps_vol(chemin_robuste, avion_selectionne.vitesse_croisiere)
+print(f"Distance totale estimée : {d:.1f} km")
+print(f"Temps de vol estimé : {h} h {m} min")
+
 # Remplacer chemin par chemin_robuste pour la carte
 carte = tracer_trajet_meteo_dynamique(chemin_robuste, cle_api, avion_selectionne)
 carte.save("trajet_robuste.html")
