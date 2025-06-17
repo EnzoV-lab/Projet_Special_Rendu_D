@@ -42,23 +42,28 @@ class DonneesMeteo:
         else:
             raise ValueError("Impossible de récupérer les données.")
 
+        #Utilisation de l'url spécifique pour récupérer les données météo
         url = f"http://api.weatherapi.com/v1/current.json?key={self.cle_api}&q={q}"
-        response = requests.get(url)
-        if response.status_code == 200:
-            self.donnees = response.json()
+        reponse = requests.get(url)
+        if reponse.status_code == 200:
+            self.donnees = reponse.json() #Récupération des données météos au format JSON
         else:
-            print("Erreur lors de la requête:", response.text)
+            print("Erreur lors de la requête:", reponse.text) #Affiche l'erreur si nécessaire
 
+    #Extraction des données nécessaires
     def get_donnees(self):
         if not self.donnees:
             return {}
-
+        #Extraction des données actuelles
         current = self.donnees.get("current", {})
         condition = current.get("condition", {}).get("text", "")
         return {
-            "vent_kph": current.get("wind_kph"),
+            "vent_km_h": current.get("wind_kph"), #Extraction des données sur la vitesse du vent
+            #Extraction des données sur la direction du vent
             "direction_cardinal": current.get("wind_dir", "N/A"),
             "direction_deg": current.get("wind_degree", 0),
+            #Extraction des conditions (venteux, nuageux...)
+
             "condition": condition,
             "precip_mm": current.get("precip_mm", 0)
         }
@@ -66,88 +71,111 @@ class DonneesMeteo:
 def charger_waypoints(fichier_csv):
     waypoints = []
     with open(fichier_csv, newline='', encoding='utf-8') as csvfile:
-        reader = csv.reader(csvfile)
-        next(reader)  # sauter l'en-tête
-        for ligne in reader:
+
+        lecteur = csv.reader(csvfile) #lit le fichier ligne par ligne
+        next(lecteur)  # Ignore l'en-tête et les lignes incomplètes
+        for ligne in lecteur:
             if len(ligne) < 3:
-                continue
+                continue #ignore les lignes incomplètes de moins de 3 colonnes
             try:
-                id_wp = ligne[0]
-                lat = float(ligne[1])
-                lon = float(ligne[2])
-                waypoints.append((id_wp, lat, lon))
+                id_wp = ligne[0] #la première colonne représente l'identifiant du waypoint
+                lat = float(ligne[1]) #la deuxième colonne représente la latitude
+                lon = float(ligne[2]) #la troisième colonne représente la longitude
+                waypoints.append((id_wp, lat, lon)) #ajoute les éléments précedents à la liste
             except ValueError:
                 continue
-    return waypoints
-# Renvoie une liste de tuple ('ID', (latitude, longitude))
-
-
-# Interpolation linéaire entre le point de départ et le point d'arrivée
+    return waypoints # Renvoie une liste de tuple ('ID', (latitude, longitude))
+""""
+Interpolation linéaire entre le point de départ et le point d'arrivée
+permet de générer des points intermédiaires entre deux coordonnées géographiques
+"""
 def intercaler_points(lat1, lon1, lat2, lon2, n):
-    points_intercale = []
+    points_intercale = [] # on stocke les points ici
+
     for i in range(1, n + 1):
         x = lat1 + i * (lat2 - lat1) / (n + 1)
         y = lon1 + i * (lon2 - lon1) / (n + 1)
         points_intercale.append((x, y))
 
-    return points_intercale
 
+    return points_intercale #retourne la liste de points intermédiares
 
+"""
+permet de découper la carte en case afin d'y placer chaque point dans la bonne case
+le but étant de trouver rapidement le point le plus proche d'un endroit
+"""
 def grille_partition(waypoints, res=(10, 10)):
     # waypoints est un dict {id: (lat, lon)}
-    latitudes = [coord[0] for coord in waypoints.values()]
-    longitudes = [coord[1] for coord in waypoints.values()]
+    #res est la résolution de la case
+    latitudes = [coord[0] for coord in waypoints.values()] #liste des latitudes
+    longitudes = [coord[1] for coord in waypoints.values()] #liste des longitudes
 
-    y1, y2 = min(latitudes), max(latitudes)
-    x1, x2 = min(longitudes), max(longitudes)
+    #Délimite la zone géographique qui contient tous les waypoints
+    y1, y2 = min(latitudes), max(latitudes) #point du sud au nord
+    x1, x2 = min(longitudes), max(longitudes) #de l'ouest à l'est
 
-    h = (y2 - y1) / res[1] if res[1] > 0 else 1
-    l = (x2 - x1) / res[0] if res[0] > 0 else 1
+    h = (y2 - y1) / res[1] if res[1] > 0 else 1 #hauteur d'une case
+    l = (x2 - x1) / res[0] if res[0] > 0 else 1 #largeur d'une case
 
-    grid = {}
+    grid = {} #permet de stocker les cases de la grille
 
     for wp_id, (lat, lon) in waypoints.items():
-        i = min(int(floor((lat - y1) / h)), res[1] - 1) if h > 0 else 0
-        j = min(int(floor((lon - x1) / l)), res[0] - 1) if l > 0 else 0
+        i = min(int(floor((lat - y1) / h)), res[1] - 1) if h > 0 else 0 #ligne de la case où se trouve le point
+        j = min(int(floor((lon - x1) / l)), res[0] - 1) if l > 0 else 0 #colonne de la case où se trouve le point
         grid.setdefault((i, j), []).append(wp_id)
+    #la fonction retourne la grille de répartition et les coordonnées géographiques
 
     return (res, grid), (x1, y1, x2, y2)
 
 
 
-#Détermine le waypoint le plus proche de la localisation du point en entrée
+
+#Détermine le point de navigation (waypoint) le plus proche de la localisation du point en entrée
 def determiner_wp_plus_proche(point, waypoints, partition, geometry, fast=True):
-    min_dist = np.inf
-    wp_id = None
-    coordonnees_proche = (None, None)
+    min_dist = np.inf #initialisation de la distance minimale entre deux waypoints
+    wp_id = None #initialisation de l'identifiant du point de navigation le plus proche
+    coordonnees_proche = (None, None) #coordonnée du point le plus proche
 
+    #recherche locale des waypoints les plus proches
     if fast:
-        x1, y1, x2, y2 = geometry
-        res = partition[0]
-        grid = partition[1]
-        l = (x2 - x1) / res[0]
-        h = (y2 - y1) / res[1]
-
+        x1, y1, x2, y2 = geometry #on prend les coordonnées des points au coin de la case
+        res = partition[0] #résolution
+        grid = partition[1] # on récupère la liste des waypoints dans la case
+        l = (x2 - x1) / res[0] #largeur (longitude)
+        h = (y2 - y1) / res[1] #hauteur (latitude)
+        #identification de la case (i,j) où se trouve le point de navigation
         i = min(int(floor((point[0] - y1) / h)), res[1] - 1)
         j = min(int(floor((point[1] - x1) / l)), res[0] - 1)
-        ids = grid.get((i, j), [])
+        ids = grid.get((i, j), []) #liste des identifiants des waypoints
 
+        #Dans le cas où le nombre de waypoints inf à 1 on élargie la recherche
         if len(ids) <= 1:
             ids = waypoints.keys()
-    else:
-        ids = waypoints.keys()
 
+    else:
+        """
+        Dans le cas où le nombre de waypoints inf à 1 on élargie la recherche
+        on ignore la grille donc le temps de recherche est plus elevé
+        """
+        ids = waypoints.keys()
+    """
+    Pour chaque point de navigation (waypoints) dans l'ids on calcule la distance entre le point
+    et le way point et on prend la distance la plus petite
+    """
     for id_wp in ids:
-        lat_wp, lon_wp = waypoints[id_wp]
-        d = geodesic((point[0], point[1]), (lat_wp, lon_wp)).meters
+        lat_wp, lon_wp = waypoints[id_wp] # récupération des coordonnées
+        d = geodesic((point[0], point[1]), (lat_wp, lon_wp)).meters #calcul de la distance en mètre
         if d < min_dist:
+            #mis à jour de la distance minimale
             min_dist, wp_id = d, id_wp
             coordonnees_proche = waypoints[id_wp]
 
+    #renvoie l'identifiant, la latitude et la longitude du waypoint le plus proche
     return wp_id, coordonnees_proche[0], coordonnees_proche[1]
 
 
-def selectionner_waypoints_plus_proches_par_segments(waypoints, depart, arrivee, partition, geometry, n_points=40):
+def selectionner_waypoints_plus_proches_par_segments(waypoints, depart, arrivee, partition, geometry, n_points=100):
+
     points_intermediaires = intercaler_points(depart[0], depart[1], arrivee[0], arrivee[1], n_points)
     cas_teste = set()
     waypoints_selectionnes = []
@@ -181,9 +209,11 @@ def tracer_trajet_meteo_dynamique(chemin, cle_api, avion):
             f" Précipitations: {infos.get('precip_mm', 'N/A')} mm"
         )
 
+
         # Déterminer la couleur du marker
         if not avion.en_capaciter_de_voler(infos.get('vent_kph', 0)):
             couleur = "red"
+
 
         else:
             couleur = "green"
@@ -209,14 +239,18 @@ class Avion:
         self.vitesse_vent_max = vitesse_vent_max
         self.categorie = categorie
 
-    def en_capaciter_de_voler(self, vent_kph):
+
+    def en_capaciter_de_voler(self, vent_km_h):
+
         """
         Vérifie si l'avion peut voler avec la vitesse de vent donnée.
 
         :param vent_kph: vitesse du vent en km/h (float)
         :return: True si l'avion peut voler, sinon False
         """
-        return vent_kph <= self.vitesse_vent_max
+
+        return vent_km_h <= self.vitesse_vent_max
+
 
     def __str__(self):
         return f"Avion {self.nom} (vent max: {self.vitesse_vent_max} km/h)"
@@ -226,7 +260,9 @@ class Avion:
 
 avions = [
     # Hélice
+
     Avion("Cessna 172", 20, "hélice"),
+
     Avion("Piper PA-28 Cherokee", 60, "hélice"),
     Avion("Diamond DA40", 65, "hélice"),
 
@@ -315,6 +351,7 @@ while choix < 1 or choix > len(avions_filtres):
 avion_selectionne = avions_filtres[choix - 1]
 print(f"\n Vous avez selectionné : {avion_selectionne.nom} (vent max : {avion_selectionne.vitesse_vent_max} km/h)")
 
+
 def trouver_waypoint_alternatif(wp_id, lat, lon, avion, cle_api, waypoints_dict, partition, geometry,
                                 rayon_initial=50000, rayon_max=300000, increment=25000):
     """
@@ -347,6 +384,7 @@ def trouver_waypoint_alternatif(wp_id, lat, lon, avion, cle_api, waypoints_dict,
         rayon += increment
 
     # Aucun voisin acceptable trouvé
+
     return (wp_id, lat, lon)
 
 
