@@ -82,10 +82,10 @@ def charger_waypoints(fichier_csv):
             except ValueError:
                 continue
     return waypoints # Renvoie une liste de tuple ('ID', (latitude, longitude))
-"""""""""
- Interpolation linéaire entre le point de départ et le point d'arrivée
+""""
+Interpolation linéaire entre le point de départ et le point d'arrivée
 permet de générer des points intermédiaires entre deux coordonnées géographiques
-"""""""""
+"""
 def intercaler_points(lat1, lon1, lat2, lon2, n):
     points_intercale = [] # on stocke les points ici
     for i in range(1, n + 1):
@@ -95,23 +95,28 @@ def intercaler_points(lat1, lon1, lat2, lon2, n):
 
     return points_intercale #retourne la liste de points intermédiares
 
-
+"""
+permet de découper la carte en case afin d'y placer chaque point dans la bonne case
+le but étant de trouver rapidement le point le plus proche d'un endroit
+"""
 def grille_partition(waypoints, res=(10, 10)):
     # waypoints est un dict {id: (lat, lon)}
-    latitudes = [coord[0] for coord in waypoints.values()]
-    longitudes = [coord[1] for coord in waypoints.values()]
+    #res est la résolution de la case
+    latitudes = [coord[0] for coord in waypoints.values()] #liste des latitudes
+    longitudes = [coord[1] for coord in waypoints.values()] #liste des longitudes
 
-    y1, y2 = min(latitudes), max(latitudes)
-    x1, x2 = min(longitudes), max(longitudes)
+    #Délimite la zone géographique qui contient tous les waypoints
+    y1, y2 = min(latitudes), max(latitudes) #point du sud au nord
+    x1, x2 = min(longitudes), max(longitudes) #de l'ouest à l'est
 
-    h = (y2 - y1) / res[1] if res[1] > 0 else 1
-    l = (x2 - x1) / res[0] if res[0] > 0 else 1
+    h = (y2 - y1) / res[1] if res[1] > 0 else 1 #hauteur d'une case
+    l = (x2 - x1) / res[0] if res[0] > 0 else 1 #longueur d'une case
 
-    grid = {}
+    grid = {} #permet de stocker les cases de la grille
 
     for wp_id, (lat, lon) in waypoints.items():
-        i = min(int(floor((lat - y1) / h)), res[1] - 1) if h > 0 else 0
-        j = min(int(floor((lon - x1) / l)), res[0] - 1) if l > 0 else 0
+        i = min(int(floor((lat - y1) / h)), res[1] - 1) if h > 0 else 0 #ligne de la case où se trouve le point
+        j = min(int(floor((lon - x1) / l)), res[0] - 1) if l > 0 else 0 #colonne de la case où se trouve le point
         grid.setdefault((i, j), []).append(wp_id)
 
     return (res, grid), (x1, y1, x2, y2)
