@@ -306,17 +306,21 @@ avion_selectionne = avions_filtres[choix - 1]
 print(f"\n Vous avez selectionné : {avion_selectionne.nom} (vent max : {avion_selectionne.vitesse_vent_max} km/h)")
 
 
+
+
+
 def split_trajet(waypoints_selectionnes):
-    segments = []
+    points_intermediaires = []
     for i in range(len(waypoints_selectionnes) - 1):
         lat1, lon1 = waypoints_selectionnes[i][1], waypoints_selectionnes[i][2]
         lat2, lon2 = waypoints_selectionnes[i + 1][1], waypoints_selectionnes[i + 1][2]
-        inter = intercaler_points(lat1, lon1, lat2, lon2, 10)
-        segments.append(inter)  # on ajoute la liste des points d’un segment
-    print(segments)
-    return segments
+        inter = intercaler_points(lat1, lon1, lat2, lon2, 10)  # doit retourner une liste de (lat, lon)
 
+        # Ajouter chaque point avec le numéro de segment
+        for point in inter:
+            points_intermediaires.append((i, point[0], point[1]))
 
+    return points_intermediaires
 
 
 waypoints_liste = charger_waypoints("Data/Waypoints.csv")
@@ -327,11 +331,9 @@ partition, geometry = grille_partition(waypoints_dict, res=(10, 10))
 
 chemin = selectionner_waypoints_plus_proches_par_segments(waypoints_dict, villes_coordonnees[depart],villes_coordonnees[arrivee] , partition, geometry)
 
-vrai_chemin = split_trajet(chemin)
+chemin_vrai = split_trajet(chemin)
 
-
-tracer_trajet_meteo_dynamique(vrai_chemin,cle_api, avion_selectionne)
-
+carte = tracer_trajet_meteo_dynamique(chemin_vrai,cle_api, avion_selectionne)
 
 
 
