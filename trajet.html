@@ -1,0 +1,2388 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_0ebaa1ba5b64c374df5556abbb8f273f {
+                    position: (37.51026833852132, -90.53860791524251);
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+
+            <style>html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            </style>
+
+            <style>#map {
+                position:absolute;
+                top:0;
+                bottom:0;
+                right:0;
+                left:0;
+                }
+            </style>
+
+            <script>
+                L_NO_TOUCH = false;
+                L_DISABLE_3D = false;
+            </script>
+
+        
+</head>
+<body>
+    
+    
+            <div class="folium-map" id="map_0ebaa1ba5b64c374df5556abbb8f273f" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_0ebaa1ba5b64c374df5556abbb8f273f = L.map(
+                "map_0ebaa1ba5b64c374df5556abbb8f273f",
+                {
+                    center: [0.0, 0.0],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 1,
+  "zoomControl": true,
+  "preferCanvas": false,
+  "eomStart": 5,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_561ae0120167b9a608a6b25ad7828987 = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 19,
+  "maxNativeZoom": 19,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_561ae0120167b9a608a6b25ad7828987.addTo(map_0ebaa1ba5b64c374df5556abbb8f273f);
+        
+    
+            var marker_c7b782d360a434f66da0e4a9861e6e57 = L.marker(
+                [40.74089813232422, -74.42980194091797],
+                {
+}
+            ).addTo(map_0ebaa1ba5b64c374df5556abbb8f273f);
+        
+    
+            var icon_e82ce892b6813e35f5900edcceb603df = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_7de4ea36f7f709fef8d98d160acdc4a3 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_4059036ad6bb167c8144595bb012bfcd = $(`<div id="html_4059036ad6bb167c8144595bb012bfcd" style="width: 100.0%; height: 100.0%;">ID:CAT Vent: 6.1 km/h E Condition: Fog Précipitations: 0.0 mm</div>`)[0];
+                popup_7de4ea36f7f709fef8d98d160acdc4a3.setContent(html_4059036ad6bb167c8144595bb012bfcd);
+            
+        
+
+        marker_c7b782d360a434f66da0e4a9861e6e57.bindPopup(popup_7de4ea36f7f709fef8d98d160acdc4a3)
+        ;
+
+        
+    
+    
+                marker_c7b782d360a434f66da0e4a9861e6e57.setIcon(icon_e82ce892b6813e35f5900edcceb603df);
+            
+    
+            var marker_798e74c8c7ec56b45af663ca66bba447 = L.marker(
+                [40.58300018310547, -74.74169921875],
+                {
+}
+            ).addTo(map_0ebaa1ba5b64c374df5556abbb8f273f);
+        
+    
+            var icon_f473c1f227421038b4cb808f989fccdc = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_d00d5ff71a9e56e83e12d9f189f2d08d = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_b01d6c2e0ee641f0430dcdda1e0df37a = $(`<div id="html_b01d6c2e0ee641f0430dcdda1e0df37a" style="width: 100.0%; height: 100.0%;">ID:SBJ Vent: 7.2 km/h E Condition: Mist Précipitations: 0.0 mm</div>`)[0];
+                popup_d00d5ff71a9e56e83e12d9f189f2d08d.setContent(html_b01d6c2e0ee641f0430dcdda1e0df37a);
+            
+        
+
+        marker_798e74c8c7ec56b45af663ca66bba447.bindPopup(popup_d00d5ff71a9e56e83e12d9f189f2d08d)
+        ;
+
+        
+    
+    
+                marker_798e74c8c7ec56b45af663ca66bba447.setIcon(icon_f473c1f227421038b4cb808f989fccdc);
+            
+    
+            var marker_637ce58890693dbc660b5653a4dbc343 = L.marker(
+                [40.424800872802734, -75.29740142822266],
+                {
+}
+            ).addTo(map_0ebaa1ba5b64c374df5556abbb8f273f);
+        
+    
+            var icon_365e7d8ed3b16e053e9267de5cee9b47 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_bed319227c1e837ad408e365810a4caa = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_2dbaafd440c42b8ce5aac807220c0b7e = $(`<div id="html_2dbaafd440c42b8ce5aac807220c0b7e" style="width: 100.0%; height: 100.0%;">ID:UKT Vent: 5.0 km/h E Condition: Overcast Précipitations: 0.0 mm</div>`)[0];
+                popup_bed319227c1e837ad408e365810a4caa.setContent(html_2dbaafd440c42b8ce5aac807220c0b7e);
+            
+        
+
+        marker_637ce58890693dbc660b5653a4dbc343.bindPopup(popup_bed319227c1e837ad408e365810a4caa)
+        ;
+
+        
+    
+    
+                marker_637ce58890693dbc660b5653a4dbc343.setIcon(icon_365e7d8ed3b16e053e9267de5cee9b47);
+            
+    
+            var marker_a0fb28fd8f15fd22fe8ba630fe80580f = L.marker(
+                [40.58580017089844, -75.54959869384766],
+                {
+}
+            ).addTo(map_0ebaa1ba5b64c374df5556abbb8f273f);
+        
+    
+            var icon_74c7cfb45b71650e6001fb4eef775ecc = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_59c0b6e258d37e917d6a790176cfa166 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_cb50d0b97fd9f401577dd63e8cf361c6 = $(`<div id="html_cb50d0b97fd9f401577dd63e8cf361c6" style="width: 100.0%; height: 100.0%;">ID:AB Vent: 4.3 km/h E Condition: Mist Précipitations: 0.0 mm</div>`)[0];
+                popup_59c0b6e258d37e917d6a790176cfa166.setContent(html_cb50d0b97fd9f401577dd63e8cf361c6);
+            
+        
+
+        marker_a0fb28fd8f15fd22fe8ba630fe80580f.bindPopup(popup_59c0b6e258d37e917d6a790176cfa166)
+        ;
+
+        
+    
+    
+                marker_a0fb28fd8f15fd22fe8ba630fe80580f.setIcon(icon_74c7cfb45b71650e6001fb4eef775ecc);
+            
+    
+            var marker_a43a0b86288065ce3bbedc390b414c85 = L.marker(
+                [40.30649948120117, -75.94960021972656],
+                {
+}
+            ).addTo(map_0ebaa1ba5b64c374df5556abbb8f273f);
+        
+    
+            var icon_3310b9f42fc50f91cfbf5182e1caf51b = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_ed6894b6cab16f76acba7700fe8a00a0 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_7c2d6c7b7586a096585e92fc941a7483 = $(`<div id="html_7c2d6c7b7586a096585e92fc941a7483" style="width: 100.0%; height: 100.0%;">ID:RD Vent: 3.6 km/h E Condition: Mist Précipitations: 0.0 mm</div>`)[0];
+                popup_ed6894b6cab16f76acba7700fe8a00a0.setContent(html_7c2d6c7b7586a096585e92fc941a7483);
+            
+        
+
+        marker_a43a0b86288065ce3bbedc390b414c85.bindPopup(popup_ed6894b6cab16f76acba7700fe8a00a0)
+        ;
+
+        
+    
+    
+                marker_a43a0b86288065ce3bbedc390b414c85.setIcon(icon_3310b9f42fc50f91cfbf5182e1caf51b);
+            
+    
+            var marker_818b97791a98ef41187d3037cad92575 = L.marker(
+                [40.119998931884766, -76.29129791259766],
+                {
+}
+            ).addTo(map_0ebaa1ba5b64c374df5556abbb8f273f);
+        
+    
+            var icon_0af7ad7b595e3a1cf90df388f4d466df = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_b4c33811cb26dfbc862bfb5fbb54bd62 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_57930f37c7984aa1835e93e187818221 = $(`<div id="html_57930f37c7984aa1835e93e187818221" style="width: 100.0%; height: 100.0%;">ID:LRP Vent: 7.2 km/h SSE Condition: Mist Précipitations: 0.0 mm</div>`)[0];
+                popup_b4c33811cb26dfbc862bfb5fbb54bd62.setContent(html_57930f37c7984aa1835e93e187818221);
+            
+        
+
+        marker_818b97791a98ef41187d3037cad92575.bindPopup(popup_b4c33811cb26dfbc862bfb5fbb54bd62)
+        ;
+
+        
+    
+    
+                marker_818b97791a98ef41187d3037cad92575.setIcon(icon_0af7ad7b595e3a1cf90df388f4d466df);
+            
+    
+            var marker_54ac51b9607fdcb415f2acae7ccdca0d = L.marker(
+                [40.24629974365234, -76.90059661865234],
+                {
+}
+            ).addTo(map_0ebaa1ba5b64c374df5556abbb8f273f);
+        
+    
+            var icon_01cd33b4e5db60c1fca592e586fc0784 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_f8d55b24e9ed79e0f4161db61b854b67 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_82613a62c4d151a24748b990a6adde7b = $(`<div id="html_82613a62c4d151a24748b990a6adde7b" style="width: 100.0%; height: 100.0%;">ID:MD Vent: 5.0 km/h ESE Condition: Mist Précipitations: 0.0 mm</div>`)[0];
+                popup_f8d55b24e9ed79e0f4161db61b854b67.setContent(html_82613a62c4d151a24748b990a6adde7b);
+            
+        
+
+        marker_54ac51b9607fdcb415f2acae7ccdca0d.bindPopup(popup_f8d55b24e9ed79e0f4161db61b854b67)
+        ;
+
+        
+    
+    
+                marker_54ac51b9607fdcb415f2acae7ccdca0d.setIcon(icon_01cd33b4e5db60c1fca592e586fc0784);
+            
+    
+            var marker_cc660a7f30f188598a3b810d53a28afa = L.marker(
+                [40.178199768066406, -77.00559997558594],
+                {
+}
+            ).addTo(map_0ebaa1ba5b64c374df5556abbb8f273f);
+        
+    
+            var icon_f2cd12095bf6b4c9d0fbd34dbadd264d = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_7c90dd45d3d7fecd2ac4b8d44eac35be = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_5c7e7bd5a26014de1f74112194a62814 = $(`<div id="html_5c7e7bd5a26014de1f74112194a62814" style="width: 100.0%; height: 100.0%;">ID:CX Vent: 5.0 km/h ESE Condition: Mist Précipitations: 0.0 mm</div>`)[0];
+                popup_7c90dd45d3d7fecd2ac4b8d44eac35be.setContent(html_5c7e7bd5a26014de1f74112194a62814);
+            
+        
+
+        marker_cc660a7f30f188598a3b810d53a28afa.bindPopup(popup_7c90dd45d3d7fecd2ac4b8d44eac35be)
+        ;
+
+        
+    
+    
+                marker_cc660a7f30f188598a3b810d53a28afa.setIcon(icon_f2cd12095bf6b4c9d0fbd34dbadd264d);
+            
+    
+            var marker_01d33835be8935d5f8908017674d1506 = L.marker(
+                [39.93320083618164, -77.95089721679688],
+                {
+}
+            ).addTo(map_0ebaa1ba5b64c374df5556abbb8f273f);
+        
+    
+            var icon_914e5fb8581f9a0188e93b1ed8b50e75 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_9b4f76ef065af58560038a656750d24d = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_1ee173eb9e711b306373b2a6628a5f14 = $(`<div id="html_1ee173eb9e711b306373b2a6628a5f14" style="width: 100.0%; height: 100.0%;">ID:THS Vent: 5.0 km/h SSE Condition: Overcast Précipitations: 0.0 mm</div>`)[0];
+                popup_9b4f76ef065af58560038a656750d24d.setContent(html_1ee173eb9e711b306373b2a6628a5f14);
+            
+        
+
+        marker_01d33835be8935d5f8908017674d1506.bindPopup(popup_9b4f76ef065af58560038a656750d24d)
+        ;
+
+        
+    
+    
+                marker_01d33835be8935d5f8908017674d1506.setIcon(icon_914e5fb8581f9a0188e93b1ed8b50e75);
+            
+    
+            var marker_44974e84c64bcdee6c1e3fce3a52cfd4 = L.marker(
+                [39.64820098876953, -78.74729919433594],
+                {
+}
+            ).addTo(map_0ebaa1ba5b64c374df5556abbb8f273f);
+        
+    
+            var icon_62e723b4a0d49ad0be938c51863ee87b = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_176500a2270cb536ac9a5719d52073d1 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_d1d311dfcace5fe404e27c49e4c78c63 = $(`<div id="html_d1d311dfcace5fe404e27c49e4c78c63" style="width: 100.0%; height: 100.0%;">ID:CBE Vent: 4.7 km/h S Condition: Overcast Précipitations: 0.0 mm</div>`)[0];
+                popup_176500a2270cb536ac9a5719d52073d1.setContent(html_d1d311dfcace5fe404e27c49e4c78c63);
+            
+        
+
+        marker_44974e84c64bcdee6c1e3fce3a52cfd4.bindPopup(popup_176500a2270cb536ac9a5719d52073d1)
+        ;
+
+        
+    
+    
+                marker_44974e84c64bcdee6c1e3fce3a52cfd4.setIcon(icon_62e723b4a0d49ad0be938c51863ee87b);
+            
+    
+            var marker_3ba84c36c479919eab4016da92dd0116 = L.marker(
+                [39.6349983215332, -79.05049896240234],
+                {
+}
+            ).addTo(map_0ebaa1ba5b64c374df5556abbb8f273f);
+        
+    
+            var icon_1dbbd243298a7fbc8e52196a2cf8d8eb = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_7f84b58c056e327805f7bd4dc03b2a29 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_eebe0abba5218bef2f41f40cb7f09e41 = $(`<div id="html_eebe0abba5218bef2f41f40cb7f09e41" style="width: 100.0%; height: 100.0%;">ID:GRV Vent: 6.5 km/h S Condition: Overcast Précipitations: 0.0 mm</div>`)[0];
+                popup_7f84b58c056e327805f7bd4dc03b2a29.setContent(html_eebe0abba5218bef2f41f40cb7f09e41);
+            
+        
+
+        marker_3ba84c36c479919eab4016da92dd0116.bindPopup(popup_7f84b58c056e327805f7bd4dc03b2a29)
+        ;
+
+        
+    
+    
+                marker_3ba84c36c479919eab4016da92dd0116.setIcon(icon_1dbbd243298a7fbc8e52196a2cf8d8eb);
+            
+    
+            var marker_1f8bdbd49a4ba86bb54a19a15d3b7311 = L.marker(
+                [39.55670166015625, -79.86039733886719],
+                {
+}
+            ).addTo(map_0ebaa1ba5b64c374df5556abbb8f273f);
+        
+    
+            var icon_0a82c1ff8e85ad6521b2323d4ae5a4e9 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_ceea7e607699960072dec5c9a72af445 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_e66635d694ea3540f6fe55c1294426ae = $(`<div id="html_e66635d694ea3540f6fe55c1294426ae" style="width: 100.0%; height: 100.0%;">ID:MGW Vent: 12.6 km/h SW Condition: Partly Cloudy Précipitations: 0.0 mm</div>`)[0];
+                popup_ceea7e607699960072dec5c9a72af445.setContent(html_e66635d694ea3540f6fe55c1294426ae);
+            
+        
+
+        marker_1f8bdbd49a4ba86bb54a19a15d3b7311.bindPopup(popup_ceea7e607699960072dec5c9a72af445)
+        ;
+
+        
+    
+    
+                marker_1f8bdbd49a4ba86bb54a19a15d3b7311.setIcon(icon_0a82c1ff8e85ad6521b2323d4ae5a4e9);
+            
+    
+            var marker_13330c8b4b1b65e3f174eba3dd1d0b02 = L.marker(
+                [39.25320053100586, -80.26789855957031],
+                {
+}
+            ).addTo(map_0ebaa1ba5b64c374df5556abbb8f273f);
+        
+    
+            var icon_a25b5d4a3077027802ca9b96eed44c00 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_59a6d46acd28832cb316be1a25735295 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_8100c21ca55d93a150c4cc9586921614 = $(`<div id="html_8100c21ca55d93a150c4cc9586921614" style="width: 100.0%; height: 100.0%;">ID:CKB Vent: 12.2 km/h SW Condition: Overcast Précipitations: 0.0 mm</div>`)[0];
+                popup_59a6d46acd28832cb316be1a25735295.setContent(html_8100c21ca55d93a150c4cc9586921614);
+            
+        
+
+        marker_13330c8b4b1b65e3f174eba3dd1d0b02.bindPopup(popup_59a6d46acd28832cb316be1a25735295)
+        ;
+
+        
+    
+    
+                marker_13330c8b4b1b65e3f174eba3dd1d0b02.setIcon(icon_a25b5d4a3077027802ca9b96eed44c00);
+            
+    
+            var marker_249244c774664a34d79a210c9904517e = L.marker(
+                [39.441200256347656, -81.37480163574219],
+                {
+}
+            ).addTo(map_0ebaa1ba5b64c374df5556abbb8f273f);
+        
+    
+            var icon_4b763e3db94b1bae8c1999cf970ae0bd = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_2cf33ae1fffa16566de82dcc4dbd6d6d = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_da2b44a7ed6b75fa986a13dc189d68f3 = $(`<div id="html_da2b44a7ed6b75fa986a13dc189d68f3" style="width: 100.0%; height: 100.0%;">ID:JPU Vent: 7.9 km/h SSW Condition: Partly cloudy Précipitations: 0.0 mm</div>`)[0];
+                popup_2cf33ae1fffa16566de82dcc4dbd6d6d.setContent(html_da2b44a7ed6b75fa986a13dc189d68f3);
+            
+        
+
+        marker_249244c774664a34d79a210c9904517e.bindPopup(popup_2cf33ae1fffa16566de82dcc4dbd6d6d)
+        ;
+
+        
+    
+    
+                marker_249244c774664a34d79a210c9904517e.setIcon(icon_4b763e3db94b1bae8c1999cf970ae0bd);
+            
+    
+            var marker_dc1a85ef6716f33518573d0107f7ec19 = L.marker(
+                [39.25410079956055, -81.48490142822266],
+                {
+}
+            ).addTo(map_0ebaa1ba5b64c374df5556abbb8f273f);
+        
+    
+            var icon_f4d032540526e3cf70a7fa788650fb5e = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_d73dfc0d98526624154304b3b3611587 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_9fe0b5a6d3145a8cf6272c7bc7a5b54e = $(`<div id="html_9fe0b5a6d3145a8cf6272c7bc7a5b54e" style="width: 100.0%; height: 100.0%;">ID:PK Vent: 8.6 km/h SSW Condition: Partly cloudy Précipitations: 0.0 mm</div>`)[0];
+                popup_d73dfc0d98526624154304b3b3611587.setContent(html_9fe0b5a6d3145a8cf6272c7bc7a5b54e);
+            
+        
+
+        marker_dc1a85ef6716f33518573d0107f7ec19.bindPopup(popup_d73dfc0d98526624154304b3b3611587)
+        ;
+
+        
+    
+    
+                marker_dc1a85ef6716f33518573d0107f7ec19.setIcon(icon_f4d032540526e3cf70a7fa788650fb5e);
+            
+    
+            var marker_f260742a36fd13a3b8a1dbaac0241d2a = L.marker(
+                [39.257301330566406, -82.1259994506836],
+                {
+}
+            ).addTo(map_0ebaa1ba5b64c374df5556abbb8f273f);
+        
+    
+            var icon_3dbef3936371bf5c8a89a1fc79da08d4 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_9c4969d6dee57bcea85aa457f124b0b0 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_c46650ed5da97e98b3ec586a088b40f1 = $(`<div id="html_c46650ed5da97e98b3ec586a088b40f1" style="width: 100.0%; height: 100.0%;">ID:UGS Vent: 6.1 km/h SSW Condition: Overcast Précipitations: 0.0 mm</div>`)[0];
+                popup_9c4969d6dee57bcea85aa457f124b0b0.setContent(html_c46650ed5da97e98b3ec586a088b40f1);
+            
+        
+
+        marker_f260742a36fd13a3b8a1dbaac0241d2a.bindPopup(popup_9c4969d6dee57bcea85aa457f124b0b0)
+        ;
+
+        
+    
+    
+                marker_f260742a36fd13a3b8a1dbaac0241d2a.setIcon(icon_3dbef3936371bf5c8a89a1fc79da08d4);
+            
+    
+            var marker_678445d2915204746cdd12482d7a3759 = L.marker(
+                [39.166900634765625, -82.93219757080078],
+                {
+}
+            ).addTo(map_0ebaa1ba5b64c374df5556abbb8f273f);
+        
+    
+            var icon_cb1ad791972bea9836e1adb80d920ab3 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_8ae816f2d8f98d7be8b9f827e18841bc = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_b6f4ff4c99992f291fc207644c110dd9 = $(`<div id="html_b6f4ff4c99992f291fc207644c110dd9" style="width: 100.0%; height: 100.0%;">ID:EOP Vent: 11.5 km/h SSW Condition: Overcast Précipitations: 0.0 mm</div>`)[0];
+                popup_8ae816f2d8f98d7be8b9f827e18841bc.setContent(html_b6f4ff4c99992f291fc207644c110dd9);
+            
+        
+
+        marker_678445d2915204746cdd12482d7a3759.bindPopup(popup_8ae816f2d8f98d7be8b9f827e18841bc)
+        ;
+
+        
+    
+    
+                marker_678445d2915204746cdd12482d7a3759.setIcon(icon_cb1ad791972bea9836e1adb80d920ab3);
+            
+    
+            var marker_ea42f9ca178f5c906e965d4a46cc9bab = L.marker(
+                [38.855899810791016, -83.56379699707031],
+                {
+}
+            ).addTo(map_0ebaa1ba5b64c374df5556abbb8f273f);
+        
+    
+            var icon_18e8c1cbd55f4741dd02ead054bb5f82 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_13bc3d1b80de8b127e72742d90356589 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_a2a23b44469257e094c2fb9ea2bd5626 = $(`<div id="html_a2a23b44469257e094c2fb9ea2bd5626" style="width: 100.0%; height: 100.0%;">ID:AMT Vent: 6.8 km/h SW Condition: Mist Précipitations: 0.0 mm</div>`)[0];
+                popup_13bc3d1b80de8b127e72742d90356589.setContent(html_a2a23b44469257e094c2fb9ea2bd5626);
+            
+        
+
+        marker_ea42f9ca178f5c906e965d4a46cc9bab.bindPopup(popup_13bc3d1b80de8b127e72742d90356589)
+        ;
+
+        
+    
+    
+                marker_ea42f9ca178f5c906e965d4a46cc9bab.setIcon(icon_18e8c1cbd55f4741dd02ead054bb5f82);
+            
+    
+            var marker_692dcba65262ef62917c0706809aee1b = L.marker(
+                [38.88199996948242, -83.88520050048828],
+                {
+}
+            ).addTo(map_0ebaa1ba5b64c374df5556abbb8f273f);
+        
+    
+            var icon_65a041d1b467bf5cb4b8fa59699c401a = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_e5e2be1c53b06be25bced50e8dcd3980 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_d64be9f5378eba65e7bc584c3ab2c427 = $(`<div id="html_d64be9f5378eba65e7bc584c3ab2c427" style="width: 100.0%; height: 100.0%;">ID:GEO Vent: 11.2 km/h SSW Condition: Partly cloudy Précipitations: 0.0 mm</div>`)[0];
+                popup_e5e2be1c53b06be25bced50e8dcd3980.setContent(html_d64be9f5378eba65e7bc584c3ab2c427);
+            
+        
+
+        marker_692dcba65262ef62917c0706809aee1b.bindPopup(popup_e5e2be1c53b06be25bced50e8dcd3980)
+        ;
+
+        
+    
+    
+                marker_692dcba65262ef62917c0706809aee1b.setIcon(icon_65a041d1b467bf5cb4b8fa59699c401a);
+            
+    
+            var marker_0d5695b0533913b6fe58346582bb33b5 = L.marker(
+                [38.64950180053711, -84.31060028076172],
+                {
+}
+            ).addTo(map_0ebaa1ba5b64c374df5556abbb8f273f);
+        
+    
+            var icon_c21c7830916661c843aef6e81f3513e0 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_236891941780bbcb65367e3d136a6c8f = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_825c60818e0fa18c4925edbb0fec3dab = $(`<div id="html_825c60818e0fa18c4925edbb0fec3dab" style="width: 100.0%; height: 100.0%;">ID:FLM Vent: 9.4 km/h S Condition: Partly cloudy Précipitations: 0.0 mm</div>`)[0];
+                popup_236891941780bbcb65367e3d136a6c8f.setContent(html_825c60818e0fa18c4925edbb0fec3dab);
+            
+        
+
+        marker_0d5695b0533913b6fe58346582bb33b5.bindPopup(popup_236891941780bbcb65367e3d136a6c8f)
+        ;
+
+        
+    
+    
+                marker_0d5695b0533913b6fe58346582bb33b5.setIcon(icon_c21c7830916661c843aef6e81f3513e0);
+            
+    
+            var marker_2b9954b96d8499c3d75ae535ee9e417a = L.marker(
+                [38.21469879150391, -84.8198013305664],
+                {
+}
+            ).addTo(map_0ebaa1ba5b64c374df5556abbb8f273f);
+        
+    
+            var icon_d9853e6fea1426d8e66cc44f0b9c9a4f = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_8e69f1124d78e14728dcafb4355164cf = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_086decc0a9cfa73fc9aa2fdf033d7ecf = $(`<div id="html_086decc0a9cfa73fc9aa2fdf033d7ecf" style="width: 100.0%; height: 100.0%;">ID:FEU Vent: 13.3 km/h SSW Condition: Light rain Précipitations: 0.0 mm</div>`)[0];
+                popup_8e69f1124d78e14728dcafb4355164cf.setContent(html_086decc0a9cfa73fc9aa2fdf033d7ecf);
+            
+        
+
+        marker_2b9954b96d8499c3d75ae535ee9e417a.bindPopup(popup_8e69f1124d78e14728dcafb4355164cf)
+        ;
+
+        
+    
+    
+                marker_2b9954b96d8499c3d75ae535ee9e417a.setIcon(icon_d9853e6fea1426d8e66cc44f0b9c9a4f);
+            
+    
+            var marker_b3f91304c4bd6eecbd72b94e298a9078 = L.marker(
+                [38.76089859008789, -85.46050262451172],
+                {
+}
+            ).addTo(map_0ebaa1ba5b64c374df5556abbb8f273f);
+        
+    
+            var icon_7316d100141eb043142af41c3d9c16b6 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_6e312b88cf437dd8a0da0d691590bb96 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_8a18dfd21e4e2c7237d04f72f933054d = $(`<div id="html_8a18dfd21e4e2c7237d04f72f933054d" style="width: 100.0%; height: 100.0%;">ID:IMS Vent: 13.7 km/h SSW Condition: Mist Précipitations: 0.0 mm</div>`)[0];
+                popup_6e312b88cf437dd8a0da0d691590bb96.setContent(html_8a18dfd21e4e2c7237d04f72f933054d);
+            
+        
+
+        marker_b3f91304c4bd6eecbd72b94e298a9078.bindPopup(popup_6e312b88cf437dd8a0da0d691590bb96)
+        ;
+
+        
+    
+    
+                marker_b3f91304c4bd6eecbd72b94e298a9078.setIcon(icon_7316d100141eb043142af41c3d9c16b6);
+            
+    
+            var marker_4cd738c323200650c4cd5f60e1fd3625 = L.marker(
+                [38.4739990234375, -85.73719787597656],
+                {
+}
+            ).addTo(map_0ebaa1ba5b64c374df5556abbb8f273f);
+        
+    
+            var icon_ac6664ebaea5f170dd5d0b9571e15682 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_995f10b2e41c0315283d052e0b1f2365 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_c001e2079397b4a40a4ff49f944c177c = $(`<div id="html_c001e2079397b4a40a4ff49f944c177c" style="width: 100.0%; height: 100.0%;">ID:JV Vent: 8.6 km/h SSW Condition: Overcast Précipitations: 0.0 mm</div>`)[0];
+                popup_995f10b2e41c0315283d052e0b1f2365.setContent(html_c001e2079397b4a40a4ff49f944c177c);
+            
+        
+
+        marker_4cd738c323200650c4cd5f60e1fd3625.bindPopup(popup_995f10b2e41c0315283d052e0b1f2365)
+        ;
+
+        
+    
+    
+                marker_4cd738c323200650c4cd5f60e1fd3625.setIcon(icon_ac6664ebaea5f170dd5d0b9571e15682);
+            
+    
+            var marker_779699a1a617b6aa995ac751c4c2d847 = L.marker(
+                [38.52780151367188, -86.52780151367188],
+                {
+}
+            ).addTo(map_0ebaa1ba5b64c374df5556abbb8f273f);
+        
+    
+            var icon_17737356352cdfabab6df2a73f165da0 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_993f90c0b955f1ceca57826735d9776e = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_1d61e5db8a3c3330435e80fc1a08dc66 = $(`<div id="html_1d61e5db8a3c3330435e80fc1a08dc66" style="width: 100.0%; height: 100.0%;">ID:RRJ Vent: 10.4 km/h S Condition: Light rain Précipitations: 0.0 mm</div>`)[0];
+                popup_993f90c0b955f1ceca57826735d9776e.setContent(html_1d61e5db8a3c3330435e80fc1a08dc66);
+            
+        
+
+        marker_779699a1a617b6aa995ac751c4c2d847.bindPopup(popup_993f90c0b955f1ceca57826735d9776e)
+        ;
+
+        
+    
+    
+                marker_779699a1a617b6aa995ac751c4c2d847.setIcon(icon_17737356352cdfabab6df2a73f165da0);
+            
+    
+            var marker_0af312200f0c868c0c223f3be1ce9887 = L.marker(
+                [38.24869918823242, -86.83789825439453],
+                {
+}
+            ).addTo(map_0ebaa1ba5b64c374df5556abbb8f273f);
+        
+    
+            var icon_c9efbec052955e69d9aa4876290fb07a = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_06f9d0acd04b5291d5f79296acaf5f9c = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_14b18bd64e1f0de7f6404bc2b86a4276 = $(`<div id="html_14b18bd64e1f0de7f6404bc2b86a4276" style="width: 100.0%; height: 100.0%;">ID:FNZ Vent: 11.5 km/h S Condition: Light rain Précipitations: 0.0 mm</div>`)[0];
+                popup_06f9d0acd04b5291d5f79296acaf5f9c.setContent(html_14b18bd64e1f0de7f6404bc2b86a4276);
+            
+        
+
+        marker_0af312200f0c868c0c223f3be1ce9887.bindPopup(popup_06f9d0acd04b5291d5f79296acaf5f9c)
+        ;
+
+        
+    
+    
+                marker_0af312200f0c868c0c223f3be1ce9887.setIcon(icon_c9efbec052955e69d9aa4876290fb07a);
+            
+    
+            var marker_8ebf03173d425439e815534e175f240a = L.marker(
+                [38.250301361083984, -86.9563980102539],
+                {
+}
+            ).addTo(map_0ebaa1ba5b64c374df5556abbb8f273f);
+        
+    
+            var icon_02c37105e39dea83e9c41fabb467d52d = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_9a5bd6dcdb0d8efd82df228909c6082e = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_f3eb156648135bb9b04857eb062c9db6 = $(`<div id="html_f3eb156648135bb9b04857eb062c9db6" style="width: 100.0%; height: 100.0%;">ID:HNB Vent: 11.5 km/h S Condition: Light rain Précipitations: 0.0 mm</div>`)[0];
+                popup_9a5bd6dcdb0d8efd82df228909c6082e.setContent(html_f3eb156648135bb9b04857eb062c9db6);
+            
+        
+
+        marker_8ebf03173d425439e815534e175f240a.bindPopup(popup_9a5bd6dcdb0d8efd82df228909c6082e)
+        ;
+
+        
+    
+    
+                marker_8ebf03173d425439e815534e175f240a.setIcon(icon_02c37105e39dea83e9c41fabb467d52d);
+            
+    
+            var marker_2a6771a1e57bbc3ef311b1e4aa4051dd = L.marker(
+                [38.12670135498047, -87.44080352783203],
+                {
+}
+            ).addTo(map_0ebaa1ba5b64c374df5556abbb8f273f);
+        
+    
+            var icon_155b3393c48e1fcb5b503f4adce69929 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_571f4957e62c647ce8adc7d1929b2212 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_d90303bd6e21799e9130bc4a45974fda = $(`<div id="html_d90303bd6e21799e9130bc4a45974fda" style="width: 100.0%; height: 100.0%;">ID:EV Vent: 12.2 km/h S Condition: Overcast Précipitations: 0.0 mm</div>`)[0];
+                popup_571f4957e62c647ce8adc7d1929b2212.setContent(html_d90303bd6e21799e9130bc4a45974fda);
+            
+        
+
+        marker_2a6771a1e57bbc3ef311b1e4aa4051dd.bindPopup(popup_571f4957e62c647ce8adc7d1929b2212)
+        ;
+
+        
+    
+    
+                marker_2a6771a1e57bbc3ef311b1e4aa4051dd.setIcon(icon_155b3393c48e1fcb5b503f4adce69929);
+            
+    
+            var marker_1aa0daf9434bd10f1bfb477512b67071 = L.marker(
+                [38.09349822998047, -88.11959838867188],
+                {
+}
+            ).addTo(map_0ebaa1ba5b64c374df5556abbb8f273f);
+        
+    
+            var icon_c58fe7f3d9400afac23ed7fe662c1eec = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_b74ad05f1238aa09a861c6880487c94c = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_22b21cfc8e19468635b3302a774b183e = $(`<div id="html_22b21cfc8e19468635b3302a774b183e" style="width: 100.0%; height: 100.0%;">ID:CUL Vent: 11.2 km/h SSW Condition: Overcast Précipitations: 0.0 mm</div>`)[0];
+                popup_b74ad05f1238aa09a861c6880487c94c.setContent(html_22b21cfc8e19468635b3302a774b183e);
+            
+        
+
+        marker_1aa0daf9434bd10f1bfb477512b67071.bindPopup(popup_b74ad05f1238aa09a861c6880487c94c)
+        ;
+
+        
+    
+    
+                marker_1aa0daf9434bd10f1bfb477512b67071.setIcon(icon_c58fe7f3d9400afac23ed7fe662c1eec);
+            
+    
+            var marker_7c5dbb0eab6193d5b7d0d55865133cd9 = L.marker(
+                [37.81159973144531, -88.54530334472656],
+                {
+}
+            ).addTo(map_0ebaa1ba5b64c374df5556abbb8f273f);
+        
+    
+            var icon_3fd88d98e267fdc53052774a84819b29 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_4b10576626b3eaee7443637b5c257d11 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_28019ea12ce2feb50dc37d79440ec4a4 = $(`<div id="html_28019ea12ce2feb50dc37d79440ec4a4" style="width: 100.0%; height: 100.0%;">ID:HSB Vent: 11.5 km/h SSW Condition: Overcast Précipitations: 0.0 mm</div>`)[0];
+                popup_4b10576626b3eaee7443637b5c257d11.setContent(html_28019ea12ce2feb50dc37d79440ec4a4);
+            
+        
+
+        marker_7c5dbb0eab6193d5b7d0d55865133cd9.bindPopup(popup_4b10576626b3eaee7443637b5c257d11)
+        ;
+
+        
+    
+    
+                marker_7c5dbb0eab6193d5b7d0d55865133cd9.setIcon(icon_3fd88d98e267fdc53052774a84819b29);
+            
+    
+            var marker_1b28eed342612cdb42d035f00a86bad4 = L.marker(
+                [37.75419998168945, -89.01170349121094],
+                {
+}
+            ).addTo(map_0ebaa1ba5b64c374df5556abbb8f273f);
+        
+    
+            var icon_9ae14c345100a4dd89d76fccfcbe91fe = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_e5dc061c3837868b1023c8ee648b4640 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_cdb4075a083ff8221198fa6ef2e8f95e = $(`<div id="html_cdb4075a083ff8221198fa6ef2e8f95e" style="width: 100.0%; height: 100.0%;">ID:MWA Vent: 9.0 km/h SSW Condition: Overcast Précipitations: 0.0 mm</div>`)[0];
+                popup_e5dc061c3837868b1023c8ee648b4640.setContent(html_cdb4075a083ff8221198fa6ef2e8f95e);
+            
+        
+
+        marker_1b28eed342612cdb42d035f00a86bad4.bindPopup(popup_e5dc061c3837868b1023c8ee648b4640)
+        ;
+
+        
+    
+    
+                marker_1b28eed342612cdb42d035f00a86bad4.setIcon(icon_9ae14c345100a4dd89d76fccfcbe91fe);
+            
+    
+            var marker_7e77d52e6758ec8a47a68b40ecd1cf06 = L.marker(
+                [37.67340087890625, -90.23400115966795],
+                {
+}
+            ).addTo(map_0ebaa1ba5b64c374df5556abbb8f273f);
+        
+    
+            var icon_47b289b791369c9feadddf31505b971a = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_23db0518f51b3eab9d485148308ed491 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_f9b963d88868866dcedfd8555419a69b = $(`<div id="html_f9b963d88868866dcedfd8555419a69b" style="width: 100.0%; height: 100.0%;">ID:FAM Vent: 4.0 km/h WSW Condition: Mist Précipitations: 0.0 mm</div>`)[0];
+                popup_23db0518f51b3eab9d485148308ed491.setContent(html_f9b963d88868866dcedfd8555419a69b);
+            
+        
+
+        marker_7e77d52e6758ec8a47a68b40ecd1cf06.bindPopup(popup_23db0518f51b3eab9d485148308ed491)
+        ;
+
+        
+    
+    
+                marker_7e77d52e6758ec8a47a68b40ecd1cf06.setIcon(icon_47b289b791369c9feadddf31505b971a);
+            
+    
+            var marker_e8ebd42f404e15dcc7fd446286ecf496 = L.marker(
+                [37.765098571777344, -90.4292984008789],
+                {
+}
+            ).addTo(map_0ebaa1ba5b64c374df5556abbb8f273f);
+        
+    
+            var icon_2bb69eec498997b441897ca55af39af1 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_479f5f3a7bdb00c9c2273e0ced4f605d = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_62d831e327f4a5d8651cda3269a30967 = $(`<div id="html_62d831e327f4a5d8651cda3269a30967" style="width: 100.0%; height: 100.0%;">ID:PRI Vent: 4.0 km/h WNW Condition: Mist Précipitations: 0.0 mm</div>`)[0];
+                popup_479f5f3a7bdb00c9c2273e0ced4f605d.setContent(html_62d831e327f4a5d8651cda3269a30967);
+            
+        
+
+        marker_e8ebd42f404e15dcc7fd446286ecf496.bindPopup(popup_479f5f3a7bdb00c9c2273e0ced4f605d)
+        ;
+
+        
+    
+    
+                marker_e8ebd42f404e15dcc7fd446286ecf496.setIcon(icon_2bb69eec498997b441897ca55af39af1);
+            
+    
+            var marker_715af2b7167e91e0116f70f1ea7acca7 = L.marker(
+                [37.59080123901367, -91.7885971069336],
+                {
+}
+            ).addTo(map_0ebaa1ba5b64c374df5556abbb8f273f);
+        
+    
+            var icon_bfa381f42eccadbf305ccca0d8bb840b = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_0dd852cce7929a49e980e619ac2bfcbe = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_707cd83bb66112128b8d0fc1c64ee17d = $(`<div id="html_707cd83bb66112128b8d0fc1c64ee17d" style="width: 100.0%; height: 100.0%;">ID:MAP Vent: 4.3 km/h WNW Condition: Light drizzle Précipitations: 0.0 mm</div>`)[0];
+                popup_0dd852cce7929a49e980e619ac2bfcbe.setContent(html_707cd83bb66112128b8d0fc1c64ee17d);
+            
+        
+
+        marker_715af2b7167e91e0116f70f1ea7acca7.bindPopup(popup_0dd852cce7929a49e980e619ac2bfcbe)
+        ;
+
+        
+    
+    
+                marker_715af2b7167e91e0116f70f1ea7acca7.setIcon(icon_bfa381f42eccadbf305ccca0d8bb840b);
+            
+    
+            var marker_70d0248af6a9dc30e77c9fb21d8b0484 = L.marker(
+                [36.993900299072266, -91.7126007080078],
+                {
+}
+            ).addTo(map_0ebaa1ba5b64c374df5556abbb8f273f);
+        
+    
+            var icon_e72c31321361832a48b808ffb676ddd8 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_6cdc4f4b01532d9e7587bdcc238a9909 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_643002e41131941f241687ff9253f5a3 = $(`<div id="html_643002e41131941f241687ff9253f5a3" style="width: 100.0%; height: 100.0%;">ID:MNF Vent: 3.6 km/h WNW Condition: Mist Précipitations: 0.0 mm</div>`)[0];
+                popup_6cdc4f4b01532d9e7587bdcc238a9909.setContent(html_643002e41131941f241687ff9253f5a3);
+            
+        
+
+        marker_70d0248af6a9dc30e77c9fb21d8b0484.bindPopup(popup_6cdc4f4b01532d9e7587bdcc238a9909)
+        ;
+
+        
+    
+    
+                marker_70d0248af6a9dc30e77c9fb21d8b0484.setIcon(icon_e72c31321361832a48b808ffb676ddd8);
+            
+    
+            var marker_cb284015677e6eac0c68c9a87f07c563 = L.marker(
+                [36.96979904174805, -92.67739868164062],
+                {
+}
+            ).addTo(map_0ebaa1ba5b64c374df5556abbb8f273f);
+        
+    
+            var icon_cca278aec07c287c4746dc7c188b993d = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_81ad41c62272953df90a416e248f25cb = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_cdb130ec2b00345b62e2d6b8244191bf = $(`<div id="html_cdb130ec2b00345b62e2d6b8244191bf" style="width: 100.0%; height: 100.0%;">ID:AOV Vent: 4.0 km/h W Condition: Overcast Précipitations: 0.0 mm</div>`)[0];
+                popup_81ad41c62272953df90a416e248f25cb.setContent(html_cdb130ec2b00345b62e2d6b8244191bf);
+            
+        
+
+        marker_cb284015677e6eac0c68c9a87f07c563.bindPopup(popup_81ad41c62272953df90a416e248f25cb)
+        ;
+
+        
+    
+    
+                marker_cb284015677e6eac0c68c9a87f07c563.setIcon(icon_cca278aec07c287c4746dc7c188b993d);
+            
+    
+            var marker_8c445996903a22c57afb25a6d16869b7 = L.marker(
+                [37.02349853515625, -92.87689971923828],
+                {
+}
+            ).addTo(map_0ebaa1ba5b64c374df5556abbb8f273f);
+        
+    
+            var icon_c48d32fd5f2ce3d78a377f49f6b31bcf = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_2760025022cbb51d101e07484972ef09 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_3fe47aa743fdd68f3c3da0476c9221ba = $(`<div id="html_3fe47aa743fdd68f3c3da0476c9221ba" style="width: 100.0%; height: 100.0%;">ID:DGD Vent: 3.6 km/h SSW Condition: Mist Précipitations: 0.0 mm</div>`)[0];
+                popup_2760025022cbb51d101e07484972ef09.setContent(html_3fe47aa743fdd68f3c3da0476c9221ba);
+            
+        
+
+        marker_8c445996903a22c57afb25a6d16869b7.bindPopup(popup_2760025022cbb51d101e07484972ef09)
+        ;
+
+        
+    
+    
+                marker_8c445996903a22c57afb25a6d16869b7.setIcon(icon_c48d32fd5f2ce3d78a377f49f6b31bcf);
+            
+    
+            var marker_f4ca838e4cffb98880aec5aa53e1521d = L.marker(
+                [37.29940032958984, -93.4406967163086],
+                {
+}
+            ).addTo(map_0ebaa1ba5b64c374df5556abbb8f273f);
+        
+    
+            var icon_38977ff44ad44aef635f7ab99fd6ba02 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_28cdb7fd68ce4cd92170077f6bd384e7 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_095d23935cd35e6816e905105e88900d = $(`<div id="html_095d23935cd35e6816e905105e88900d" style="width: 100.0%; height: 100.0%;">ID:ILJ Vent: 9.0 km/h SSE Condition: Mist Précipitations: 0.0 mm</div>`)[0];
+                popup_28cdb7fd68ce4cd92170077f6bd384e7.setContent(html_095d23935cd35e6816e905105e88900d);
+            
+        
+
+        marker_f4ca838e4cffb98880aec5aa53e1521d.bindPopup(popup_28cdb7fd68ce4cd92170077f6bd384e7)
+        ;
+
+        
+    
+    
+                marker_f4ca838e4cffb98880aec5aa53e1521d.setIcon(icon_38977ff44ad44aef635f7ab99fd6ba02);
+            
+    
+            var marker_d052f19e5b3b915707489a1729b10e73 = L.marker(
+                [36.84239959716797, -94.43569946289062],
+                {
+}
+            ).addTo(map_0ebaa1ba5b64c374df5556abbb8f273f);
+        
+    
+            var icon_7325373cb525cc9eca294a88dbfb59c5 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_cc21c56dd87eaf2da8fc123d49edfa82 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_b65df32a76e912d82cb26a606ea57f43 = $(`<div id="html_b65df32a76e912d82cb26a606ea57f43" style="width: 100.0%; height: 100.0%;">ID:EOS Vent: 9.7 km/h SW Condition: Fog Précipitations: 0.0 mm</div>`)[0];
+                popup_cc21c56dd87eaf2da8fc123d49edfa82.setContent(html_b65df32a76e912d82cb26a606ea57f43);
+            
+        
+
+        marker_d052f19e5b3b915707489a1729b10e73.bindPopup(popup_cc21c56dd87eaf2da8fc123d49edfa82)
+        ;
+
+        
+    
+    
+                marker_d052f19e5b3b915707489a1729b10e73.setIcon(icon_7325373cb525cc9eca294a88dbfb59c5);
+            
+    
+            var marker_f93e7624121a294122c53fc7d6a31473 = L.marker(
+                [37.157501220703125, -95.20359802246094],
+                {
+}
+            ).addTo(map_0ebaa1ba5b64c374df5556abbb8f273f);
+        
+    
+            var icon_cefa8e6816d46c4975d1623737f3714f = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_a7009ceab2c1a4a08e5a5c704d3c4048 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_616aebeadb917003f0df91cdd991a760 = $(`<div id="html_616aebeadb917003f0df91cdd991a760" style="width: 100.0%; height: 100.0%;">ID:OSW Vent: 17.3 km/h SSE Condition: Patchy light rain with thunder Précipitations: 0.0 mm</div>`)[0];
+                popup_a7009ceab2c1a4a08e5a5c704d3c4048.setContent(html_616aebeadb917003f0df91cdd991a760);
+            
+        
+
+        marker_f93e7624121a294122c53fc7d6a31473.bindPopup(popup_a7009ceab2c1a4a08e5a5c704d3c4048)
+        ;
+
+        
+    
+    
+                marker_f93e7624121a294122c53fc7d6a31473.setIcon(icon_cefa8e6816d46c4975d1623737f3714f);
+            
+    
+            var marker_4facd00becb1f091d493fa8bec1add36 = L.marker(
+                [36.30739974975586, -95.87529754638672],
+                {
+}
+            ).addTo(map_0ebaa1ba5b64c374df5556abbb8f273f);
+        
+    
+            var icon_36bfae5e8f215a58d9ee10c046ae0408 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_5c0b40ecdd6768e061445d5a34104ed3 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_9a1fefc2708f56e48f198a63dd009183 = $(`<div id="html_9a1fefc2708f56e48f198a63dd009183" style="width: 100.0%; height: 100.0%;">ID:DW Vent: 16.2 km/h SSE Condition: Patchy light rain with thunder Précipitations: 0.0 mm</div>`)[0];
+                popup_5c0b40ecdd6768e061445d5a34104ed3.setContent(html_9a1fefc2708f56e48f198a63dd009183);
+            
+        
+
+        marker_4facd00becb1f091d493fa8bec1add36.bindPopup(popup_5c0b40ecdd6768e061445d5a34104ed3)
+        ;
+
+        
+    
+    
+                marker_4facd00becb1f091d493fa8bec1add36.setIcon(icon_36bfae5e8f215a58d9ee10c046ae0408);
+            
+    
+            var marker_5801383c9bd22b92220e9703b26d9ed8 = L.marker(
+                [36.17290115356445, -96.1541976928711],
+                {
+}
+            ).addTo(map_0ebaa1ba5b64c374df5556abbb8f273f);
+        
+    
+            var icon_f33467830061c67ce351ce834ee511e1 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_af34e79c5eac012b6213200929b26563 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_ec79c0bfd73288c54da7b8db2403eb01 = $(`<div id="html_ec79c0bfd73288c54da7b8db2403eb01" style="width: 100.0%; height: 100.0%;">ID:OWP Vent: 16.9 km/h SSE Condition: Patchy light rain with thunder Précipitations: 0.0 mm</div>`)[0];
+                popup_af34e79c5eac012b6213200929b26563.setContent(html_ec79c0bfd73288c54da7b8db2403eb01);
+            
+        
+
+        marker_5801383c9bd22b92220e9703b26d9ed8.bindPopup(popup_af34e79c5eac012b6213200929b26563)
+        ;
+
+        
+    
+    
+                marker_5801383c9bd22b92220e9703b26d9ed8.setIcon(icon_f33467830061c67ce351ce834ee511e1);
+            
+    
+            var marker_61af12d68ba78adc4572d4c616931ea7 = L.marker(
+                [36.23619842529297, -97.0873031616211],
+                {
+}
+            ).addTo(map_0ebaa1ba5b64c374df5556abbb8f273f);
+        
+    
+            var icon_48e10135120252036a1f1b33455ab737 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_fce245e9f820002deadca5ee8250835a = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_0ef33905be5f37e594237fd61e095db9 = $(`<div id="html_0ef33905be5f37e594237fd61e095db9" style="width: 100.0%; height: 100.0%;">ID:SW Vent: 23.0 km/h SSE Condition: Overcast Précipitations: 0.0 mm</div>`)[0];
+                popup_fce245e9f820002deadca5ee8250835a.setContent(html_0ef33905be5f37e594237fd61e095db9);
+            
+        
+
+        marker_61af12d68ba78adc4572d4c616931ea7.bindPopup(popup_fce245e9f820002deadca5ee8250835a)
+        ;
+
+        
+    
+    
+                marker_61af12d68ba78adc4572d4c616931ea7.setIcon(icon_48e10135120252036a1f1b33455ab737);
+            
+    
+            var marker_b388f9e5922141bf6524ec4f5a873594 = L.marker(
+                [36.275001525878906, -97.79070281982422],
+                {
+}
+            ).addTo(map_0ebaa1ba5b64c374df5556abbb8f273f);
+        
+    
+            var icon_13394d61ded625cf12215dc29489c913 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_ad80c2e42bd6b771e785759ea078017b = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_1e4ac60bbd90a265320cea50b6bfb5d8 = $(`<div id="html_1e4ac60bbd90a265320cea50b6bfb5d8" style="width: 100.0%; height: 100.0%;">ID:EI Vent: 25.9 km/h SSE Condition: Partly cloudy Précipitations: 0.0 mm</div>`)[0];
+                popup_ad80c2e42bd6b771e785759ea078017b.setContent(html_1e4ac60bbd90a265320cea50b6bfb5d8);
+            
+        
+
+        marker_b388f9e5922141bf6524ec4f5a873594.bindPopup(popup_ad80c2e42bd6b771e785759ea078017b)
+        ;
+
+        
+    
+    
+                marker_b388f9e5922141bf6524ec4f5a873594.setIcon(icon_13394d61ded625cf12215dc29489c913);
+            
+    
+            var marker_3a71e45d2700e9651058d79e1b79f306 = L.marker(
+                [36.345001220703125, -97.91829681396484],
+                {
+}
+            ).addTo(map_0ebaa1ba5b64c374df5556abbb8f273f);
+        
+    
+            var icon_f204ac97e36319c6c09f99e22fc2900f = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_0881a0dc568fd63a907f78d44de68655 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_a916528360ff1c7b858fcbd327802073 = $(`<div id="html_a916528360ff1c7b858fcbd327802073" style="width: 100.0%; height: 100.0%;">ID:END Vent: 25.9 km/h SSE Condition: Partly cloudy Précipitations: 0.0 mm</div>`)[0];
+                popup_0881a0dc568fd63a907f78d44de68655.setContent(html_a916528360ff1c7b858fcbd327802073);
+            
+        
+
+        marker_3a71e45d2700e9651058d79e1b79f306.bindPopup(popup_0881a0dc568fd63a907f78d44de68655)
+        ;
+
+        
+    
+    
+                marker_3a71e45d2700e9651058d79e1b79f306.setIcon(icon_f204ac97e36319c6c09f99e22fc2900f);
+            
+    
+            var marker_9a461072beeb09a029f55398ed68a82e = L.marker(
+                [35.86199951171875, -98.42530059814452],
+                {
+}
+            ).addTo(map_0ebaa1ba5b64c374df5556abbb8f273f);
+        
+    
+            var icon_9c38762c107ff46d3dc8537500532775 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_236224d78911aceadd2ab348ecbdd7d5 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_b3e22ae54487e25b15f4885a225d7ee6 = $(`<div id="html_b3e22ae54487e25b15f4885a225d7ee6" style="width: 100.0%; height: 100.0%;">ID:JWG Vent: 23.4 km/h S Condition: Partly cloudy Précipitations: 0.0 mm</div>`)[0];
+                popup_236224d78911aceadd2ab348ecbdd7d5.setContent(html_b3e22ae54487e25b15f4885a225d7ee6);
+            
+        
+
+        marker_9a461072beeb09a029f55398ed68a82e.bindPopup(popup_236224d78911aceadd2ab348ecbdd7d5)
+        ;
+
+        
+    
+    
+                marker_9a461072beeb09a029f55398ed68a82e.setIcon(icon_9c38762c107ff46d3dc8537500532775);
+            
+    
+            var marker_35720dc29f1914f366f28b37335d5d65 = L.marker(
+                [35.53919982910156, -98.93509674072266],
+                {
+}
+            ).addTo(map_0ebaa1ba5b64c374df5556abbb8f273f);
+        
+    
+            var icon_6da0262242ac94d241d54354b4284266 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_a9f2ec7505d65bd54ba21a4d18df69cf = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_f8bd8453200cc0b2e4639b5b49e0cba6 = $(`<div id="html_f8bd8453200cc0b2e4639b5b49e0cba6" style="width: 100.0%; height: 100.0%;">ID:CLK Vent: 27.4 km/h SSW Condition: Thundery outbreaks in nearby Précipitations: 0.0 mm</div>`)[0];
+                popup_a9f2ec7505d65bd54ba21a4d18df69cf.setContent(html_f8bd8453200cc0b2e4639b5b49e0cba6);
+            
+        
+
+        marker_35720dc29f1914f366f28b37335d5d65.bindPopup(popup_a9f2ec7505d65bd54ba21a4d18df69cf)
+        ;
+
+        
+    
+    
+                marker_35720dc29f1914f366f28b37335d5d65.setIcon(icon_6da0262242ac94d241d54354b4284266);
+            
+    
+            var marker_58a5546b43d9f15b42ed760d91e83d99 = L.marker(
+                [35.425899505615234, -99.39810180664062],
+                {
+}
+            ).addTo(map_0ebaa1ba5b64c374df5556abbb8f273f);
+        
+    
+            var icon_d4b0eb73f98238eacd1f9c81bbb43ade = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_cfe90e74d1084e3c682c70ffbb05ec03 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_cee9471ee34049abb137457f04c161eb = $(`<div id="html_cee9471ee34049abb137457f04c161eb" style="width: 100.0%; height: 100.0%;">ID:EZY Vent: 31.0 km/h SSW Condition: Cloudy Précipitations: 0.0 mm</div>`)[0];
+                popup_cfe90e74d1084e3c682c70ffbb05ec03.setContent(html_cee9471ee34049abb137457f04c161eb);
+            
+        
+
+        marker_58a5546b43d9f15b42ed760d91e83d99.bindPopup(popup_cfe90e74d1084e3c682c70ffbb05ec03)
+        ;
+
+        
+    
+    
+                marker_58a5546b43d9f15b42ed760d91e83d99.setIcon(icon_d4b0eb73f98238eacd1f9c81bbb43ade);
+            
+    
+            var marker_2df9816fd61a9225ca061ba53d3b37bf = L.marker(
+                [35.34519958496094, -99.6352996826172],
+                {
+}
+            ).addTo(map_0ebaa1ba5b64c374df5556abbb8f273f);
+        
+    
+            var icon_f3108a6e62748bc768057631a5a78776 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_ae1364bd38994ae0defe9a5e79dbb66e = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_b16695e695d77b16711d50028bd8141f = $(`<div id="html_b16695e695d77b16711d50028bd8141f" style="width: 100.0%; height: 100.0%;">ID:SYO Vent: 32.0 km/h SSW Condition: Partly Cloudy Précipitations: 0.0 mm</div>`)[0];
+                popup_ae1364bd38994ae0defe9a5e79dbb66e.setContent(html_b16695e695d77b16711d50028bd8141f);
+            
+        
+
+        marker_2df9816fd61a9225ca061ba53d3b37bf.bindPopup(popup_ae1364bd38994ae0defe9a5e79dbb66e)
+        ;
+
+        
+    
+    
+                marker_2df9816fd61a9225ca061ba53d3b37bf.setIcon(icon_f3108a6e62748bc768057631a5a78776);
+            
+    
+            var marker_6f56fe9001d67d314631cd3b3e5e2397 = L.marker(
+                [35.612701416015625, -100.99199676513672],
+                {
+}
+            ).addTo(map_0ebaa1ba5b64c374df5556abbb8f273f);
+        
+    
+            var icon_3b86c47020a646c494fb180e7a1ff19f = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_4c754ea661d589d1e6031bf26bf3edf0 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_ac7189876578b92c067f5bf8586b8f88 = $(`<div id="html_ac7189876578b92c067f5bf8586b8f88" style="width: 100.0%; height: 100.0%;">ID:PPA Vent: 41.4 km/h SSW Condition: Thundery outbreaks in nearby Précipitations: 0.0 mm</div>`)[0];
+                popup_4c754ea661d589d1e6031bf26bf3edf0.setContent(html_ac7189876578b92c067f5bf8586b8f88);
+            
+        
+
+        marker_6f56fe9001d67d314631cd3b3e5e2397.bindPopup(popup_4c754ea661d589d1e6031bf26bf3edf0)
+        ;
+
+        
+    
+    
+                marker_6f56fe9001d67d314631cd3b3e5e2397.setIcon(icon_3b86c47020a646c494fb180e7a1ff19f);
+            
+    
+            var marker_99bc7279e87cdf3cbc957dbd8c3bbba2 = L.marker(
+                [35.23509979248047, -101.6989974975586],
+                {
+}
+            ).addTo(map_0ebaa1ba5b64c374df5556abbb8f273f);
+        
+    
+            var icon_2458a8200bc41fd0bada94a3683bee4d = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_69a0a5ba9bee837f060e39fbbd210c06 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_53630bf965d98f1a256c44dd8f565545 = $(`<div id="html_53630bf965d98f1a256c44dd8f565545" style="width: 100.0%; height: 100.0%;">ID:PNH Vent: 37.8 km/h SSW Condition: Thundery outbreaks in nearby Précipitations: 0.0 mm</div>`)[0];
+                popup_69a0a5ba9bee837f060e39fbbd210c06.setContent(html_53630bf965d98f1a256c44dd8f565545);
+            
+        
+
+        marker_99bc7279e87cdf3cbc957dbd8c3bbba2.bindPopup(popup_69a0a5ba9bee837f060e39fbbd210c06)
+        ;
+
+        
+    
+    
+                marker_99bc7279e87cdf3cbc957dbd8c3bbba2.setIcon(icon_2458a8200bc41fd0bada94a3683bee4d);
+            
+    
+            var marker_e3e736ff72f010da0dfaf934e6077584 = L.marker(
+                [35.14649963378906, -101.80500030517578],
+                {
+}
+            ).addTo(map_0ebaa1ba5b64c374df5556abbb8f273f);
+        
+    
+            var icon_8f5dbfbc4303eb7bb984ef68caf5d4da = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_8c95d1bc47fbe7e94975cbd6bf85537a = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_34be91966b525adafe19ab53d83ace13 = $(`<div id="html_34be91966b525adafe19ab53d83ace13" style="width: 100.0%; height: 100.0%;">ID:AM Vent: 37.8 km/h SSW Condition: Thundery outbreaks in nearby Précipitations: 0.0 mm</div>`)[0];
+                popup_8c95d1bc47fbe7e94975cbd6bf85537a.setContent(html_34be91966b525adafe19ab53d83ace13);
+            
+        
+
+        marker_e3e736ff72f010da0dfaf934e6077584.bindPopup(popup_8c95d1bc47fbe7e94975cbd6bf85537a)
+        ;
+
+        
+    
+    
+                marker_e3e736ff72f010da0dfaf934e6077584.setIcon(icon_8f5dbfbc4303eb7bb984ef68caf5d4da);
+            
+    
+            var marker_755bf7068e26c737565ac7b0fc7b2b98 = L.marker(
+                [35.182098388671875, -103.5989990234375],
+                {
+}
+            ).addTo(map_0ebaa1ba5b64c374df5556abbb8f273f);
+        
+    
+            var icon_95aa7a61822b60b6bc00e7a5660abc54 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_7c03f5cc3a3de7408d1328e3257bc45d = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_41dcda34f4b63aa951d53964ede8b772 = $(`<div id="html_41dcda34f4b63aa951d53964ede8b772" style="width: 100.0%; height: 100.0%;">ID:TCC Vent: 25.6 km/h SW Condition: Sunny Précipitations: 0.0 mm</div>`)[0];
+                popup_7c03f5cc3a3de7408d1328e3257bc45d.setContent(html_41dcda34f4b63aa951d53964ede8b772);
+            
+        
+
+        marker_755bf7068e26c737565ac7b0fc7b2b98.bindPopup(popup_7c03f5cc3a3de7408d1328e3257bc45d)
+        ;
+
+        
+    
+    
+                marker_755bf7068e26c737565ac7b0fc7b2b98.setIcon(icon_95aa7a61822b60b6bc00e7a5660abc54);
+            
+    
+            var marker_dbab7b5252bc7503e223186a85501ab2 = L.marker(
+                [34.38059997558594, -103.3219985961914],
+                {
+}
+            ).addTo(map_0ebaa1ba5b64c374df5556abbb8f273f);
+        
+    
+            var icon_2e23bd1d3bc6d4c8afbb158b73084295 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_1ab0202c487f7f4ad0e9adb0e39c79b9 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_eee0be577c69ad4ca369bb08c1d01d76 = $(`<div id="html_eee0be577c69ad4ca369bb08c1d01d76" style="width: 100.0%; height: 100.0%;">ID:CVS Vent: 27.7 km/h WSW Condition: Overcast Précipitations: 0.0 mm</div>`)[0];
+                popup_1ab0202c487f7f4ad0e9adb0e39c79b9.setContent(html_eee0be577c69ad4ca369bb08c1d01d76);
+            
+        
+
+        marker_dbab7b5252bc7503e223186a85501ab2.bindPopup(popup_1ab0202c487f7f4ad0e9adb0e39c79b9)
+        ;
+
+        
+    
+    
+                marker_dbab7b5252bc7503e223186a85501ab2.setIcon(icon_2e23bd1d3bc6d4c8afbb158b73084295);
+            
+    
+            var marker_04c56c12498f745bc6a57ebe45792629 = L.marker(
+                [35.111698150634766, -105.04000091552734],
+                {
+}
+            ).addTo(map_0ebaa1ba5b64c374df5556abbb8f273f);
+        
+    
+            var icon_cd4141d6f08fb9ba591ac235408fd36b = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_217d3ad11b5862898cc58e54a882772a = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_43881041386b42a8df3c4d886cca6a90 = $(`<div id="html_43881041386b42a8df3c4d886cca6a90" style="width: 100.0%; height: 100.0%;">ID:ACH Vent: 29.9 km/h WNW Condition: Sunny Précipitations: 0.0 mm</div>`)[0];
+                popup_217d3ad11b5862898cc58e54a882772a.setContent(html_43881041386b42a8df3c4d886cca6a90);
+            
+        
+
+        marker_04c56c12498f745bc6a57ebe45792629.bindPopup(popup_217d3ad11b5862898cc58e54a882772a)
+        ;
+
+        
+    
+    
+                marker_04c56c12498f745bc6a57ebe45792629.setIcon(icon_cd4141d6f08fb9ba591ac235408fd36b);
+            
+    
+            var marker_d39ef0b50da76514abcf633f1afde1f1 = L.marker(
+                [34.367000579833984, -105.6780014038086],
+                {
+}
+            ).addTo(map_0ebaa1ba5b64c374df5556abbb8f273f);
+        
+    
+            var icon_79692ca000dc0cbc0a1a5269f2587d10 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_4f26188f3ca9f8bcd31f0afac07abbd5 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_bea966afd9b071a8b92d8577a7d8b534 = $(`<div id="html_bea966afd9b071a8b92d8577a7d8b534" style="width: 100.0%; height: 100.0%;">ID:CNX Vent: 28.8 km/h WNW Condition: Sunny Précipitations: 0.0 mm</div>`)[0];
+                popup_4f26188f3ca9f8bcd31f0afac07abbd5.setContent(html_bea966afd9b071a8b92d8577a7d8b534);
+            
+        
+
+        marker_d39ef0b50da76514abcf633f1afde1f1.bindPopup(popup_4f26188f3ca9f8bcd31f0afac07abbd5)
+        ;
+
+        
+    
+    
+                marker_d39ef0b50da76514abcf633f1afde1f1.setIcon(icon_79692ca000dc0cbc0a1a5269f2587d10);
+            
+    
+            var marker_f5ef0c122d54b1a61d587e84417b01e2 = L.marker(
+                [34.33890151977539, -106.81999969482422],
+                {
+}
+            ).addTo(map_0ebaa1ba5b64c374df5556abbb8f273f);
+        
+    
+            var icon_e5f5ca7ae5bf5d2080e09e590319b1a6 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_3462e3e4755541590d9097e8feb843e1 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_6a600546cf3b308a0c4bcfdc83234ec1 = $(`<div id="html_6a600546cf3b308a0c4bcfdc83234ec1" style="width: 100.0%; height: 100.0%;">ID:ONM Vent: 9.0 km/h WNW Condition: Sunny Précipitations: 0.0 mm</div>`)[0];
+                popup_3462e3e4755541590d9097e8feb843e1.setContent(html_6a600546cf3b308a0c4bcfdc83234ec1);
+            
+        
+
+        marker_f5ef0c122d54b1a61d587e84417b01e2.bindPopup(popup_3462e3e4755541590d9097e8feb843e1)
+        ;
+
+        
+    
+    
+                marker_f5ef0c122d54b1a61d587e84417b01e2.setIcon(icon_e5f5ca7ae5bf5d2080e09e590319b1a6);
+            
+    
+            var marker_b5ed53c7e15c42f989842e8a5028b746 = L.marker(
+                [33.282501220703125, -107.28099822998048],
+                {
+}
+            ).addTo(map_0ebaa1ba5b64c374df5556abbb8f273f);
+        
+    
+            var icon_1836daa8b7b45702e9924b403bea69fa = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_d1d04703c08a4318de173bb78a089610 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_b95194e6db09799254a83de7a0de879c = $(`<div id="html_b95194e6db09799254a83de7a0de879c" style="width: 100.0%; height: 100.0%;">ID:TCS Vent: 3.6 km/h SW Condition: Sunny Précipitations: 0.0 mm</div>`)[0];
+                popup_d1d04703c08a4318de173bb78a089610.setContent(html_b95194e6db09799254a83de7a0de879c);
+            
+        
+
+        marker_b5ed53c7e15c42f989842e8a5028b746.bindPopup(popup_d1d04703c08a4318de173bb78a089610)
+        ;
+
+        
+    
+    
+                marker_b5ed53c7e15c42f989842e8a5028b746.setIcon(icon_1836daa8b7b45702e9924b403bea69fa);
+            
+    
+            var marker_ece910b89ab4394a323cd6d752c496ba = L.marker(
+                [34.42409896850586, -109.1439971923828],
+                {
+}
+            ).addTo(map_0ebaa1ba5b64c374df5556abbb8f273f);
+        
+    
+            var icon_3aef8e7d3acbe49045c10c011f9291fd = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_3b95d19bc623f6202d8153f93180b1b1 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_fc15d40b6a7f0d4be77f0a370e9cf235 = $(`<div id="html_fc15d40b6a7f0d4be77f0a370e9cf235" style="width: 100.0%; height: 100.0%;">ID:SJN Vent: 9.7 km/h SSW Condition: Sunny Précipitations: 0.0 mm</div>`)[0];
+                popup_3b95d19bc623f6202d8153f93180b1b1.setContent(html_fc15d40b6a7f0d4be77f0a370e9cf235);
+            
+        
+
+        marker_ece910b89ab4394a323cd6d752c496ba.bindPopup(popup_3b95d19bc623f6202d8153f93180b1b1)
+        ;
+
+        
+    
+    
+                marker_ece910b89ab4394a323cd6d752c496ba.setIcon(icon_3aef8e7d3acbe49045c10c011f9291fd);
+            
+    
+            var marker_cad310325dd1526c85a6c3d5216c30e3 = L.marker(
+                [34.26729965209961, -110.00800323486328],
+                {
+}
+            ).addTo(map_0ebaa1ba5b64c374df5556abbb8f273f);
+        
+    
+            var icon_44c8d7a6aae6d8ab37ba183287050991 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_c51cda5068beb913c892bd14d5984e5c = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_ae82d6d1a474e5fd6b1a7811a261b690 = $(`<div id="html_ae82d6d1a474e5fd6b1a7811a261b690" style="width: 100.0%; height: 100.0%;">ID:SOW Vent: 13.7 km/h S Condition: Sunny Précipitations: 0.0 mm</div>`)[0];
+                popup_c51cda5068beb913c892bd14d5984e5c.setContent(html_ae82d6d1a474e5fd6b1a7811a261b690);
+            
+        
+
+        marker_cad310325dd1526c85a6c3d5216c30e3.bindPopup(popup_c51cda5068beb913c892bd14d5984e5c)
+        ;
+
+        
+    
+    
+                marker_cad310325dd1526c85a6c3d5216c30e3.setIcon(icon_44c8d7a6aae6d8ab37ba183287050991);
+            
+    
+            var marker_a8bea5de355f041efe32d23a9fd442d3 = L.marker(
+                [33.46189880371094, -111.73300170898438],
+                {
+}
+            ).addTo(map_0ebaa1ba5b64c374df5556abbb8f273f);
+        
+    
+            var icon_67ba97cec9c3222fc9655226b290c119 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_9d2951a6acc917448171b28da38da56d = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_e8364af2e66a49b47740ce1bdbe12176 = $(`<div id="html_e8364af2e66a49b47740ce1bdbe12176" style="width: 100.0%; height: 100.0%;">ID:FFZ Vent: 7.9 km/h SE Condition: Sunny Précipitations: 0.0 mm</div>`)[0];
+                popup_9d2951a6acc917448171b28da38da56d.setContent(html_e8364af2e66a49b47740ce1bdbe12176);
+            
+        
+
+        marker_a8bea5de355f041efe32d23a9fd442d3.bindPopup(popup_9d2951a6acc917448171b28da38da56d)
+        ;
+
+        
+    
+    
+                marker_a8bea5de355f041efe32d23a9fd442d3.setIcon(icon_67ba97cec9c3222fc9655226b290c119);
+            
+    
+            var poly_line_cd584454657b0ff1996af76193a6d2d9 = L.polyline(
+                [[40.74089813232422, -74.42980194091797], [40.58300018310547, -74.74169921875], [40.424800872802734, -75.29740142822266], [40.58580017089844, -75.54959869384766], [40.30649948120117, -75.94960021972656], [40.119998931884766, -76.29129791259766], [40.24629974365234, -76.90059661865234], [40.178199768066406, -77.00559997558594], [39.93320083618164, -77.95089721679688], [39.64820098876953, -78.74729919433594], [39.6349983215332, -79.05049896240234], [39.55670166015625, -79.86039733886719], [39.25320053100586, -80.26789855957031], [39.441200256347656, -81.37480163574219], [39.25410079956055, -81.48490142822266], [39.257301330566406, -82.1259994506836], [39.166900634765625, -82.93219757080078], [38.855899810791016, -83.56379699707031], [38.88199996948242, -83.88520050048828], [38.64950180053711, -84.31060028076172], [38.21469879150391, -84.8198013305664], [38.76089859008789, -85.46050262451172], [38.4739990234375, -85.73719787597656], [38.52780151367188, -86.52780151367188], [38.24869918823242, -86.83789825439453], [38.250301361083984, -86.9563980102539], [38.12670135498047, -87.44080352783203], [38.09349822998047, -88.11959838867188], [37.81159973144531, -88.54530334472656], [37.75419998168945, -89.01170349121094], [37.67340087890625, -90.23400115966795], [37.765098571777344, -90.4292984008789], [37.59080123901367, -91.7885971069336], [36.993900299072266, -91.7126007080078], [36.96979904174805, -92.67739868164062], [37.02349853515625, -92.87689971923828], [37.29940032958984, -93.4406967163086], [36.84239959716797, -94.43569946289062], [37.157501220703125, -95.20359802246094], [36.30739974975586, -95.87529754638672], [36.17290115356445, -96.1541976928711], [36.23619842529297, -97.0873031616211], [36.275001525878906, -97.79070281982422], [36.345001220703125, -97.91829681396484], [35.86199951171875, -98.42530059814452], [35.53919982910156, -98.93509674072266], [35.425899505615234, -99.39810180664062], [35.34519958496094, -99.6352996826172], [35.612701416015625, -100.99199676513672], [35.23509979248047, -101.6989974975586], [35.14649963378906, -101.80500030517578], [35.182098388671875, -103.5989990234375], [34.38059997558594, -103.3219985961914], [35.111698150634766, -105.04000091552734], [34.367000579833984, -105.6780014038086], [34.33890151977539, -106.81999969482422], [33.282501220703125, -107.28099822998048], [34.42409896850586, -109.1439971923828], [34.26729965209961, -110.00800323486328], [33.46189880371094, -111.73300170898438]],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "blue", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 2.5}
+            ).addTo(map_0ebaa1ba5b64c374df5556abbb8f273f);
+        
+</script>
+</html>
