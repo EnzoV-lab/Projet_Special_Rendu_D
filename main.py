@@ -82,16 +82,18 @@ def charger_waypoints(fichier_csv):
             except ValueError:
                 continue
     return waypoints # Renvoie une liste de tuple ('ID', (latitude, longitude))
-
-# Interpolation linéaire entre le point de départ et le point d'arrivée
+"""""""""
+ Interpolation linéaire entre le point de départ et le point d'arrivée
+permet de générer des points intermédiaires entre deux coordonnées géographiques
+"""""""""
 def intercaler_points(lat1, lon1, lat2, lon2, n):
-    points_intercale = []
+    points_intercale = [] # on stocke les points ici
     for i in range(1, n + 1):
         x = lat1 + i * (lat2 - lat1) / (n + 1)
         y = lon1 + i * (lon2 - lon1) / (n + 1)
         points_intercale.append((x, y))
 
-    return points_intercale
+    return points_intercale #retourne la liste de points intermédiares
 
 
 def grille_partition(waypoints, res=(10, 10)):
