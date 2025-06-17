@@ -147,7 +147,7 @@ def determiner_wp_plus_proche(point, waypoints, partition, geometry, fast=True):
     return wp_id, coordonnees_proche[0], coordonnees_proche[1]
 
 
-def selectionner_waypoints_plus_proches_par_segments(waypoints, depart, arrivee, partition, geometry, n_points=100):
+def selectionner_waypoints_plus_proches_par_segments(waypoints, depart, arrivee, partition, geometry, n_points=40):
     points_intermediaires = intercaler_points(depart[0], depart[1], arrivee[0], arrivee[1], n_points)
     cas_teste = set()
     waypoints_selectionnes = []
@@ -226,7 +226,7 @@ class Avion:
 
 avions = [
     # Hélice
-    Avion("Cessna 172", 10, "hélice"),
+    Avion("Cessna 172", 20, "hélice"),
     Avion("Piper PA-28 Cherokee", 60, "hélice"),
     Avion("Diamond DA40", 65, "hélice"),
 
@@ -315,34 +315,38 @@ while choix < 1 or choix > len(avions_filtres):
 avion_selectionne = avions_filtres[choix - 1]
 print(f"\n Vous avez selectionné : {avion_selectionne.nom} (vent max : {avion_selectionne.vitesse_vent_max} km/h)")
 
-def trouver_waypoint_alternatif(wp_id, lat, lon, avion, cle_api, waypoints_dict, partition, geometry, rayon_max=50000):
+def trouver_waypoint_alternatif(wp_id, lat, lon, avion, cle_api, waypoints_dict, partition, geometry,
+                                rayon_initial=50000, rayon_max=300000, increment=25000):
     """
-    Trouve un waypoint alternatif proche (rayon_max en mètres) avec météo acceptable.
-    Retourne un tuple (id, lat, lon). Si aucun trouvé, retourne le waypoint original.
+    Cherche un waypoint alternatif proche avec météo acceptable.
+    Étend progressivement le rayon de recherche si aucun n'est trouvé.
     """
     from geopy.distance import distance
 
-    # Chercher dans une zone proche (ex: 50km)
-    voisins = []
-    for id_voisin, (lat_v, lon_v) in waypoints_dict.items():
-        if id_voisin == wp_id:
-            continue
-        dist = distance((lat, lon), (lat_v, lon_v)).meters
-        if dist <= rayon_max:
-            voisins.append((id_voisin, lat_v, lon_v, dist))
+    rayon = rayon_initial
+    while rayon <= rayon_max:
+        voisins = []
+        for id_voisin, (lat_v, lon_v) in waypoints_dict.items():
+            if id_voisin == wp_id:
+                continue
+            dist = distance((lat, lon), (lat_v, lon_v)).meters
+            if dist <= rayon:
+                voisins.append((id_voisin, lat_v, lon_v, dist))
 
-    # Trier voisins par distance croissante
-    voisins.sort(key=lambda x: x[3])
+        # Trier les voisins par distance
+        voisins.sort(key=lambda x: x[3])
 
-    # Tester la météo sur chaque voisin
-    for id_v, lat_v, lon_v, _ in voisins:
-        meteo = DonneesMeteo(cle_api, (lat_v, lon_v))
-        meteo.fetch()
-        infos = meteo.get_donnees()
-        if avion.en_capaciter_de_voler(infos.get('vent_kph', 0)):
-            return (id_v, lat_v, lon_v)
+        # Tester la météo sur chaque voisin
+        for id_v, lat_v, lon_v, _ in voisins:
+            meteo = DonneesMeteo(cle_api, (lat_v, lon_v))
+            meteo.fetch()
+            infos = meteo.get_donnees()
+            if avion.en_capaciter_de_voler(infos.get('vent_kph', 0)):
+                return (id_v, lat_v, lon_v)
 
-    # Sinon renvoyer le waypoint d’origine
+        rayon += increment
+
+    # Aucun voisin acceptable trouvé
     return (wp_id, lat, lon)
 
 
