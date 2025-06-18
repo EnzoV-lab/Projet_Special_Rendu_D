@@ -210,7 +210,7 @@ def tracer_chemin(depart, arrivee, seuil):
         prochain_point = trouver_point_suivant(point, arrivee, liste_point_utilisees)
 
         if prochain_point is None:
-            print(" Aucun prochain point valide trouvé, arrêt.")
+            print(" Aucun prochain point valide trouvé, une barriere se situe sur le chemin, voyage impossible avec cet avion.")
             break
 
         print("➡️ Test du segment vers", prochain_point)
@@ -410,8 +410,8 @@ def afficher_meteo_sur_carte(points_meteo,seuille, itineraire=None):
 
 print(distance((np.float64(35.157798767089844), np.float64(-81.02030181884766)),(35.2271, -80.8431)))
 
-depart = (34.0522, -118.2437)
-arrivee = (47.6062, -122.3321)
+depart = (40.7128, -74.0060)
+arrivee = (41.8781, -87.6298)
 
 
 """itineraire, points_meteo = tracer_chemin(depart, arrivee, seuil=18)
