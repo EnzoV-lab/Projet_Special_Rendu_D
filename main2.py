@@ -186,7 +186,7 @@ def verifier_conditions_meteo(coordonnees, cle_api, seuil_vent_kph, max_depassem
                     return False, liste_coords, donnees_meteo_segment
 
         except Exception as e:
-            print(f"❌ Erreur pour le point ({lat}, {lon}) : {e}")
+            print(f"Erreur pour le point ({lat}, {lon}) : {e}")
             liste_coords.append((lat, lon))
             donnees_meteo_segment.append((lat, lon, None))
 
@@ -205,12 +205,12 @@ def tracer_chemin(depart, arrivee, seuil):
     print(f"🔍 Distance initiale au but : {distance(point, arrivee)} km")
     while distance(point, arrivee) > 30:
 
-        print(f"📏 Distance actuelle entre {point} et {arrivee} : {distance(point, arrivee)} km")
+        print(f" Distance actuelle entre {point} et {arrivee} : {distance(point, arrivee)} km")
 
         prochain_point = trouver_point_suivant(point, arrivee, liste_point_utilisees)
 
         if prochain_point is None:
-            print("🔴 Aucun prochain point valide trouvé — arrêt.")
+            print(" Aucun prochain point valide trouvé, arrêt.")
             break
 
         print("➡️ Test du segment vers", prochain_point)
