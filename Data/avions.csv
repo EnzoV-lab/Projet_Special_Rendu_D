@@ -1,0 +1,31 @@
+nom,type,vitesse_vent_admissible,vitesse_de_avion
+Cessna 172,hélice,45,226
+Piper PA-28,hélice,40,215
+Diamond DA40,hélice,42,285
+Robin DR400,hélice,38,240
+Cirrus SR22,hélice,50,340
+Beechcraft Bonanza,hélice,48,320
+Mooney M20,hélice,45,360
+Tecnam P2002,hélice,37,210
+Zlin Z-242,hélice,40,280
+Grob G 115,hélice,38,260
+ATR 72,turbopropulseur,70,510
+Dash 8 Q400,turbopropulseur,75,667
+Saab 340,turbopropulseur,65,500
+Fokker 50,turbopropulseur,70,530
+Embraer EMB 120,turbopropulseur,68,520
+Antonov An-140,turbopropulseur,72,575
+Beechcraft 1900,turbopropulseur,65,530
+Let L-410,turbopropulseur,60,405
+CASA C-295,turbopropulseur,75,570
+Pilatus PC-12,turbopropulseur,68,528
+Airbus A320,jet,100,840
+Boeing 737,jet,100,876
+Embraer E190,jet,95,870
+Bombardier CRJ900,jet,90,860
+Dassault Falcon 8X,jet,95,950
+Gulfstream G650,jet,100,982
+Learjet 75,jet,90,870
+Boeing 787,jet,105,903
+Airbus A350,jet,105,945
+Concorde,jet,120,2179

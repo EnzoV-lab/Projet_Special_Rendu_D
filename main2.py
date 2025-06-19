@@ -6,6 +6,7 @@ import numpy as np
 import pandas as pd
 import requests
 import os
+import math
 
 cle_api ="d9ac5ac56f3d4768abd232315250506"
 
@@ -21,6 +22,10 @@ filepath = os.path.join("Data", "Villes.csv")
 de = pd.read_csv(filepath)
 Villes = de[['city', 'lat', 'lng',]]
 Villes.to_csv("Data/Villes.csv", index=False)
+
+filepath = os.path.join("Data", "avions.csv")
+da = pd.read_csv("Data/avions.csv")
+
 
 
 
@@ -87,12 +92,8 @@ def intercaler_points(lat1, lon1, lat2, lon2, n):
     return points_intercale
 
 
-import pandas as pd
-import math
 
 
-import pandas as pd
-import math
 
 def calcul_angle(depart, waypoint, arrivee):
     """Calcule l'angle (en radians) entre les vecteurs départ→waypoint et départ→arrivée."""
@@ -413,8 +414,10 @@ def transformer_nom_en_coordonnees (ville):
     return match.iloc[0]['lat'], match.iloc[0]['lng']
 
 
-select_depart = input("Ville : ").strip().lower()
-select_arrivee = input("Ville : ").strip().lower()
+
+
+select_depart = input("Entrez la ville de départ : ").strip().lower()
+select_arrivee = input("Entrez la ville de d'arrivée' : ").strip().lower()
 
 
 depart = transformer_nom_en_coordonnees(select_depart)
