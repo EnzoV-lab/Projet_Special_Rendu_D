@@ -1,12 +1,12 @@
 nom,type,vitesse_vent_admissible,vitesse_de_avion
-Cessna 172,hélice,23,226
-Piper PA-28,hélice,30,215
-Diamond DA40,hélice,31,285
-Robin DR400,hélice,35,240
-Cirrus SR22,hélice,38,340
-Beechcraft Bonanza,hélice,40,320
-Mooney M20,hélice,45,360
-Tecnam P2002,hélice,37,210
+Cessna 172,hélice,15,226
+Piper PA-28,hélice,17,215
+Diamond DA40,hélice,20,285
+Robin DR400,hélice,23,240
+Cirrus SR22,hélice,25,340
+Beechcraft Bonanza,hélice,27,320
+Mooney M20,hélice,30,360
+Tecnam P2002,hélice,32,210
 Zlin Z-242,hélice,40,280
 Grob G 115,hélice,38,260
 ATR 72,turbopropulseur,70,510
