@@ -154,7 +154,7 @@ def trouver_point_suivant(depart, arrivee, points_utilises, fichier_csv='Data/Wa
 import time  # pour respecter les limites d'appels à l'API
 
 
-def verifier_conditions_meteo(coordonnees, cle_api, seuil_vent_kph, max_depassements=3, pause=1):
+def verifier_conditions_meteo(coordonnees, cle_api, seuil_vent_kph, max_depassements=2, pause=1):
     """
     Vérifie les conditions météo pour un segment.
 
@@ -174,6 +174,7 @@ def verifier_conditions_meteo(coordonnees, cle_api, seuil_vent_kph, max_depassem
     depassements = 0
     liste_coords = []
     donnees_meteo_segment = []
+    vent_max = 0
 
     for lat, lon in coordonnees:
         meteo = DonneesMeteo(cle_api, (lat, lon))
@@ -181,14 +182,16 @@ def verifier_conditions_meteo(coordonnees, cle_api, seuil_vent_kph, max_depassem
             meteo.fetch()
             donnees = meteo.get_donnees()
             vent = donnees.get("vent_kph", None)
-
             liste_coords.append((lat, lon))
             donnees_meteo_segment.append((lat, lon, vent))
+            if vent > vent_max:
+                vent_max = vent
 
             if vent is not None and vent > seuil_vent_kph:
+
                 depassements += 1
                 if depassements > max_depassements:
-                    return False, liste_coords, donnees_meteo_segment
+                    return False, liste_coords, donnees_meteo_segment,vent_max
 
         except Exception as e:
             print(f"Erreur pour le point ({lat}, {lon}) : {e}")
@@ -197,7 +200,7 @@ def verifier_conditions_meteo(coordonnees, cle_api, seuil_vent_kph, max_depassem
 
         time.sleep(pause)
 
-    return True, liste_coords, donnees_meteo_segment
+    return True, liste_coords, donnees_meteo_segment, vent_max
 
 
 
@@ -207,8 +210,9 @@ def tracer_chemin(depart, arrivee, seuil):
     liste_point_utilisees = []
     liste_finale = []
     liste_points_meteo = []
+    vent_max_tot = 0
     print(f"🔍 Distance initiale au but : {distance(point, arrivee)} km")
-    while distance(point, arrivee) > 30:
+    while distance(point, arrivee) > 75:
 
         print(f" Distance actuelle entre {point} et {arrivee} : {distance(point, arrivee)} km")
 
@@ -224,7 +228,10 @@ def tracer_chemin(depart, arrivee, seuil):
                                       prochain_point[0], prochain_point[1],
                                       6)
 
-        Etat, liste_coordonnees,donnees_meteo = verifier_conditions_meteo(coord_seg, cle_api, seuil)
+        Etat, liste_coordonnees,donnees_meteo,vent_max = verifier_conditions_meteo(coord_seg, cle_api, seuil)
+        if vent_max_tot < vent_max:
+            vent_max_tot = vent_max
+
         print(f"   → État météo valide ?", Etat)
 
 
@@ -241,7 +248,7 @@ def tracer_chemin(depart, arrivee, seuil):
 
     liste_finale.append([arrivee])
     print(liste_finale)
-    return liste_finale, liste_points_meteo
+    return liste_finale, liste_points_meteo,vent_max_tot
 
 
 
@@ -285,98 +292,103 @@ avions = [
     Avion("ATR 72", 90, "turbopropulseur")
 ]
 
-villes_coordonnees = {
-    "New York": (40.7128, -74.0060),
-    "Los Angeles": (34.0522, -118.2437),
-    "Chicago": (41.8781, -87.6298),
-    "Houston": (29.7604, -95.3698),
-    "Phoenix": (33.4484, -112.0740),
-    "Philadelphia": (39.9526, -75.1652),
-    "San Antonio": (29.4241, -98.4936),
-    "San Diego": (32.7157, -117.1611),
-    "Dallas": (32.7767, -96.7970),
-    "San Jose": (37.3382, -121.8863),
-    "Austin": (30.2672, -97.7431),
-    "Jacksonville": (30.3322, -81.6557),
-    "Fort Worth": (32.7555, -97.3308),
-    "Columbus": (39.9612, -82.9988),
-    "Charlotte": (35.2271, -80.8431),
-    "San Francisco": (37.7749, -122.4194),
-    "Indianapolis": (39.7684, -86.1581),
-    "Seattle": (47.6062, -122.3321),
-    "Denver": (39.7392, -104.9903),
-    "Washington": (38.9072, -77.0369),
-    "Boston": (42.3601, -71.0589),
-    "Nashville": (36.1627, -86.7816),
-    "El Paso": (31.7619, -106.4850),
-    "Detroit": (42.3314, -83.0458),
-    "Memphis": (35.1495, -90.0490),
-    "Portland": (45.5152, -122.6784),
-    "Las Vegas": (36.1699, -115.1398),
-    "Louisville": (38.2527, -85.7585),
-    "Baltimore": (39.2904, -76.6122),
-    "Milwaukee": (43.0389, -87.9065),
-    "Albuquerque": (35.0844, -106.6504),
-    "Tucson": (32.2226, -110.9747),
-    "Fresno": (36.7378, -119.7871),
-    "Mesa": (33.4152, -111.8315),
-    "Sacramento": (38.5816, -121.4944),
-    "Atlanta": (33.7490, -84.3880),
-    "Kansas City": (39.0997, -94.5786),
-    "Colorado Springs": (38.8339, -104.8214),
-    "Miami": (25.7617, -80.1918),
-    "Raleigh": (35.7796, -78.6382),
-    "Omaha": (41.2565, -95.9345),
-    "Long Beach": (33.7701, -118.1937),
-    "Virginia Beach": (36.8529, -75.9780),
-    "Oakland": (37.8044, -122.2712),
-    "Minneapolis": (44.9778, -93.2650),
-    "Tulsa": (36.1539, -95.9928),
-    "Tampa": (27.9506, -82.4572),
-    "Arlington": (32.7357, -97.1081),
-    "New Orleans": (29.9511, -90.0715),
-    "Wichita": (37.6872, -97.3301)
-}
+def choix_avion_mode_1(fichier_csv="Data/avions.csv"):
 
-"""depart = input("Quel est votre ville de départ : ")
-arrivee = input("Quel est votre ville d'arrivée : ")
+    df = pd.read_csv(fichier_csv)
 
-categorie = ""
-while categorie.lower() not in ["hélice", "turbopropulseur"]:
-    categorie = input("Quel type d’avion veux-tu utiliser ? (hélice / turbopropulseur) : ").strip().lower()
+    types_disponibles = da['type'].unique()
+    print("Types d’avions disponibles :")
+    liste_type=[]
+    for t in types_disponibles:
+        liste_type.append(t)
+        print(f" - {t}")
+    type_choisi = ""
+    while type_choisi not in liste_type:
+        type_choisi = input("Entrez un type d’avion : ").strip().lower()
 
-# Filtrage
-avions_filtres = [avion for avion in avions if avion.categorie == categorie]
-
-#  Affichage des avions disponibles
-print("\nAvions disponibles :")
-for i, avion in enumerate(avions_filtres, 1):
-    print(f"{i}. {avion}")
-
-# Choix de l'avion
-choix = -1
-while choix < 1 or choix > len(avions_filtres):
-    try:
-        choix = int(input(f"\nChoisissez un avion (1 à {len(avions_filtres)}) : "))
-    except ValueError:
-        continue
-
-avion_selectionne = avions_filtres[choix - 1]
-print(f"\n Vous avez selectionné : {avion_selectionne.nom} (vent max : {avion_selectionne.vitesse_vent_max} km/h)")"""
+    da_type = da[da['type'] == type_choisi]
 
 
+    print("\nAvions disponibles :")
+    liste_avion = []
+    for _, row in da_type.iterrows():
+        nom = row['nom']
+        vent = row['vitesse_vent_admissible']
+        liste_avion.append(nom)
+        print(f" - {nom} (vent max admissible : {vent} km/h)")
+
+    nom_choisi = ""
+    while nom_choisi not in liste_avion:
+        nom_choisi = input("Entrez le nom de l’avion : ").strip()
+
+    avion = da_type[da_type['nom'] == nom_choisi].iloc[0]
+
+    vitesse_admi = avion['vitesse_vent_admissible']
+    vitesse_avion = avion['vitesse_de_avion']
+    return vitesse_admi, vitesse_avion
+
+
+import pandas as pd
+
+def choix_avion_mode_2(fichier_csv="Data/avions.csv", borne_min=0, borne_max=100):
+    df = pd.read_csv(fichier_csv)
+
+    # Étape 1 : Choix du type d’avion
+    types_disponibles = df['type'].unique()
+    print("Types d’avions disponibles :")
+    for t in types_disponibles:
+        print(f" - {t}")
+
+    type_choisi = ""
+    while type_choisi not in types_disponibles:
+        type_choisi = input("Entrez un type d’avion : ").strip().lower()
+
+    # Étape 2 : Filtrage selon type et bornes
+    da_type = da[
+        (da['type'] == type_choisi) &
+        (da['vitesse_vent_admissible'] >= borne_min) &
+        (da['vitesse_vent_admissible'] <= borne_max)
+    ]
+
+    if da_type.empty:
+        print(f"Aucun avion trouvé pour le type '{type_choisi}' avec vent admissible entre {borne_min} et {borne_max} km/h.")
+        return None, None
+
+    print("\nAvions disponibles :")
+    liste_avion = []
+    for _, row in da_type.iterrows():
+        nom = row['nom']
+        vent = row['vitesse_vent_admissible']
+        liste_avion.append(nom)
+        print(f" - {nom} (vent max admissible : {vent} km/h)")
+
+    nom_choisi = ""
+    while nom_choisi not in liste_avion:
+        nom_choisi = input("Entrez le nom de l’avion : ").strip()
+
+    avion = da_type[da_type['nom'] == nom_choisi].iloc[0]
+    vitesse_admi = avion['vitesse_vent_admissible']
+    vitesse_avion = avion['vitesse_de_avion']
+
+    return vitesse_admi, vitesse_avion
+
+def choix_du_mode(borne_min, borne_max):
+    reponse_possible = ["1", "2"]
+    reponse_mode = ""
+    while reponse_mode not in reponse_possible:
+        reponse_mode = input(
+            "A présent veuillez choisir votre mode\n 1 - Proposer n'importe quel avion\n 2 - Proposer uniquement les avions susceptibles à une déviation : ")
+
+    if reponse_mode == "1":
+        return choix_avion_mode_1()
+    else:
+        return choix_avion_mode_2(fichier_csv="Data/avions.csv", borne_min=borne_min, borne_max=borne_max)
 
 
 
 
 
 
-
-
-
-
-
-import folium
 
 def afficher_meteo_sur_carte(points_meteo,seuille, itineraire=None):
     if not points_meteo:
@@ -416,26 +428,32 @@ def transformer_nom_en_coordonnees (ville):
 
 
 
-select_depart = input("Entrez la ville de départ : ").strip().lower()
-select_arrivee = input("Entrez la ville de d'arrivée' : ").strip().lower()
-
+select_depart = input("Entrez une ville U.S de départ : ").strip().lower()
+select_arrivee = input("Entrez une ville U.S de d'arrivée' : ").strip().lower()
 
 depart = transformer_nom_en_coordonnees(select_depart)
 arrivee = transformer_nom_en_coordonnees(select_arrivee)
 
+print("L'itinéraire de référence est en cours de chargement...  ")
+itineraire_droit, points_meteo_droit,vent_max_total = tracer_chemin(depart, arrivee,10000)
+borne_inferieur = vent_max_total-5
+borne_superieur = vent_max_total
+carte_droit = afficher_meteo_sur_carte(points_meteo_droit,10000, itineraire=itineraire_droit)
+carte_droit.save("carte_itinéraire_droit.html")
+print("L'itinéraire de référence est terminé")
 
 
-"""itineraire, points_meteo = tracer_chemin(depart, arrivee, seuil=18)
-carte = afficher_meteo_sur_carte(points_meteo,15, itineraire=itineraire)
-carte.save("carte_avec_meteo_autre.html")"""
+vitesse_admi, vitesse_avion = choix_du_mode(borne_inferieur,borne_superieur)
 
-itineraire1, points_meteo1 = tracer_chemin(depart, arrivee,1000)
-carte1 = afficher_meteo_sur_carte(points_meteo1,15, itineraire=itineraire1)
-carte1.save("carte_avec_meteo_autre.html")
 
-itineraire, points_meteo = tracer_chemin(depart, arrivee,15)
-carte = afficher_meteo_sur_carte(points_meteo,15, itineraire=itineraire)
-carte.save("carte_avec_meteo_autre1.html")
+
+
+
+print("L'itinéraire déviée est en cours de chargement...")
+itineraire_deviee, points_meteo_deviee,vent_max_total = tracer_chemin(depart, arrivee,vitesse_admi)
+carte_deviee = afficher_meteo_sur_carte(points_meteo_deviee,vitesse_admi, itineraire=itineraire_deviee)
+carte_deviee.save("carte_itinéraire_deviée.html")
+print("L'itinéraire déviée est terminé")
 
 
 
