@@ -7,6 +7,7 @@ import pandas as pd
 import requests
 import os
 import math
+import time
 
 cle_api ="d9ac5ac56f3d4768abd232315250506"
 
@@ -151,7 +152,7 @@ def trouver_point_suivant(depart, arrivee, points_utilises, fichier_csv='Data/Wa
     return (point_choisi['latitude_deg'], point_choisi['longitude_deg'])
 
 
-import time  # pour respecter les limites d'appels à l'API
+
 
 
 def verifier_conditions_meteo(coordonnees, cle_api, seuil_vent_kph, max_depassements=2, pause=1):
@@ -330,7 +331,7 @@ def choix_avion_mode_1(fichier_csv="Data/avions.csv"):
 """Mistral, prompt " je veux que la proposition d'avion faite soit des avions avec une vitesse de vent admissible entre 2 chiffres défini en parametre de la fonction
  avec la meme structure et la meme sortie que le mode 1"""
 
-import pandas as pd
+
 
 def choix_avion_mode_2(fichier_csv="Data/avions.csv", borne_min=0, borne_max=100):
     da = pd.read_csv(fichier_csv)
@@ -345,7 +346,7 @@ def choix_avion_mode_2(fichier_csv="Data/avions.csv", borne_min=0, borne_max=100
         type_choisi = input("Entrez un type d’avion : ").strip().lower()
 
         if type_choisi not in types_disponibles:
-            print("❌ Type invalide. Veuillez réessayer.")
+            print("Type invalide. Veuillez réessayer.")
             continue
 
         # Filtrage selon le type choisi et les bornes
@@ -452,20 +453,13 @@ def main ():
     carte_droit.save("carte_itinéraire_droit.html")
     print("L'itinéraire de référence est terminé")
 
-
     vitesse_admi, vitesse_avion = choix_du_mode(borne_inferieur, borne_superieur)
-
-
-
-
-
 
     print("L'itinéraire déviée est en cours de chargement...")
     itineraire_deviee, points_meteo_deviee,vent_max_total = tracer_chemin(depart, arrivee,vitesse_admi)
     carte_deviee = afficher_meteo_sur_carte(points_meteo_deviee,vitesse_admi, itineraire=itineraire_deviee)
     carte_deviee.save("carte_itinéraire_deviée.html")
     print("L'itinéraire déviée est terminé")
-
 
 
 main()
