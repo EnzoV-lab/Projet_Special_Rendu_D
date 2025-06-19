@@ -15,8 +15,12 @@ df = pd.read_csv(filepath)
 north_america_codes = ['US', 'CA', 'MX']
 df_na = df[df['iso_country'].isin(north_america_codes)]
 waypoints = df_na[['ident', 'latitude_deg', 'longitude_deg', 'iso_country']]
-print(waypoints.head())
 waypoints.to_csv("Data/Waypoints.csv", index=False)
+
+filepath = os.path.join("Data", "Villes.csv")
+de = pd.read_csv(filepath)
+Villes = de[['city', 'lat', 'lng',]]
+Villes.to_csv("Data/Villes.csv", index=False)
 
 
 
@@ -404,14 +408,18 @@ def afficher_meteo_sur_carte(points_meteo,seuille, itineraire=None):
 
     return carte
 
+def transformer_nom_en_coordonnees (ville):
+    match = de[de['city'].str.lower() == ville]
+    return match.iloc[0]['lat'], match.iloc[0]['lng']
 
 
+select_depart = input("Ville : ").strip().lower()
+select_arrivee = input("Ville : ").strip().lower()
 
 
-print(distance((np.float64(35.157798767089844), np.float64(-81.02030181884766)),(35.2271, -80.8431)))
+depart = transformer_nom_en_coordonnees(select_depart)
+arrivee = transformer_nom_en_coordonnees(select_arrivee)
 
-depart = (40.7128, -74.0060)
-arrivee = (41.8781, -87.6298)
 
 
 """itineraire, points_meteo = tracer_chemin(depart, arrivee, seuil=18)
