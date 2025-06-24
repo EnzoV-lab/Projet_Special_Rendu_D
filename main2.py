@@ -239,6 +239,7 @@ def tracer_chemin(depart, arrivee, seuil):
 
         if Etat:
             liste_finale.append(liste_coordonnees)
+            liste_finale.append([prochain_point])
             liste_points_meteo.extend(donnees_meteo)
             liste_point_utilisees.append(prochain_point)
             point = prochain_point
@@ -248,7 +249,6 @@ def tracer_chemin(depart, arrivee, seuil):
             continue
 
     liste_finale.append([arrivee])
-    print(liste_finale)
     return liste_finale, liste_points_meteo,vent_max_tot
 
 
@@ -277,6 +277,64 @@ class Avion:
 
     def __str__(self):
         return f"Avion {self.nom} (vent max: {self.vitesse_vent_max} km/h)"
+
+
+import numpy as np
+
+
+def bezier_curve(p0, p1, p2, n=20):
+    t = np.linspace(0, 1, n)
+    return [
+        (
+            (1 - tt) ** 2 * p0[0] + 2 * (1 - tt) * tt * p1[0] + tt ** 2 * p2[0],
+            (1 - tt) ** 2 * p0[1] + 2 * (1 - tt) * tt * p1[1] + tt ** 2 * p2[1]
+        )
+        for tt in t
+    ]
+
+
+def auto_ctrl(p_prev_end, p_next_start, ratio=0.3):
+    """
+    Crée un point de contrôle entre deux points géographiques (lat, lon).
+    """
+    if not (isinstance(p_prev_end, (tuple, list)) and isinstance(p_next_start, (tuple, list))):
+        raise TypeError("Les points doivent être des tuples (lat, lon).")
+
+    if len(p_prev_end) != 2 or len(p_next_start) != 2:
+        raise ValueError("Chaque point doit contenir exactement deux coordonnées (lat, lon).")
+
+    p1 = np.array(p_prev_end, dtype=float)
+    p2 = np.array(p_next_start, dtype=float)
+
+    ctrl_point = p1 + ratio * (p2 - p1)
+    return tuple(ctrl_point.tolist())
+
+
+
+def trajectoire_lisse_avec_controles(data, n_points_bezier=20, auto_ctrl_ratio=0.3):
+    """
+    Accepte une liste avec juste des segments :
+    [seg1, seg2, seg3, ...]
+    Génère automatiquement des contrôles entre chaque segment.
+    """
+    if len(data) < 2:
+        raise ValueError("Il faut au moins deux segments.")
+
+    trajectoire = list(data[0])
+
+    for i in range(len(data) - 1):
+        seg1 = data[i]
+        seg2 = data[i + 1]
+
+        p0 = seg1[-1]
+        p2 = seg2[0]
+        ctrl = auto_ctrl(p0, p2, ratio=auto_ctrl_ratio)
+
+        courbe = bezier_curve(p0, ctrl, p2, n=n_points_bezier)
+        trajectoire.extend(courbe[1:])
+        trajectoire.extend(seg2[1:])
+    print (trajectoire)
+    return trajectoire
 
     # === Création des avions ===
 
@@ -447,9 +505,11 @@ def main ():
 
     print("L'itinéraire de référence est en cours de chargement...  ")
     itineraire_droit, points_meteo_droit,vent_max_total = tracer_chemin(depart, arrivee,10000)
+    itineraire_avec_jonction = trajectoire_lisse_avec_controles(itineraire_droit)
+    meteo_jonction = trajectoire_lisse_avec_controles(points_meteo_droit)
     borne_inferieur = vent_max_total-5
     borne_superieur = vent_max_total
-    carte_droit = afficher_meteo_sur_carte(points_meteo_droit,10000, itineraire=itineraire_droit)
+    carte_droit = afficher_meteo_sur_carte(meteo_jonction,10000, itineraire=itineraire_avec_jonction)
     carte_droit.save("carte_itinéraire_droit.html")
     print("L'itinéraire de référence est terminé")
 
