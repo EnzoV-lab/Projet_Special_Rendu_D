@@ -9,9 +9,9 @@ Mooney M20,hélice,30,360
 Tecnam P2002,hélice,32,210
 Zlin Z-242,hélice,40,280
 Grob G 115,hélice,38,260
-ATR 72,turbopropulseur,70,510
-Dash 8 Q400,turbopropulseur,75,667
-Saab 340,turbopropulseur,65,500
+ATR 72,turbopropulseur,10,510
+Dash 8 Q400,turbopropulseur,13,667
+Saab 340,turbopropulseur,16,500
 Fokker 50,turbopropulseur,70,530
 Embraer EMB 120,turbopropulseur,68,520
 Antonov An-140,turbopropulseur,72,575
