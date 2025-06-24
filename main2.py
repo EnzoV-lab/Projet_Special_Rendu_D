@@ -92,45 +92,10 @@ def intercaler_points(lat1, lon1, lat2, lon2, n):
 
     return points_intercale
 
-class Avion:
-    def __init__(self, nom, vitesse_vent_max, categorie):
-        """
-        Initialise un objet Avion.
-
-        :param nom: Nom ou modèle de l'avion (str)
-        :param vitesse_vent_max: Vitesse maximale de vent tolérée (en km/h)
-        """
-        self.nom = nom
-        self.vitesse_vent_max = vitesse_vent_max
-        self.categorie = categorie
-
-    def en_capaciter_de_voler(self, vent_kph):
-        """
-        Vérifie si l'avion peut voler avec la vitesse de vent donnée.
-
-        :param vent_kph: vitesse du vent en km/h (float)
-        :return: True si l'avion peut voler, sinon False
-        """
-        return vent_kph <= self.vitesse_vent_max
-
-    def __str__(self):
-        return f"Avion {self.nom} (vent max: {self.vitesse_vent_max} km/h)"
-
-avions = [
-    # Hélice
-    Avion("Cessna 172", 18, "hélice"),
-    Avion("Piper PA-28 Cherokee", 60, "hélice"),
-    Avion("Diamond DA40", 65, "hélice"),
-
-    # Turbopropulseur
-    Avion("DHC-6 Twin Otter", 70, "turbopropulseur"),
-    Avion("Beechcraft King Air 350", 80, "turbopropulseur"),
-    Avion("ATR 72", 90, "turbopropulseur")
-]
 
 def choix_avion_mode_1(fichier_csv="Data/avions.csv"):
 
-    df = pd.read_csv(fichier_csv)
+    da = pd.read_csv(fichier_csv)
 
     types_disponibles = da['type'].unique()
     print("Types d’avions disponibles :")
@@ -206,7 +171,7 @@ def choix_avion_mode_2(fichier_csv="Data/avions.csv", borne_min=0, borne_max=100
         liste_avion.append(nom)
         print(f" - {nom} (vent max admissible : {vent} km/h)")
 
-    # Choix du nom
+
     nom_choisi = ""
     while nom_choisi not in liste_avion:
         nom_choisi = input("Entrez le nom de l’avion : ").strip()
@@ -294,22 +259,7 @@ def trouver_point_suivant(depart, arrivee, points_utilises, fichier_csv='Data/Wa
 
 
 def verifier_conditions_meteo(coordonnees, cle_api, seuil_vent_kph, max_depassements=2, pause=1):
-    """
-    Vérifie les conditions météo pour un segment.
 
-    Args:
-        coordonnees: liste de (lat, lon)
-        cle_api: str, clé WeatherAPI
-        seuil_vent_kph: float, vent max autorisé
-        max_depassements: int, nombre max de points dépassant le seuil
-        pause: float, pause entre les appels API
-
-    Returns:
-        tuple:
-            - état (bool): True si segment valide, False sinon
-            - liste des coordonnées [(lat, lon), ...]
-            - liste des données météo [(lat, lon, vent_kph ou None), ...]
-    """
     depassements = 0
     liste_coords = []
     donnees_meteo_segment = []
@@ -392,13 +342,7 @@ def tracer_chemin(depart, arrivee, seuil):
 
 
 
-
-
-
-import numpy as np
-
-
-def bezier_curve(p0, p1, p2, n=20):
+def bezier_curve(p0, p1, p2, n=40):
     t = np.linspace(0, 1, n)
     return [
         (
@@ -409,7 +353,7 @@ def bezier_curve(p0, p1, p2, n=20):
     ]
 
 
-def auto_ctrl(p_prev_end, p_next_start, ratio=0.3):
+def auto_ctrl(p_prev_end, p_next_start, ratio=0.1):
     """
     Crée un point de contrôle entre deux points géographiques (lat, lon).
     """
@@ -427,7 +371,7 @@ def auto_ctrl(p_prev_end, p_next_start, ratio=0.3):
 
 
 
-def trajectoire_lisse_avec_controles(data, n_points_bezier=20, auto_ctrl_ratio=0.3):
+def trajectoire_lisse_avec_controles(data, n_points_bezier=40, auto_ctrl_ratio=0.1):
     """
     Accepte une liste avec juste des segments :
     [seg1, seg2, seg3, ...]
@@ -449,7 +393,6 @@ def trajectoire_lisse_avec_controles(data, n_points_bezier=20, auto_ctrl_ratio=0
         courbe = bezier_curve(p0, ctrl, p2, n=n_points_bezier)
         trajectoire.extend(courbe[1:])
         trajectoire.extend(seg2[1:])
-    print (trajectoire)
     return trajectoire
 
     # === Création des avions ===
@@ -457,11 +400,7 @@ def trajectoire_lisse_avec_controles(data, n_points_bezier=20, auto_ctrl_ratio=0
 
 
 
-
-
-import folium
-
-def afficher_meteo_sur_carte(points_meteo, seuille, itineraire=None):
+def afficher_meteo_sur_carte(points_meteo, seuil, itineraire):
     if not points_meteo:
         raise ValueError("Aucune donnée météo à afficher.")
 
@@ -477,7 +416,7 @@ def afficher_meteo_sur_carte(points_meteo, seuille, itineraire=None):
     # Tracer points météo
     for lat, lon, vent in points_meteo:
         couleur = "gray" if vent is None else (
-            "green" if vent <= seuille else
+            "green" if vent <= seuil else
             "red"
         )
         popup_text = "Vent : inconnu" if vent is None else f"Vent : {vent:.1f} km/h"
@@ -492,6 +431,49 @@ def afficher_meteo_sur_carte(points_meteo, seuille, itineraire=None):
 
     return carte
 
+def afficher_double_itineraire(itineraire1, itineraire2, points_meteo2, seuil):
+    if not itineraire1 and not itineraire2:
+        raise ValueError("Aucun itinéraire fourni.")
+
+    # Choisir un point pour centrer la carte
+    if itineraire2:
+        lat_centre, lon_centre = itineraire2[0]
+    elif itineraire1:
+        lat_centre, lon_centre = itineraire1[0]
+    else:
+        raise ValueError("Impossible de centrer la carte.")
+
+    carte = folium.Map(location=(lat_centre, lon_centre), zoom_start=6)
+
+    # Tracer itinéraire 1 (référence) en bleu
+    if itineraire1:
+        folium.PolyLine(itineraire1, color="blue", weight=3, opacity=0.7, tooltip="Itinéraire référence").add_to(carte)
+
+    # Tracer itinéraire 2 (dévié) en violet
+    if itineraire2:
+        folium.PolyLine(itineraire2, color="purple", weight=3, opacity=0.7, tooltip="Itinéraire dévié").add_to(carte)
+
+    # Tracer les points météo liés à l’itinéraire 2
+    if points_meteo2:
+        for lat, lon, vent in points_meteo2:
+            couleur = "gray" if vent is None else (
+                "green" if vent <= seuil else "red"
+            )
+            popup_text = "Vent : inconnu" if vent is None else f"Vent : {vent:.1f} km/h"
+            folium.CircleMarker(
+                location=(lat, lon),
+                radius=5,
+                color=couleur,
+                fill=True,
+                fill_color=couleur,
+                popup=popup_text
+            ).add_to(carte)
+
+    return carte
+
+
+
+
 
 def transformer_nom_en_coordonnees (ville):
     match = de[de['city'].str.lower() == ville]
@@ -500,6 +482,7 @@ def transformer_nom_en_coordonnees (ville):
 
 
 def main ():
+
     select_depart = input("Entrez une ville U.S de départ : ").strip().lower()
     select_arrivee = input("Entrez une ville U.S de d'arrivée' : ").strip().lower()
 
@@ -510,13 +493,11 @@ def main ():
 
 
     itineraire_droit, points_meteo_droit, vent_max_total = tracer_chemin(depart, arrivee, 10000)
-    print(itineraire_droit)
     itineraire_avec_jonction = trajectoire_lisse_avec_controles(itineraire_droit)
 
-    print(itineraire_avec_jonction)
     borne_inferieur = vent_max_total-5
     borne_superieur = vent_max_total
-    carte_droit = afficher_meteo_sur_carte(points_meteo_droit,10000, itineraire=itineraire_avec_jonction)
+    carte_droit = afficher_meteo_sur_carte(points_meteo_droit,10000, itineraire_avec_jonction)
     carte_droit.save("carte_itinéraire_droit.html")
     print("L'itinéraire de référence est terminé")
 
@@ -524,8 +505,8 @@ def main ():
 
     print("L'itinéraire déviée est en cours de chargement...")
     itineraire_deviee, points_meteo_deviee,vent_max_total = tracer_chemin(depart, arrivee,vitesse_admi)
-    itineraire_deviee_avec_jonction = trajectoire_lisse_avec_controles(itineraire_droit)
-    carte_deviee = afficher_meteo_sur_carte(points_meteo_deviee,vitesse_admi, itineraire=itineraire_deviee_avec_jonction)
+    itineraire_deviee_avec_jonction = trajectoire_lisse_avec_controles(itineraire_deviee)
+    carte_deviee = afficher_double_itineraire(itineraire_avec_jonction,itineraire_deviee_avec_jonction,points_meteo_deviee,vitesse_admi)
     carte_deviee.save("carte_itinéraire_deviée.html")
     print("L'itinéraire déviée est terminé")
 
