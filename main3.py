@@ -6,6 +6,7 @@ from math import floor
 import numpy as np
 import requests
 import os
+import streamlit as st
 import math
 import time
 
@@ -331,66 +332,105 @@ def transformer_nom_en_coordonnees(ville, df_villes):
         raise ValueError(f"Ville '{ville}' non trouvée dans le fichier Villes.csv.")
     return match.iloc[0]['lat'], match.iloc[0]['lng']
 
-def main():
-    # Chargement des villes
-    df_villes = pd.read_csv(VILLES_CSV)
 
-    # Saisie utilisateur
-    ville_depart = input("Entrez une ville U.S de départ : ").strip()
-    ville_arrivee = input("Entrez une ville U.S d'arrivée : ").strip()
 
-    # Conversion en coordonnées
-    depart = transformer_nom_en_coordonnees(ville_depart, df_villes)
-    arrivee = transformer_nom_en_coordonnees(ville_arrivee, df_villes)
+# Constantes
+CLE_API = "d9ac5ac56f3d4768abd232315250506"
+WAYPOINT_CSV = "Data/Waypoints.csv"
+VILLES_CSV = "Data/Villes.csv"
+AVIONS_CSV = "Data/avions.csv"
 
-    print("L'itinéraire de référence est en cours de calcul...")
+# Initialisation
+df_villes = pd.read_csv(VILLES_CSV)
+avion_manager = AvionManager(AVIONS_CSV)
+navigation_manager = NavigationManager(WAYPOINT_CSV)
+meteo_manager = MeteoManager(CLE_API)
+trajectoire_manager = TrajectoireManager()
+visualisation_manager = VisualisationManager()
 
-    # Initialisation des gestionnaires
-    meteo_manager = MeteoManager(CLE_API)
-    navigation_manager = NavigationManager(WAYPOINT_CSV)
-    trajectoire_manager = TrajectoireManager()
-    visualisation_manager = VisualisationManager()
 
-    # Trajectoire directe par défaut
-    itineraire_droit, points_meteo_droit, vent_max_total = navigation_manager.tracer_chemin(
+def transformer_nom_en_coordonnees(ville):
+    match = df_villes[df_villes['city'].str.lower() == ville.lower()]
+    if match.empty:
+        return None
+    return match.iloc[0]['lat'], match.iloc[0]['lng']
+
+
+# --- Interface Streamlit ---
+st.set_page_config(page_title="Simulation de Trajectoire Aérienne", layout="wide")
+st.title("✈️ Simulation de Trajectoire Aérienne avec Météo")
+
+st.sidebar.header("📍 Paramètres de vol")
+
+ville_depart = st.sidebar.selectbox("Ville de départ", df_villes['city'].sort_values().unique())
+ville_arrivee = st.sidebar.selectbox("Ville d’arrivée", df_villes['city'].sort_values().unique())
+
+if ville_depart == ville_arrivee:
+    st.warning("Les villes doivent être différentes.")
+    st.stop()
+
+depart = transformer_nom_en_coordonnees(ville_depart)
+arrivee = transformer_nom_en_coordonnees(ville_arrivee)
+
+if not depart or not arrivee:
+    st.error("Ville introuvable dans la base de données.")
+    st.stop()
+
+# Itinéraire de référence
+st.subheader("🧭 Calcul de l’itinéraire de référence (sans contraintes)")
+with st.spinner("Calcul en cours..."):
+    itin_droit, meteo_droit, vent_max_ref = navigation_manager.tracer_chemin(
         depart, arrivee, seuil=10000,
         verifier_meteo_callback=lambda coords, seuil: meteo_manager.verifier_conditions_meteo(coords, seuil)
     )
+    itin_droit_lisse = trajectoire_manager.trajectoire_lisse_avec_controles(itin_droit)
 
-    itineraire_droit_lisse = trajectoire_manager.trajectoire_lisse_avec_controles(itineraire_droit)
+st.success(f"Itinéraire de référence calculé ✅ | Vent max détecté : {vent_max_ref:.1f} km/h")
 
-    print("Itinéraire de référence terminé. Vent max détecté :", vent_max_total)
+# Choix de l'avion
+st.subheader("🛩️ Choix de l’avion selon le vent détecté")
+type_avions = avion_manager.df['type'].unique()
+type_choisi = st.selectbox("Type d’avion :", type_avions)
 
-    carte_ref = visualisation_manager.afficher_meteo_sur_carte(
-        points_meteo_droit, seuil=10000, itineraire=itineraire_droit_lisse)
-    carte_ref.save("carte_itineraire_reference.html")
+# Avions valides selon borne (comme dans ton code mode 2)
+borne_min = vent_max_ref - 5
+borne_max = vent_max_ref
+avions_filtres = avion_manager.df[
+    (avion_manager.df['type'] == type_choisi) &
+    (avion_manager.df['vitesse_vent_admissible'] >= borne_min) &
+    (avion_manager.df['vitesse_vent_admissible'] <= borne_max)
+]
 
-    # Choix de l'avion
-    borne_min = vent_max_total - 5
-    borne_max = vent_max_total
+if avions_filtres.empty:
+    st.warning("Aucun avion de ce type ne supporte le vent détecté.")
+    st.stop()
 
-    avion_manager = AvionManager("Data/avions.csv")
-    vitesse_admi, vitesse_avion = avion_manager.choix_du_mode(borne_min, borne_max)
+nom_avion = st.selectbox("Modèle d’avion :", avions_filtres['nom'].values)
+avion = avions_filtres[avions_filtres['nom'] == nom_avion].iloc[0]
+vitesse_admi = avion['vitesse_vent_admissible']
+vitesse_avion = avion['vitesse_de_avion']
 
-    # Trajectoire déviée avec météo réelle
-    print("L'itinéraire dévié est en cours de calcul...")
+st.success(f"Avion sélectionné : {nom_avion} (Vent max admissible : {vitesse_admi} km/h)")
 
-    itineraire_devie, points_meteo_devie, vent_max_total2 = navigation_manager.tracer_chemin(
+# Calcul de l’itinéraire avec météo réelle
+st.subheader("🌪️ Calcul de l’itinéraire en prenant en compte la météo")
+with st.spinner("Déviation en cours..."):
+    itin_devie, meteo_devie, vent_max_devie = navigation_manager.tracer_chemin(
         depart, arrivee, seuil=vitesse_admi,
         verifier_meteo_callback=lambda coords, seuil: meteo_manager.verifier_conditions_meteo(coords, seuil)
     )
+    itin_devie_lisse = trajectoire_manager.trajectoire_lisse_avec_controles(itin_devie)
 
-    itineraire_devie_lisse = trajectoire_manager.trajectoire_lisse_avec_controles(itineraire_devie)
+st.success(f"Itinéraire dévié terminé ✅ | Vent max détecté : {vent_max_devie:.1f} km/h")
 
-    print("Itinéraire dévié terminé. Vent max détecté :", vent_max_total2)
+# Affichage de la carte finale
+st.subheader("🗺️ Visualisation")
+carte_html = visualisation_manager.afficher_double_itineraire(
+    itin_droit_lisse, itin_devie_lisse, meteo_devie, seuil=vitesse_admi
+)
+carte_html.save("carte_resultat.html")
 
-    carte_deviee = visualisation_manager.afficher_double_itineraire(
-        itineraire_droit_lisse, itineraire_devie_lisse, points_meteo_devie, seuil=vitesse_admi)
-    carte_deviee.save("carte_itineraire_devie.html")
-
-    print("✅ Cartes générées :")
-    print("- carte_itineraire_reference.html")
-    print("- carte_itineraire_devie.html")
-
-if __name__ == "__main__":
-    main()
+from streamlit.components.v1 import html
+with open("carte_resultat.html", "r", encoding="utf-8") as f:
+    html_map = f.read()
+html(html_map, height=600)
