@@ -3,12 +3,20 @@ import numpy as np  # Pour les calculs numériques et manipulation de vecteurs
 class TrajectoireManager:
     """
     Classe permettant de lisser une trajectoire composée de segments en utilisant des courbes de Bézier quadratiques.
+
+    :param n_points_bezier: Nombre de points générés pour chaque courbe de Bézier.
+    :type n_points_bezier: int
+    :param auto_ctrl_ratio: Position relative du point de contrôle sur le segment p1 → p2.
+    :type auto_ctrl_ratio: float
     """
     def __init__(self, n_points_bezier=40, auto_ctrl_ratio=0.1):
         """
-        Initialise les paramètres de lissage.
-        :param n_points_bezier: nombre de points à générer pour chaque courbe de Bézier
-        :param auto_ctrl_ratio: position du point de contrôle par rapport à la ligne p1 -> p2
+        Initialise les paramètres de génération des courbes.
+
+        :param n_points_bezier: Nombre de points générés par courbe.
+        :type n_points_bezier: int
+        :param auto_ctrl_ratio: Ratio définissant l'emplacement du point de contrôle.
+        :type auto_ctrl_ratio: float
         """
         self.n = n_points_bezier        # Plus ce nombre est grand, plus la courbe sera lisse
         self.ratio = auto_ctrl_ratio    # Définit la position du point de contrôle (ex : 0.1 = proche de p1)
@@ -16,10 +24,15 @@ class TrajectoireManager:
     def bezier_curve(self, p0, p1, p2):
         """
         Génère une courbe de Bézier quadratique à partir de trois points.
-        :param p0: point de départ (lat, lon)
-        :param p1: point de contrôle
-        :param p2: point d’arrivée (lat, lon)
-        :return: liste de points interpolés (lat, lon) formant la courbe
+
+        :param p0: Point de départ de la courbe (latitude, longitude).
+        :type p0: tuple[float, float]
+        :param p1: Point de contrôle (influence la courbure).
+        :type p1: tuple[float, float]
+        :param p2: Point d’arrivée de la courbe (latitude, longitude).
+        :type p2: tuple[float, float]
+        :return: Liste de points interpolés (latitude, longitude).
+        :rtype: list[tuple[float, float]]
         """
         t = np.linspace(0, 1, self.n)  # Génère 'n' valeurs de t entre 0 et 1
         return [
@@ -33,9 +46,13 @@ class TrajectoireManager:
     def auto_ctrl(self, p1, p2):
         """
         Calcule automatiquement un point de contrôle intermédiaire entre deux points.
-        :param p1: point de départ
-        :param p2: point d’arrivée
-        :return: point de contrôle (lat, lon) interpolé entre p1 et p2
+
+        :param p1: Point de départ (latitude, longitude).
+        :type p1: tuple[float, float]
+        :param p2: Point d’arrivée (latitude, longitude).
+        :type p2: tuple[float, float]
+        :return: Point de contrôle calculé selon le ratio défini.
+        :rtype: tuple[float, float]
         """
         p1 = np.array(p1, dtype=float)
         p2 = np.array(p2, dtype=float)
@@ -43,9 +60,13 @@ class TrajectoireManager:
 
     def trajectoire_lisse_avec_controles(self, data):
         """
-        Lisse une trajectoire composée de plusieurs segments en insérant des courbes de Bézier.
-        :param data: liste de segments, chaque segment étant une liste de points [(lat, lon), ...]
-        :return: liste complète des points lissés constituant la trajectoire finale
+        Lisse une trajectoire en remplaçant les jonctions entre segments par des courbes de Bézier.
+
+        :param data: Liste de segments, chaque segment étant une liste de points [(lat, lon), ...].
+        :type data: list[list[tuple[float, float]]]
+        :return: Trajectoire complète lissée sous forme de liste de points (latitude, longitude).
+        :rtype: list[tuple[float, float]]
+        :raises ValueError: Si moins de deux segments sont fournis.
         """
         if len(data) < 2:
             raise ValueError("Il faut au moins deux segments pour lisser une trajectoire.")

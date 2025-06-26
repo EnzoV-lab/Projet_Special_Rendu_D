@@ -3,42 +3,49 @@ import time  # Permet de temporiser les requêtes (éviter surcharge de l'API)
 
 class MeteoManager:
     """
-        Gère la récupération et la vérification des conditions météorologiques.
+    Classe de gestion des conditions météorologiques sur des segments de trajectoire.
 
-        Attributes
-        ----------
-        cle_api : str
-            Clé API pour l'accès au service météo.
+    Cette classe utilise l'API WeatherAPI via la classe `DonneesMeteo` pour interroger
+    les conditions météo sur une série de coordonnées GPS et déterminer si elles
+    respectent un seuil de vent défini.
 
-        Methods
-        -------
-        verifier_conditions_meteo(coordonnees, seuil_vent_kph)
-            Vérifie les conditions météorologiques sur un segment donné.
-        """
+    :param cle_api: Clé API pour accéder au service météo (ex: weatherapi.com)
+    :type cle_api: str
+    """
+
     def __init__(self, cle_api):
         """
-        Initialise le gestionnaire météo avec la clé API.
-        :param cle_api: clé fournie par le service météo (ex: weatherapi.com)
+        Initialise un objet MeteoManager avec une clé API.
+
+        :param cle_api: Clé d'accès à l'API WeatherAPI.
+        :type cle_api: str
         """
         self.cle_api = cle_api
 
     def verifier_conditions_meteo(self, coordonnees, seuil_vent_kph, max_depassements=2, pause=1):
         """
-                Vérifie les conditions météo sur une série de coordonnées.
-                Rejette le segment si le vent dépasse le seuil autorisé trop souvent.
+        Vérifie les conditions météorologiques sur une série de coordonnées GPS.
 
-                Parameters
-                ----------
-                coordonnees : list of tuple
-                    Liste de coordonnées GPS (latitude, longitude).
-                seuil_vent_kph : float (valeur max admissible du vent en km/h)
-                    Seuil maximal de vent admis.
+        Pour chaque point, récupère les données météo et vérifie si la vitesse du vent
+        dépasse un seuil défini. Si trop de points dépassent ce seuil, le segment est rejeté.
 
-                Returns
-                -------
-                tuple
-                    Résultat booléen, liste de coordonnées, données météo, et vent maximal détecté.
-                """
+        :param coordonnees: Liste de tuples représentant les coordonnées GPS (latitude, longitude).
+        :type coordonnees: list[tuple[float, float]]
+        :param seuil_vent_kph: Seuil maximal de vent admissible (en km/h).
+        :type seuil_vent_kph: float
+        :param max_depassements: Nombre maximal de points autorisés à dépasser le seuil de vent.
+        :type max_depassements: int, optional
+        :param pause: Temps d'attente entre deux requêtes API, en secondes.
+        :type pause: float, optional
+
+        :return:
+            - `bool` : True si le segment est accepté, False sinon.
+            - `list[tuple[float, float]]` : Coordonnées vérifiées.
+            - `list[tuple[float, float, float|None]]` : Données météo par point.
+            - `float` : Vent maximal rencontré sur le segment.
+
+        :rtype: tuple[bool, list, list, float]
+        """
         depassements = 0                    # Nombre de points dépassant le seuil
         liste_coords = []                  # Coordonnées réellement analysées
         donnees_meteo_segment = []         # Résultats météo pour chaque point

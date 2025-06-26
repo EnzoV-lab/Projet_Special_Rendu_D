@@ -3,20 +3,31 @@ import csv           # Module standard pour la manipulation de fichiers CSV
 
 class AvionManager:
     """
-    Classe de gestion des avions à partir d'un fichier CSV contenant leurs caractéristiques.
-    Permet de sélectionner un avion selon différents modes.
+    Classe permettant de gérer la sélection d'avions à partir d'un fichier CSV.
+
+    Cette classe propose deux modes de sélection :
+    - Mode 1 : Choix libre parmi tous les avions disponibles.
+    - Mode 2 : Filtrage par plage de vent admissible.
+
+    :param fichier_csv: Chemin vers le fichier CSV contenant les données des avions.
+    :type fichier_csv: str
     """
     def __init__(self, fichier_csv="Data/avions.csv"):
         """
-        Initialise le gestionnaire d'avions à partir d'un fichier CSV.
-        :param fichier_csv: chemin vers le fichier contenant les données des avions
+        Initialise l'instance de la classe et charge les données CSV dans un DataFrame.
+
+        :param fichier_csv: Chemin vers le fichier CSV contenant les avions.
+        :type fichier_csv: str
         """
         self.fichier_csv = fichier_csv
         self.df = pd.read_csv(fichier_csv)  # Chargement du fichier CSV dans un DataFrame
 
     def choix_avion_mode_1(self):
         """
-        Mode 1 : permet à l'utilisateur de choisir librement un avion, sans contrainte météo.
+        Mode 1 : Permet de choisir un avion librement sans contrainte météo.
+
+        :return: Vitesse maximale de vent admissible et vitesse propre de l'avion choisi.
+        :rtype: tuple(float, float)
         """
         types_disponibles = self.df['type'].unique()  # Liste des types d’avions uniques dans le fichier
         print("Types d’avions disponibles :")
@@ -54,10 +65,14 @@ class AvionManager:
 
     def choix_avion_mode_2(self, borne_min=0, borne_max=100):
         """
-        Mode 2 : propose uniquement les avions dont la vitesse de vent admissible est dans une certaine plage.
-        Utile pour filtrer les avions selon les conditions météo prévues.
-        :param borne_min: vitesse de vent minimale admissible
-        :param borne_max: vitesse de vent maximale admissible
+        Mode 2 : Propose uniquement les avions avec une vitesse de vent admissible comprise dans un intervalle.
+
+        :param borne_min: Borne minimale de vent admissible.
+        :type borne_min: int
+        :param borne_max: Borne maximale de vent admissible.
+        :type borne_max: int
+        :return: Vitesse maximale de vent admissible et vitesse propre de l'avion choisi.
+        :rtype: tuple(float, float)
         """
         types_disponibles = self.df['type'].unique()
         print("Types d’avions disponibles :")
@@ -105,10 +120,17 @@ class AvionManager:
 
     def choix_du_mode(self, borne_min, borne_max):
         """
-        Permet à l’utilisateur de choisir entre les deux modes :
-        - Mode 1 : sans contrainte météo
-        - Mode 2 : filtrage selon la plage de vent admissible
-        :return: les caractéristiques de l’avion choisi
+        Permet à l’utilisateur de choisir entre les deux modes de sélection d’avion.
+
+        - Mode 1 : Choix libre (aucune contrainte météo)
+        - Mode 2 : Filtrage par plage de vent admissible
+
+        :param borne_min: Borne minimale pour la vitesse de vent admissible.
+        :type borne_min: int
+        :param borne_max: Borne maximale pour la vitesse de vent admissible.
+        :type borne_max: int
+        :return: Vitesse admissible maximale et vitesse propre de l’avion.
+        :rtype: tuple(float, float)
         """
         reponse_possible = ["1", "2"]
         reponse_mode = ""

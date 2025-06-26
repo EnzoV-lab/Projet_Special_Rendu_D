@@ -3,17 +3,22 @@ import folium  # Folium permet de créer des cartes interactives basées sur Lea
 
 class VisualisationManager:
     """
-    Classe responsable de l'affichage de cartes interactives avec des itinéraires
-    et des données météo (vitesse du vent) à l'aide de Folium.
+    Classe responsable de l'affichage de cartes interactives contenant des itinéraires
+    et des données météo (notamment le vent) à l'aide de la bibliothèque Folium.
     """
     def afficher_meteo_sur_carte(self, points_meteo, seuil, itineraire):
         """
-        Affiche une carte avec un itinéraire et les points météo associés.
+        Affiche une carte interactive avec un itinéraire et les points météo associés.
 
-        :param points_meteo: liste de tuples (lat, lon, vent_kph)
-        :param seuil: valeur du vent max admissible pour l’avion
-        :param itineraire: liste de points (lat, lon) représentant l’itinéraire
-        :return: objet folium.Map contenant la visualisation
+        :param points_meteo: Liste de tuples contenant latitude, longitude et vitesse du vent (km/h).
+                                Format : [(lat, lon, vent_kph), ...]
+        :type points_meteo: list[tuple[float, float, float or None]]
+        :param seuil: Seuil de vent maximal admissible (km/h) pour le tracé.
+        :type seuil: float
+        :param itineraire: Liste de coordonnées GPS représentant l’itinéraire.
+        :type itineraire: list[tuple[float, float]]
+        :return: Carte Folium avec tracé et points météo.
+        :rtype: folium.Map
         """
         # Calcule le centre de la carte à partir des points météo
         lat_centre = sum(lat for lat, lon, vent in points_meteo) / len(points_meteo)
@@ -42,13 +47,19 @@ class VisualisationManager:
 
     def afficher_double_itineraire(self, itin1, itin2, points_meteo, seuil):
         """
-        Affiche une carte avec deux itinéraires (référence et dévié), ainsi que les points météo.
+        Affiche une carte avec deux itinéraires superposés (référence et dévié), ainsi que les points météo.
 
-        :param itin1: itinéraire de référence (liste de tuples lat/lon)
-        :param itin2: itinéraire dévié (liste de tuples lat/lon)
-        :param points_meteo: liste des points météo (lat, lon, vent)
-        :param seuil: seuil de vent admissible
-        :return: carte Folium
+        :param itin1: Liste de points représentant l’itinéraire de référence.
+        :type itin1: list[tuple[float, float]]
+        :param itin2: Liste de points représentant l’itinéraire dévié.
+        :type itin2: list[tuple[float, float]]
+        :param points_meteo: Liste des points météo à afficher, avec vitesse du vent.
+                                Format : [(lat, lon, vent_kph), ...]
+        :type points_meteo: list[tuple[float, float, float or None]]
+        :param seuil: Seuil de vent maximal admissible (km/h) à représenter.
+        :type seuil: float
+        :return: Carte Folium représentant les deux trajets et les conditions météo.
+        :rtype: folium.Map
         """
         # Centre la carte sur le premier point disponible
         lat_centre, lon_centre = itin1[0] if itin1 else itin2[0]
