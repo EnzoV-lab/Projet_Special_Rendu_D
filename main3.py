@@ -357,11 +357,15 @@ def transformer_nom_en_coordonnees(ville):
 
 
 # --- Interface Streamlit ---
+import streamlit as st
+from streamlit.components.v1 import html
+
+# Configuration
 st.set_page_config(page_title="Simulation de Trajectoire Aérienne", layout="wide")
-st.title("✈️ Simulation de Trajectoire Aérienne avec Météo")
+st.title("Simulation de Trajectoire Aérienne avec Météo")
+st.sidebar.header("Paramètres de vol")
 
-st.sidebar.header("📍 Paramètres de vol")
-
+# Sélection des villes
 ville_depart = st.sidebar.selectbox("Ville de départ", df_villes['city'].sort_values().unique())
 ville_arrivee = st.sidebar.selectbox("Ville d’arrivée", df_villes['city'].sort_values().unique())
 
@@ -376,82 +380,114 @@ if not depart or not arrivee:
     st.error("Ville introuvable dans la base de données.")
     st.stop()
 
-# Itinéraire de référence
-st.subheader("🧭 Calcul de l’itinéraire de référence (sans contraintes)")
-with st.spinner("Calcul en cours..."):
-    itin_droit, meteo_droit, vent_max_ref = navigation_manager.tracer_chemin(
-        depart, arrivee, seuil=10000,
-        verifier_meteo_callback=lambda coords, seuil: meteo_manager.verifier_conditions_meteo(coords, seuil)
-    )
-    itin_droit_lisse = trajectoire_manager.trajectoire_lisse_avec_controles(itin_droit)
+# Initialisation de session_state si besoin
+if "itin_droit_lisse" not in st.session_state:
+    st.session_state.itin_droit_lisse = None
+    st.session_state.meteo_droit = None
+    st.session_state.vent_max_ref = None
 
-st.success(f"Itinéraire de référence calculé ✅ | Vent max détecté : {vent_max_ref:.1f} km/h")
+# BOUTON DANS LA SIDEBAR : Calcul itinéraire de référence
+if st.sidebar.button("Lancer le calcul de l'itinéraire de référence"):
+    st.subheader("Calcul de l’itinéraire de référence (sans contraintes)")
+    with st.spinner("Calcul en cours (le calcul peut prendre quelques minutes)..."):
+        itin_droit, meteo_droit, vent_max_ref = navigation_manager.tracer_chemin(
+            depart, arrivee, seuil=10000,
+            verifier_meteo_callback=lambda coords, seuil: meteo_manager.verifier_conditions_meteo(coords, seuil)
+        )
+        itin_droit_lisse = trajectoire_manager.trajectoire_lisse_avec_controles(itin_droit)
 
-# Choix du mode
-st.subheader("🎯 Choix de l'avion")
-mode = st.radio("Mode de sélection de l'avion :", ["Choix libre (mode 1)", "Filtré par conditions météo (mode 2)"])
+        st.session_state.itin_droit_lisse = itin_droit_lisse
+        st.session_state.meteo_droit = meteo_droit
+        st.session_state.vent_max_ref = vent_max_ref
 
-# Initialisation du gestionnaire avion déjà faite plus haut
+    st.success(f"Itinéraire de référence calculé | Vent max détecté : {vent_max_ref:.1f} km/h")
 
-if mode == "Choix libre (mode 1)":
-    # Mode 1 : sélection libre
-    type_avions = avion_manager.df['type'].unique()
+# Affichage si itinéraire de référence calculé
+if st.session_state.itin_droit_lisse:
+    vent_max_ref = st.session_state.vent_max_ref
+    itin_droit_lisse = st.session_state.itin_droit_lisse
+
+    st.subheader("Choix de l'avion")
+    mode = st.radio("Mode de sélection de l'avion :", ["Choix libre (mode 1)", "Filtré par conditions météo (mode 2)"])
+
+    type_avions = ["-- Sélectionner un type --"] + list(avion_manager.df['type'].unique())
     type_choisi = st.selectbox("Type d’avion :", type_avions)
-    avions_type = avion_manager.df[avion_manager.df['type'] == type_choisi]
 
-    if avions_type.empty:
-        st.warning("Aucun avion de ce type n’est disponible.")
+    if type_choisi == "-- Sélectionner un type --":
+        st.warning("Veuillez sélectionner un type d’avion.")
         st.stop()
 
-    nom_avion = st.selectbox("Modèle d’avion :", avions_type['nom'].values)
-    avion = avions_type[avions_type['nom'] == nom_avion].iloc[0]
+    if mode == "Choix libre (mode 1)":
+        avions_type = avion_manager.df[avion_manager.df['type'] == type_choisi]
+        if avions_type.empty:
+            st.warning("Aucun avion de ce type n’est disponible.")
+            st.stop()
+        nom_avion = st.selectbox("Modèle d’avion :", avions_type['nom'].values)
+        avion = avions_type[avions_type['nom'] == nom_avion].iloc[0]
+    else:
+        borne_min = int(max(0, vent_max_ref - 5))
+        borne_max = int(vent_max_ref - 2)
+        st.info(f"Recherche des avions supportant entre {borne_min} et {borne_max} km/h de vent.")
 
-else:
-    # Mode 2 : filtré par météo
-    borne_min = max(0, vent_max_ref - 5)
-    borne_max = vent_max_ref
+        avions_filtres = avion_manager.df[
+            (avion_manager.df['type'] == type_choisi) &
+            (avion_manager.df['vitesse_vent_admissible'] >= borne_min) &
+            (avion_manager.df['vitesse_vent_admissible'] <= borne_max)
+        ]
+        if avions_filtres.empty:
+            st.warning("Aucun avion de ce type ne supporte le vent détecté.")
+            st.stop()
 
-    type_avions = avion_manager.df['type'].unique()
-    type_choisi = st.selectbox("Type d’avion :", type_avions)
-    avions_filtres = avion_manager.df[
-        (avion_manager.df['type'] == type_choisi) &
-        (avion_manager.df['vitesse_vent_admissible'] >= borne_min) &
-        (avion_manager.df['vitesse_vent_admissible'] <= borne_max)
-    ]
+        avions_filtres['affichage'] = avions_filtres.apply(
+            lambda row: f"{row['nom']} (vent max: {row['vitesse_vent_admissible']} km/h)", axis=1
+        )
+        nom_affichage = st.selectbox("Modèle d’avion :", avions_filtres['affichage'].values)
+        nom_avion = nom_affichage.split(" (")[0]
+        avion = avions_filtres[avions_filtres['nom'] == nom_avion].iloc[0]
 
-    if avions_filtres.empty:
-        st.warning("Aucun avion de ce type ne supporte le vent détecté.")
-        st.stop()
+    vitesse_admi = avion['vitesse_vent_admissible']
+    vitesse_avion = avion['vitesse_de_avion']
+    st.success(f"Avion sélectionné : {nom_avion} (Vent max admissible : {vitesse_admi} km/h)")
 
-    nom_avion = st.selectbox("Modèle d’avion :", avions_filtres['nom'].values)
-    avion = avions_filtres[avions_filtres['nom'] == nom_avion].iloc[0]
+    # Bouton : calcul avec météo réelle (dans le corps principal)
+    if st.button("Lancer le calcul de l’itinéraire avec déviation"):
+        st.subheader("Calcul de l’itinéraire déviée")
+        with st.spinner("Déviation en cours (le calcul peut prendre quelques minutes)..."):
+            itin_devie, meteo_devie, vent_max_devie = navigation_manager.tracer_chemin(
+                depart, arrivee, seuil=vitesse_admi,
+                verifier_meteo_callback=lambda coords, seuil: meteo_manager.verifier_conditions_meteo(coords, seuil)
+            )
+            itin_devie_lisse = trajectoire_manager.trajectoire_lisse_avec_controles(itin_devie)
 
-# Finalisation
-vitesse_admi = avion['vitesse_vent_admissible']
-vitesse_avion = avion['vitesse_de_avion']
-st.success(f"Avion sélectionné : {nom_avion} (Vent max admissible : {vitesse_admi} km/h)")
+        st.success(f"Itinéraire dévié terminé | Vent max détecté : {vent_max_devie:.1f} km/h")
 
-st.success(f"Avion sélectionné : {nom_avion} (Vent max admissible : {vitesse_admi} km/h)")
+        # Message explicatif avant la carte
+        st.info("Le trajet **bleu** correspond à l’itinéraire **de référence**, "
+                "et le trajet **violet** correspond à l’itinéraire **dévié**.")
 
-# Calcul de l’itinéraire avec météo réelle
-st.subheader("🌪️ Calcul de l’itinéraire en prenant en compte la météo")
-with st.spinner("Déviation en cours..."):
-    itin_devie, meteo_devie, vent_max_devie = navigation_manager.tracer_chemin(
-        depart, arrivee, seuil=vitesse_admi,
-        verifier_meteo_callback=lambda coords, seuil: meteo_manager.verifier_conditions_meteo(coords, seuil)
-    )
-    itin_devie_lisse = trajectoire_manager.trajectoire_lisse_avec_controles(itin_devie)
+        # Affichage carte
+        st.subheader("Visualisation")
+        carte_html = visualisation_manager.afficher_double_itineraire(
+            itin_droit_lisse, itin_devie_lisse, meteo_devie, seuil=vitesse_admi
+        )
+        carte_html.save("Cartes/carte_resultat.html")
 
-st.success(f"Itinéraire dévié terminé ✅ | Vent max détecté : {vent_max_devie:.1f} km/h")
+        with open("Cartes/carte_resultat.html", "r", encoding="utf-8") as f:
+            html_map = f.read()
+        html(html_map, height=600)
 
-# Affichage de la carte finale
-st.subheader("🗺️ Visualisation")
-carte_html = visualisation_manager.afficher_double_itineraire(
-    itin_droit_lisse, itin_devie_lisse, meteo_devie, seuil=vitesse_admi
-)
-carte_html.save("carte_resultat.html")
+        # Résumé
+        st.subheader("Résumé de la simulation")
+        st.markdown(f"""
+        - Ville de départ : `{ville_depart}`
+        - Ville d’arrivée : `{ville_arrivee}`
+        - Avion sélectionné : `{nom_avion}`
+        - Vent max admissible avion : `{vitesse_admi} km/h`
+        - Vent max sur itinéraire direct : `{vent_max_ref:.1f} km/h`
+        - Vent max sur itinéraire dévié : `{vent_max_devie:.1f} km/h`
+        """)
 
-from streamlit.components.v1 import html
-with open("carte_resultat.html", "r", encoding="utf-8") as f:
-    html_map = f.read()
-html(html_map, height=600)
+        # Bouton pour relancer la simulation depuis le début
+        if st.button("🔁 Nouvelle simulation"):
+            st.session_state.clear()
+            st.experimental_rerun()
