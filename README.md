@@ -1,8 +1,6 @@
 # Projet_Special_Rendu_D
 # ITINÉRAIRE AÉRIEN SÉCURISÉ PAR METEO
-# Membre: Romuald TIAKO - Elsa KUPFER - Enzo VILLAMANDOS - Lucas BONNEAUD
-
-
+ Membres: Romuald TIAKO - Elsa KUPFER - Enzo VILLAMANDOS - Lucas BONNEAUD
 
 ## Introduction
 
@@ -33,20 +31,20 @@ Le projet est principalement destiné à des simulations d’itinéraires aérie
 ### 1. Cloner le dépôt
 
 ``` bash
-git clone https://github.com/votre-utilisateur/nom-du-projet.git
-cd nom-du-projet
+ git clone https://github.com/votre-utilisateur/nom-du-projet.git
+ cd nom-du-projet
 ```
 
 ### 2. Installer les dépendances
 
 ``` bash
-pip install -r requirements.txt
+ pip install -r requirements.txt
 ```
 
 ### 3. Créer les dossiers nécessaires
 
 ``` bash
-mkdir Data Cartes
+ mkdir Data Cartes
 ```
 
 ### 4. Fournir les fichiers de données :
@@ -60,7 +58,7 @@ Placez les fichiers suivants dans le dossier `Data/` :
 ## 🚀 Lancer l’application
 
 ``` bash
-streamlit run main.py
+ streamlit run main.py
 ```
 
 L'application s’ouvre dans le navigateur. Utilisez la barre latérale pour définir les paramètres de simulation.
