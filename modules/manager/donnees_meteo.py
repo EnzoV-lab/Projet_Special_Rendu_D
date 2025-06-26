@@ -3,13 +3,22 @@ import requests
 
 class DonneesMeteo:
     """
-    Classe pour interroger l'API WeatherAPI et récupérer les données météo actuelles pour une coordonnée donnée.
+    Classe pour interroger l'API WeatherAPI et récupérer les données météo actuelles
+    pour une position géographique donnée.
+
+    :param cle_api: Clé API valide pour accéder à weatherapi.com.
+    :type cle_api: str
+    :param coordonnees: Coordonnées GPS au format (latitude, longitude).
+    :type coordonnees: tuple[float, float] or None
     """
     def __init__(self, cle_api, coordonnees=None):
         """
-        Initialise un objet DonneesMeteo.
-        :param cle_api: clé API pour accéder à weatherapi.com
-        :param coordonnees: tuple (latitude, longitude) des coordonnées à interroger
+        Initialise une instance de la classe DonneesMeteo.
+
+        :param cle_api: Clé d’authentification pour WeatherAPI.
+        :type cle_api: str
+        :param coordonnees: Tuple contenant latitude et longitude (ex. : (45.5, -73.6)).
+        :type coordonnees: tuple or None
         """
         self.coordonnees = coordonnees  # Coordonnées géographiques de la zone à analyser
         self.cle_api = cle_api  # Clé API fournie par WeatherAPI
@@ -17,8 +26,11 @@ class DonneesMeteo:
 
     def fetch(self):
         """
-        Envoie une requête HTTP à WeatherAPI pour obtenir les données météo actuelles de la coordonnée.
-        Résultat stocké dans self.donnees en format JSON.
+        Récupère les données météo actuelles pour les coordonnées fournies,
+        en interrogeant l’API WeatherAPI.
+
+        :raises ValueError: Si aucune coordonnée n’est spécifiée.
+        :raises RuntimeError: Si la réponse de l’API est invalide ou échoue.
         """
         if not self.coordonnees:
             raise ValueError("Coordonnées requises")  # Impossible de faire une requête sans position
@@ -35,8 +47,15 @@ class DonneesMeteo:
 
     def get_donnees(self):
         """
-        Extrait les données utiles de la réponse météo et les retourne sous forme de dictionnaire.
-        :return: dictionnaire contenant vitesse du vent, direction, conditions météo, etc.
+        Extrait et retourne les informations météo principales de la réponse de l’API.
+
+        :return: Un dictionnaire contenant :
+            - vent_kph (float) : Vitesse du vent en km/h.
+            - direction_cardinal (str) : Direction du vent (ex: "NE").
+            - direction_deg (int) : Direction du vent en degrés.
+            - condition (str) : Description du temps (ex: "Sunny").
+            - precip_mm (float) : Précipitations en millimètres.
+        :rtype: dict
         """
         if not self.donnees:
             return {}  # Si aucune donnée n’a encore été récupérée
