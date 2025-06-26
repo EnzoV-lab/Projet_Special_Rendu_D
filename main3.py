@@ -387,28 +387,49 @@ with st.spinner("Calcul en cours..."):
 
 st.success(f"Itinéraire de référence calculé ✅ | Vent max détecté : {vent_max_ref:.1f} km/h")
 
-# Choix de l'avion
-st.subheader("🛩️ Choix de l’avion selon le vent détecté")
-type_avions = avion_manager.df['type'].unique()
-type_choisi = st.selectbox("Type d’avion :", type_avions)
+# Choix du mode
+st.subheader("🎯 Choix de l'avion")
+mode = st.radio("Mode de sélection de l'avion :", ["Choix libre (mode 1)", "Filtré par conditions météo (mode 2)"])
 
-# Avions valides selon borne (comme dans ton code mode 2)
-borne_min = vent_max_ref - 5
-borne_max = vent_max_ref
-avions_filtres = avion_manager.df[
-    (avion_manager.df['type'] == type_choisi) &
-    (avion_manager.df['vitesse_vent_admissible'] >= borne_min) &
-    (avion_manager.df['vitesse_vent_admissible'] <= borne_max)
-]
+# Initialisation du gestionnaire avion déjà faite plus haut
 
-if avions_filtres.empty:
-    st.warning("Aucun avion de ce type ne supporte le vent détecté.")
-    st.stop()
+if mode == "Choix libre (mode 1)":
+    # Mode 1 : sélection libre
+    type_avions = avion_manager.df['type'].unique()
+    type_choisi = st.selectbox("Type d’avion :", type_avions)
+    avions_type = avion_manager.df[avion_manager.df['type'] == type_choisi]
 
-nom_avion = st.selectbox("Modèle d’avion :", avions_filtres['nom'].values)
-avion = avions_filtres[avions_filtres['nom'] == nom_avion].iloc[0]
+    if avions_type.empty:
+        st.warning("Aucun avion de ce type n’est disponible.")
+        st.stop()
+
+    nom_avion = st.selectbox("Modèle d’avion :", avions_type['nom'].values)
+    avion = avions_type[avions_type['nom'] == nom_avion].iloc[0]
+
+else:
+    # Mode 2 : filtré par météo
+    borne_min = max(0, vent_max_ref - 5)
+    borne_max = vent_max_ref
+
+    type_avions = avion_manager.df['type'].unique()
+    type_choisi = st.selectbox("Type d’avion :", type_avions)
+    avions_filtres = avion_manager.df[
+        (avion_manager.df['type'] == type_choisi) &
+        (avion_manager.df['vitesse_vent_admissible'] >= borne_min) &
+        (avion_manager.df['vitesse_vent_admissible'] <= borne_max)
+    ]
+
+    if avions_filtres.empty:
+        st.warning("Aucun avion de ce type ne supporte le vent détecté.")
+        st.stop()
+
+    nom_avion = st.selectbox("Modèle d’avion :", avions_filtres['nom'].values)
+    avion = avions_filtres[avions_filtres['nom'] == nom_avion].iloc[0]
+
+# Finalisation
 vitesse_admi = avion['vitesse_vent_admissible']
 vitesse_avion = avion['vitesse_de_avion']
+st.success(f"Avion sélectionné : {nom_avion} (Vent max admissible : {vitesse_admi} km/h)")
 
 st.success(f"Avion sélectionné : {nom_avion} (Vent max admissible : {vitesse_admi} km/h)")
 
