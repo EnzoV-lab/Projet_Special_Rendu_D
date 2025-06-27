@@ -107,12 +107,6 @@ ou
 
 2- Lien actuel vers le blog: ` <http://localhost:63342/Projet_Special_Rendu_D/docs/build/html/index.html>`
 
-ou
-
-3- Ouvrez le fichier suivant dans votre navigateur :
-``` bash
-  docs/build/html/index.html
-```
 ### 2. Naviguez dans les modules, classes et fonctions documentées.
 
 --> Régénérer la documentation
