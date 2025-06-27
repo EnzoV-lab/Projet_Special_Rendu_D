@@ -55,7 +55,7 @@ Placez les fichiers suivants dans le dossier `Data/` :
 * `Waypoints.csv` : base de données géographiques des points de navigation.
 * `Villes.csv` : coordonnées des villes utilisées.
 
-## 🚀 Lancer l’application
+## Lancer l’application
 
 ``` bash
   streamlit run main.py
