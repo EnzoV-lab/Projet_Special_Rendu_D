@@ -1,5 +1,5 @@
 import pandas as pd  # Bibliothèque pour la manipulation de données sous forme de tableaux (DataFrames)
-import csv           # Module standard pour la manipulation de fichiers CSV
+
 
 class AvionManager:
     """
@@ -74,6 +74,8 @@ class AvionManager:
         :return: Vitesse maximale de vent admissible et vitesse propre de l'avion choisi.
         :rtype: tuple(float, float)
         """
+
+
         types_disponibles = self.df['type'].unique()
         print("Types d’avions disponibles :")
         for t in types_disponibles:

@@ -19,7 +19,7 @@ Modules utilisés :
 - :mod:`pandas` pour la lecture des CSV.
 - :mod:`streamlit` pour l’interface web.
 - :mod:`folium` pour la cartographie interactive.
-- :mod:`modules.manager.*` pour la logique de calcul métier.
+- :mod:`Itineraire-aérien-package.manager.*` pour la logique de calcul métier.
 - :mod:`outils.coordonees.coordonees_villes` pour la géolocalisation.
 
 Variables globales :
@@ -43,24 +43,24 @@ Notes :
 
 # === Import des bibliothèques nécessaires ===
 import pandas as pd  # Pour manipuler les fichiers CSV
-from geopy.distance import geodesic  # (Non utilisé ici, pourrait être supprimé)
-import folium  # Pour créer des cartes interactives
 import streamlit as st  # Pour l'application web interactive
 from streamlit.components.v1 import html  # Pour afficher du HTML brut
 
-# === Importation des modules personnalisés ===
-from modules.manager.avion_manager import AvionManager
-from modules.manager.meteo_manager import MeteoManager
-from modules.manager.navigation_manager import NavigationManager
-from modules.manager.trajectoire_manager import TrajectoireManager
-from modules.manager.visualisation_manager import VisualisationManager
-from outils.coordonees.coordonees_villes import transformer_nom_en_coordonnees
+# === Importation des Itineraire-aérien-package personnalisés ===
+import ItineraireAerien
+from ItineraireAerien.Avion import AvionManager
+from ItineraireAerien.coordonees import transformer_nom_en_coordonnees
+from ItineraireAerien.Meteo import DonneesMeteo
+from ItineraireAerien.Meteo import MeteoManager
+from ItineraireAerien.Visualisation import NavigationManager
+from ItineraireAerien.Visualisation import TrajectoireManager
+from ItineraireAerien.Visualisation import VisualisationManager
 
 # Constantes globales du projet
 CLE_API = "d9ac5ac56f3d4768abd232315250506"
-WAYPOINT_CSV = "Data/Waypoints.csv"
-VILLES_CSV = "Data/Villes.csv"
-AVIONS_CSV = "Data/avions.csv"
+WAYPOINT_CSV = "/Users/villamandos/PycharmProjects/Projet_Special_Rendu_D/Itineraire-aérien-package/Data/Waypoints.csv"
+VILLES_CSV = "/Users/villamandos/PycharmProjects/Projet_Special_Rendu_D/Itineraire-aérien-package/Data/Villes.csv"
+AVIONS_CSV = "/Users/villamandos/PycharmProjects/Projet_Special_Rendu_D/Itineraire-aérien-package/Data/avions.csv"
 
 # Chargement des villes disponibles depuis le CSV
 # (doit contenir les colonnes : city, lat, lng)
@@ -192,9 +192,9 @@ if st.session_state.itin_droit_lisse:
         carte_html = visualisation_manager.afficher_double_itineraire(
             itin_droit_lisse, itin_devie_lisse, meteo_devie, seuil=vitesse_admi
         )
-        carte_html.save("Cartes/carte_resultat.html")
+        carte_html.save("/Users/villamandos/PycharmProjects/Projet_Special_Rendu_D/Itineraire-aérien-package/Cartes/carte_resultat.html")
 
-        with open("Cartes/carte_resultat.html", "r", encoding="utf-8") as f:
+        with open("/Users/villamandos/PycharmProjects/Projet_Special_Rendu_D/Itineraire-aérien-package/Cartes/carte_resultat.html", "r", encoding="utf-8") as f:
             html_map = f.read()
         html(html_map, height=600)
 
