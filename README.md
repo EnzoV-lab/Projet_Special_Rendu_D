@@ -109,7 +109,10 @@ Cessna208,light,350,60
 ## Documentation
 Une documentation complète du code (générée avec Sphinx) est disponible.
 ### 1. Consulter la documentation
-lien actuel vers le blog: ` <http://localhost:63342/Projet_Special_Rendu_D/docs/build/html/index.html>`
+Consultation directement via-streamlit
+ou
+Lien actuel vers le blog: ` <http://localhost:63342/Projet_Special_Rendu_D/docs/build/html/index.html>`
+ou
 
 Ouvrez le fichier suivant dans votre navigateur :
 ``` bash
