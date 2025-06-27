@@ -31,20 +31,20 @@ Le projet est principalement destiné à des simulations d’itinéraires aérie
 ### 1. Cloner le dépôt
 
 ``` bash
- git clone https://github.com/votre-utilisateur/nom-du-projet.git
- cd nom-du-projet
+  git clone https://github.com/votre-utilisateur/nom-du-projet.git
+  cd nom-du-projet
 ```
 
 ### 2. Installer les dépendances
 
 ``` bash
- pip install -r requirements.txt
+  pip install -r requirements.txt
 ```
 
 ### 3. Créer les dossiers nécessaires
 
 ``` bash
- mkdir Data Cartes
+  mkdir Data Cartes
 ```
 
 ### 4. Fournir les fichiers de données :
@@ -58,7 +58,7 @@ Placez les fichiers suivants dans le dossier `Data/` :
 ## 🚀 Lancer l’application
 
 ``` bash
- streamlit run main.py
+  streamlit run main.py
 ```
 
 L'application s’ouvre dans le navigateur. Utilisez la barre latérale pour définir les paramètres de simulation.
@@ -93,6 +93,7 @@ Cessna208,light,350,60
 
 * **[WeatherAPI](https://www.weatherapi.com/)** : pour récupérer les données météorologiques.
 
+
 ## À savoir
 
 * Il est possible que certaines coordonnées de villes ou waypoints soient absentes ou incorrectes — vous pouvez compléter les fichiers CSV à votre convenance.
@@ -105,4 +106,35 @@ Cessna208,light,350,60
 * Développeurs souhaitant intégrer des contraintes réelles (météo) à des modèles de simulation.
 * Curieux des applications géospatiales.
 
+## Documentation
+Une documentation complète du code (générée avec Sphinx) est disponible.
+### 1. Consulter la documentation
+1- Consultation directement via-streamlit
+ou
 
+2- Lien actuel vers le blog: ` <http://localhost:63342/Projet_Special_Rendu_D/docs/build/html/index.html?_ijt=6emfc9ru0ec4e650633gegt3ij&_ij_reload=RELOAD_ON_SAVE>`
+
+ou
+
+3- Ouvrez le fichier suivant dans votre navigateur :
+``` bash
+  docs/build/html/index.html
+```
+### 2. Naviguez dans les modules, classes et fonctions documentées.
+
+--> Régénérer la documentation
+
+Si vous modifiez le code et souhaitez mettre à jour la documentation :
+Dans le terminal ecrivez:
+``` bash
+cd docs
+sphinx-apidoc -o source ../modules
+./make.bat html   # Windows
+# ou
+make html         # Mac/Linux
+``` 
+➡️ La documentation mise à jour sera disponible dans docs/build/html.
+Dans ce cas vous ne pourrez consulter la documentation que via l'option 3 ou vous devrez modifier le lien vous même sur streamlit et sur ce même document
+
+📝 Licence
+    Projet académique MGA802 – ETS Montréal. Usage interne uniquement
