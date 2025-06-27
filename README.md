@@ -34,30 +34,20 @@ Le projet est principalement destiné à des simulations d’itinéraires aérie
   git clone https://github.com/EnzoV-lab/Projet_Special_Rendu_D
 ```
 
-### 2. Installer les dépendances
+### 2. Installer le package
+
+``` bash
+  pip install -e .
+```
+### 2.1. En cas de problème utiliser la commande suivante
 
 ``` bash
   pip install -r requirements.txt
 ```
-
-### 3. Créer les dossiers si nécessaires
-
-``` bash
-  mkdir Data Cartes
-```
-
-### 4. Fournir les fichiers de données :
-
-Placez les fichiers suivants dans le dossier `Data/` :
-
-* `avions.csv` : base de données des avions avec type, vitesse admissible, etc.
-* `Waypoints.csv` : base de données géographiques des points de navigation.
-* `Villes.csv` : coordonnées des villes utilisées.
-
 ## Lancer l’application
 
 ``` bash
-  streamlit run main.py
+  streamlit run Itineraire-aérien-package/main.py
 ```
 
 L'application s’ouvre dans le navigateur. Utilisez la barre latérale pour définir les paramètres de simulation.
