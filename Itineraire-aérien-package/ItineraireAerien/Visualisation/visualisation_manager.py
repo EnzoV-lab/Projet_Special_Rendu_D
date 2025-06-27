@@ -83,6 +83,7 @@ class VisualisationManager:
                 tooltip="Itinéraire dévié"
             ).add_to(carte)
 
+
         # Ajoute les points météo, avec un code couleur selon la vitesse du vent
         for lat, lon, vent in points_meteo:
             couleur = "gray" if vent is None else ("green" if vent <= seuil else "red")
