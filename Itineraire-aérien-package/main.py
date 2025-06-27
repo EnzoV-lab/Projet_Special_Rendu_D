@@ -55,6 +55,7 @@ from ItineraireAerien.Meteo import MeteoManager
 from ItineraireAerien.Visualisation import NavigationManager
 from ItineraireAerien.Visualisation import TrajectoireManager
 from ItineraireAerien.Visualisation import VisualisationManager
+import os
 
 # Constantes globales du projet
 CLE_API = "d9ac5ac56f3d4768abd232315250506"
@@ -63,6 +64,7 @@ BASE_DIR = Path(__file__).resolve().parent
 WAYPOINT_CSV = BASE_DIR / "Data" / "Waypoints.csv"
 VILLES_CSV = BASE_DIR / "Data" / "Villes.csv"
 AVIONS_CSV = BASE_DIR / "Data" / "avions.csv"
+cartes_dir = BASE_DIR / "Itineraire-aérien-package" / "Cartes"
 
 
 # Chargement des villes disponibles depuis le CSV
@@ -195,9 +197,11 @@ if st.session_state.itin_droit_lisse:
         carte_html = visualisation_manager.afficher_double_itineraire(
             itin_droit_lisse, itin_devie_lisse, meteo_devie, seuil=vitesse_admi
         )
-        carte_html.save("/Users/villamandos/PycharmProjects/Projet_Special_Rendu_D/Itineraire-aérien-package/Cartes/carte_resultat.html")
+        carte_path = cartes_dir / "carte_resultat.html"
+        os.makedirs(os.path.dirname(carte_path), exist_ok=True)
+        carte_html.save(str(carte_path))
 
-        with open("/Users/villamandos/PycharmProjects/Projet_Special_Rendu_D/Itineraire-aérien-package/Cartes/carte_resultat.html", "r", encoding="utf-8") as f:
+        with open(carte_path, "r", encoding="utf-8") as f:
             html_map = f.read()
         html(html_map, height=600)
 
