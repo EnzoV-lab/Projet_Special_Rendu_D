@@ -14,6 +14,6 @@ sur notre code
    :maxdepth: 2
    :caption: Contenu:
 
-   main3
+   main
    modules
    coordonees

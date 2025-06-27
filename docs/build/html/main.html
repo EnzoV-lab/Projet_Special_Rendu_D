@@ -1,0 +1,333 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="fr" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Module principal (main) &mdash; Documentation ITINÉRAIRE AÉRIEN SÉCURISÉ PAR METEO 27/06/2025</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=e7829b41"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/translations.js?v=e6b791cb"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Recherche" href="search.html" />
+    <link rel="next" title="Modules du projet" href="modules.html" />
+    <link rel="prev" title="ITINÉRAIRE AÉRIEN SÉCURISÉ PAR METEO documentation" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            ITINÉRAIRE AÉRIEN SÉCURISÉ PAR METEO
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Rechercher docs" aria-label="Rechercher docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contenu:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Module principal (main)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modules.html">Modules du projet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="coordonees.html">Module d’obtention des coordonnées géographiques des villes</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">ITINÉRAIRE AÉRIEN SÉCURISÉ PAR METEO</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Module principal (main)</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/main.rst.txt" rel="nofollow"> Afficher la source de la page</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-principal-main">
+<h1>Module principal (main)<a class="headerlink" href="#module-principal-main" title="Lien vers cette rubrique"></a></h1>
+<p>Ce script constitue le cœur de l’application Streamlit pour la simulation de trajectoires aériennes
+en fonction des conditions météorologiques et des avions disponibles.</p>
+<p>En tant que script Streamlit principal, il n’a pas vocation à être importé comme module. Le script sera donc affiché en entier.
+Cela permet d’éviter les erreurs d’import sphinx</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">  1</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="linenos">  2</span><span class="sd">main.py</span>
+<span class="linenos">  3</span><span class="sd">=======</span>
+<span class="linenos">  4</span>
+<span class="linenos">  5</span><span class="sd">Ce script constitue le cœur de l&#39;application Streamlit pour la simulation de trajectoires aériennes</span>
+<span class="linenos">  6</span><span class="sd">en fonction des conditions météorologiques et des avions disponibles.</span>
+<span class="linenos">  7</span>
+<span class="linenos">  8</span><span class="sd">Fonctionnalités principales :</span>
+<span class="linenos">  9</span><span class="sd">-----------------------------</span>
+<span class="linenos"> 10</span><span class="sd">- Sélection interactive des villes de départ et d’arrivée.</span>
+<span class="linenos"> 11</span><span class="sd">- Calcul d’un itinéraire direct (sans contrainte météo).</span>
+<span class="linenos"> 12</span><span class="sd">- Choix de l’avion (libre ou filtré par vent admissible).</span>
+<span class="linenos"> 13</span><span class="sd">- Calcul d’un itinéraire dévié basé sur les contraintes météo réelles.</span>
+<span class="linenos"> 14</span><span class="sd">- Affichage d’une carte interactive avec les trajets (via Folium).</span>
+<span class="linenos"> 15</span><span class="sd">- Résumé synthétique de la simulation.</span>
+<span class="linenos"> 16</span>
+<span class="linenos"> 17</span><span class="sd">Modules utilisés :</span>
+<span class="linenos"> 18</span><span class="sd">------------------</span>
+<span class="linenos"> 19</span><span class="sd">- :mod:`pandas` pour la lecture des CSV.</span>
+<span class="linenos"> 20</span><span class="sd">- :mod:`streamlit` pour l’interface web.</span>
+<span class="linenos"> 21</span><span class="sd">- :mod:`folium` pour la cartographie interactive.</span>
+<span class="linenos"> 22</span><span class="sd">- :mod:`modules.manager.*` pour la logique de calcul métier.</span>
+<span class="linenos"> 23</span><span class="sd">- :mod:`outils.coordonees.coordonees_villes` pour la géolocalisation.</span>
+<span class="linenos"> 24</span>
+<span class="linenos"> 25</span><span class="sd">Variables globales :</span>
+<span class="linenos"> 26</span><span class="sd">--------------------</span>
+<span class="linenos"> 27</span><span class="sd">CLE_API : str</span>
+<span class="linenos"> 28</span><span class="sd">    Clé API pour accéder au service météo.</span>
+<span class="linenos"> 29</span><span class="sd">WAYPOINT_CSV : str</span>
+<span class="linenos"> 30</span><span class="sd">    Fichier contenant les waypoints (points intermédiaires de navigation).</span>
+<span class="linenos"> 31</span><span class="sd">VILLES_CSV : str</span>
+<span class="linenos"> 32</span><span class="sd">    Fichier contenant les villes et leurs coordonnées.</span>
+<span class="linenos"> 33</span><span class="sd">AVIONS_CSV : str</span>
+<span class="linenos"> 34</span><span class="sd">    Fichier contenant les données sur les avions disponibles.</span>
+<span class="linenos"> 35</span>
+<span class="linenos"> 36</span><span class="sd">Notes :</span>
+<span class="linenos"> 37</span><span class="sd">-------</span>
+<span class="linenos"> 38</span><span class="sd">- Le fichier doit être exécuté avec `streamlit run main.py`.</span>
+<span class="linenos"> 39</span><span class="sd">- Nécessite une connexion Internet pour interroger l’API météo.</span>
+<span class="linenos"> 40</span><span class="sd">- L’utilisateur doit sélectionner deux villes différentes.</span>
+<span class="linenos"> 41</span>
+<span class="linenos"> 42</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="linenos"> 43</span>
+<span class="linenos"> 44</span><span class="c1"># === Import des bibliothèques nécessaires ===</span>
+<span class="linenos"> 45</span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>  <span class="c1"># Pour manipuler les fichiers CSV</span>
+<span class="linenos"> 46</span><span class="kn">from</span><span class="w"> </span><span class="nn">geopy.distance</span><span class="w"> </span><span class="kn">import</span> <span class="n">geodesic</span>  <span class="c1"># (Non utilisé ici, pourrait être supprimé)</span>
+<span class="linenos"> 47</span><span class="kn">import</span><span class="w"> </span><span class="nn">folium</span>  <span class="c1"># Pour créer des cartes interactives</span>
+<span class="linenos"> 48</span><span class="kn">import</span><span class="w"> </span><span class="nn">streamlit</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">st</span>  <span class="c1"># Pour l&#39;application web interactive</span>
+<span class="linenos"> 49</span><span class="kn">from</span><span class="w"> </span><span class="nn">streamlit.components.v1</span><span class="w"> </span><span class="kn">import</span> <span class="n">html</span>  <span class="c1"># Pour afficher du HTML brut</span>
+<span class="linenos"> 50</span>
+<span class="linenos"> 51</span><span class="c1"># === Importation des modules personnalisés ===</span>
+<span class="linenos"> 52</span><span class="kn">from</span><span class="w"> </span><span class="nn">modules.manager.avion_manager</span><span class="w"> </span><span class="kn">import</span> <span class="n">AvionManager</span>
+<span class="linenos"> 53</span><span class="kn">from</span><span class="w"> </span><span class="nn">modules.manager.meteo_manager</span><span class="w"> </span><span class="kn">import</span> <span class="n">MeteoManager</span>
+<span class="linenos"> 54</span><span class="kn">from</span><span class="w"> </span><span class="nn">modules.manager.navigation_manager</span><span class="w"> </span><span class="kn">import</span> <span class="n">NavigationManager</span>
+<span class="linenos"> 55</span><span class="kn">from</span><span class="w"> </span><span class="nn">modules.manager.trajectoire_manager</span><span class="w"> </span><span class="kn">import</span> <span class="n">TrajectoireManager</span>
+<span class="linenos"> 56</span><span class="kn">from</span><span class="w"> </span><span class="nn">modules.manager.visualisation_manager</span><span class="w"> </span><span class="kn">import</span> <span class="n">VisualisationManager</span>
+<span class="linenos"> 57</span><span class="kn">from</span><span class="w"> </span><span class="nn">outils.coordonees.coordonees_villes</span><span class="w"> </span><span class="kn">import</span> <span class="n">transformer_nom_en_coordonnees</span>
+<span class="linenos"> 58</span>
+<span class="linenos"> 59</span><span class="c1"># Constantes globales du projet</span>
+<span class="linenos"> 60</span><span class="n">CLE_API</span> <span class="o">=</span> <span class="s2">&quot;d9ac5ac56f3d4768abd232315250506&quot;</span>
+<span class="linenos"> 61</span><span class="n">WAYPOINT_CSV</span> <span class="o">=</span> <span class="s2">&quot;Data/Waypoints.csv&quot;</span>
+<span class="linenos"> 62</span><span class="n">VILLES_CSV</span> <span class="o">=</span> <span class="s2">&quot;Data/Villes.csv&quot;</span>
+<span class="linenos"> 63</span><span class="n">AVIONS_CSV</span> <span class="o">=</span> <span class="s2">&quot;Data/avions.csv&quot;</span>
+<span class="linenos"> 64</span>
+<span class="linenos"> 65</span><span class="c1"># Chargement des villes disponibles depuis le CSV</span>
+<span class="linenos"> 66</span><span class="c1"># (doit contenir les colonnes : city, lat, lng)</span>
+<span class="linenos"> 67</span><span class="n">df_villes</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">VILLES_CSV</span><span class="p">)</span>
+<span class="linenos"> 68</span>
+<span class="linenos"> 69</span><span class="c1"># Initialisation des gestionnaires (managers)</span>
+<span class="linenos"> 70</span><span class="n">avion_manager</span> <span class="o">=</span> <span class="n">AvionManager</span><span class="p">(</span><span class="n">AVIONS_CSV</span><span class="p">)</span>  <span class="c1">#: Gestionnaire des avions</span>
+<span class="linenos"> 71</span><span class="n">navigation_manager</span> <span class="o">=</span> <span class="n">NavigationManager</span><span class="p">(</span><span class="n">WAYPOINT_CSV</span><span class="p">)</span>  <span class="c1">#: Gestionnaire de navigation</span>
+<span class="linenos"> 72</span><span class="n">meteo_manager</span> <span class="o">=</span> <span class="n">MeteoManager</span><span class="p">(</span><span class="n">CLE_API</span><span class="p">)</span>  <span class="c1">#: Gestionnaire météo</span>
+<span class="linenos"> 73</span><span class="n">trajectoire_manager</span> <span class="o">=</span> <span class="n">TrajectoireManager</span><span class="p">()</span>  <span class="c1">#: Lissage des trajectoires</span>
+<span class="linenos"> 74</span><span class="n">visualisation_manager</span> <span class="o">=</span> <span class="n">VisualisationManager</span><span class="p">()</span>  <span class="c1">#: Génération de cartes</span>
+<span class="linenos"> 75</span>
+<span class="linenos"> 76</span><span class="c1"># --- Interface utilisateur Streamlit ---</span>
+<span class="linenos"> 77</span>
+<span class="linenos"> 78</span><span class="c1"># Configuration de la page Streamlit</span>
+<span class="linenos"> 79</span><span class="n">st</span><span class="o">.</span><span class="n">set_page_config</span><span class="p">(</span><span class="n">page_title</span><span class="o">=</span><span class="s2">&quot;Simulation de Trajectoire Aérienne&quot;</span><span class="p">,</span> <span class="n">layout</span><span class="o">=</span><span class="s2">&quot;wide&quot;</span><span class="p">)</span>
+<span class="linenos"> 80</span><span class="n">st</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Simulation de Trajectoire Aérienne avec Météo&quot;</span><span class="p">)</span>
+<span class="linenos"> 81</span><span class="n">st</span><span class="o">.</span><span class="n">sidebar</span><span class="o">.</span><span class="n">markdown</span><span class="p">(</span><span class="s2">&quot;[📄 Consulter la documentation Sphinx](http://localhost:63342/Projet_Special_Rendu_D/docs/build/html/index.html?_ijt=6emfc9ru0ec4e650633gegt3ij&amp;_ij_reload=RELOAD_ON_SAVE)&quot;</span><span class="p">)</span>
+<span class="linenos"> 82</span><span class="n">st</span><span class="o">.</span><span class="n">sidebar</span><span class="o">.</span><span class="n">header</span><span class="p">(</span><span class="s2">&quot;Paramètres de vol&quot;</span><span class="p">)</span>
+<span class="linenos"> 83</span>
+<span class="linenos"> 84</span><span class="c1"># === Sélection des villes de départ et d&#39;arrivée ===</span>
+<span class="linenos"> 85</span><span class="n">ville_depart</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">sidebar</span><span class="o">.</span><span class="n">selectbox</span><span class="p">(</span><span class="s2">&quot;Ville de départ&quot;</span><span class="p">,</span> <span class="n">df_villes</span><span class="p">[</span><span class="s1">&#39;city&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sort_values</span><span class="p">()</span><span class="o">.</span><span class="n">unique</span><span class="p">())</span>
+<span class="linenos"> 86</span><span class="n">ville_arrivee</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">sidebar</span><span class="o">.</span><span class="n">selectbox</span><span class="p">(</span><span class="s2">&quot;Ville d’arrivée&quot;</span><span class="p">,</span> <span class="n">df_villes</span><span class="p">[</span><span class="s1">&#39;city&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sort_values</span><span class="p">()</span><span class="o">.</span><span class="n">unique</span><span class="p">())</span>
+<span class="linenos"> 87</span>
+<span class="linenos"> 88</span><span class="c1"># Validation : les deux villes doivent être différentes</span>
+<span class="linenos"> 89</span><span class="k">if</span> <span class="n">ville_depart</span> <span class="o">==</span> <span class="n">ville_arrivee</span><span class="p">:</span>
+<span class="linenos"> 90</span>    <span class="n">st</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;Les villes doivent être différentes.&quot;</span><span class="p">)</span>
+<span class="linenos"> 91</span>    <span class="n">st</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+<span class="linenos"> 92</span>
+<span class="linenos"> 93</span><span class="c1"># Transformation des noms de villes en coordonnées GPS</span>
+<span class="linenos"> 94</span><span class="n">depart</span> <span class="o">=</span> <span class="n">transformer_nom_en_coordonnees</span><span class="p">(</span><span class="n">ville_depart</span><span class="p">)</span>
+<span class="linenos"> 95</span><span class="n">arrivee</span> <span class="o">=</span> <span class="n">transformer_nom_en_coordonnees</span><span class="p">(</span><span class="n">ville_arrivee</span><span class="p">)</span>
+<span class="linenos"> 96</span>
+<span class="linenos"> 97</span><span class="k">if</span> <span class="ow">not</span> <span class="n">depart</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">arrivee</span><span class="p">:</span>
+<span class="linenos"> 98</span>    <span class="n">st</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Ville introuvable dans la base de données.&quot;</span><span class="p">)</span>
+<span class="linenos"> 99</span>    <span class="n">st</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+<span class="linenos">100</span>
+<span class="linenos">101</span><span class="c1"># Initialisation de l&#39;état de session pour stocker les résultats entre les actions utilisateur</span>
+<span class="linenos">102</span><span class="k">if</span> <span class="s2">&quot;itin_droit_lisse&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">st</span><span class="o">.</span><span class="n">session_state</span><span class="p">:</span>
+<span class="linenos">103</span>    <span class="n">st</span><span class="o">.</span><span class="n">session_state</span><span class="o">.</span><span class="n">itin_droit_lisse</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="linenos">104</span>    <span class="n">st</span><span class="o">.</span><span class="n">session_state</span><span class="o">.</span><span class="n">meteo_droit</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="linenos">105</span>    <span class="n">st</span><span class="o">.</span><span class="n">session_state</span><span class="o">.</span><span class="n">vent_max_ref</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="linenos">106</span>
+<span class="linenos">107</span><span class="c1"># --- Bouton : Calcul de l&#39;itinéraire direct sans contrainte météo ---</span>
+<span class="linenos">108</span><span class="k">if</span> <span class="n">st</span><span class="o">.</span><span class="n">sidebar</span><span class="o">.</span><span class="n">button</span><span class="p">(</span><span class="s2">&quot;Lancer le calcul de l&#39;itinéraire de référence&quot;</span><span class="p">):</span>
+<span class="linenos">109</span>    <span class="n">st</span><span class="o">.</span><span class="n">subheader</span><span class="p">(</span><span class="s2">&quot;Calcul de l’itinéraire de référence (sans contraintes)&quot;</span><span class="p">)</span>
+<span class="linenos">110</span>    <span class="k">with</span> <span class="n">st</span><span class="o">.</span><span class="n">spinner</span><span class="p">(</span><span class="s2">&quot;Calcul en cours (le calcul peut prendre quelques minutes)...&quot;</span><span class="p">):</span>
+<span class="linenos">111</span>        <span class="c1"># Trace un itinéraire direct sans filtre météo (seuil très élevé)</span>
+<span class="linenos">112</span>        <span class="n">itin_droit</span><span class="p">,</span> <span class="n">meteo_droit</span><span class="p">,</span> <span class="n">vent_max_ref</span> <span class="o">=</span> <span class="n">navigation_manager</span><span class="o">.</span><span class="n">tracer_chemin</span><span class="p">(</span>
+<span class="linenos">113</span>            <span class="n">depart</span><span class="p">,</span> <span class="n">arrivee</span><span class="p">,</span> <span class="n">seuil</span><span class="o">=</span><span class="mi">10000</span><span class="p">,</span>  <span class="c1"># Seuil très haut pour ignorer les contraintes</span>
+<span class="linenos">114</span>            <span class="n">verifier_meteo_callback</span><span class="o">=</span><span class="k">lambda</span> <span class="n">coords</span><span class="p">,</span> <span class="n">seuil</span><span class="p">:</span> <span class="n">meteo_manager</span><span class="o">.</span><span class="n">verifier_conditions_meteo</span><span class="p">(</span><span class="n">coords</span><span class="p">,</span> <span class="n">seuil</span><span class="p">)</span>
+<span class="linenos">115</span>        <span class="p">)</span>
+<span class="linenos">116</span>        <span class="c1"># Lissage de la trajectoire pour un affichage plus esthétique</span>
+<span class="linenos">117</span>        <span class="n">itin_droit_lisse</span> <span class="o">=</span> <span class="n">trajectoire_manager</span><span class="o">.</span><span class="n">trajectoire_lisse_avec_controles</span><span class="p">(</span><span class="n">itin_droit</span><span class="p">)</span>
+<span class="linenos">118</span>
+<span class="linenos">119</span>        <span class="c1"># Sauvegarde dans la session</span>
+<span class="linenos">120</span>        <span class="n">st</span><span class="o">.</span><span class="n">session_state</span><span class="o">.</span><span class="n">itin_droit_lisse</span> <span class="o">=</span> <span class="n">itin_droit_lisse</span>
+<span class="linenos">121</span>        <span class="n">st</span><span class="o">.</span><span class="n">session_state</span><span class="o">.</span><span class="n">meteo_droit</span> <span class="o">=</span> <span class="n">meteo_droit</span>
+<span class="linenos">122</span>        <span class="n">st</span><span class="o">.</span><span class="n">session_state</span><span class="o">.</span><span class="n">vent_max_ref</span> <span class="o">=</span> <span class="n">vent_max_ref</span>
+<span class="linenos">123</span>
+<span class="linenos">124</span>    <span class="n">st</span><span class="o">.</span><span class="n">success</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Itinéraire de référence calculé | Vent max détecté : </span><span class="si">{</span><span class="n">vent_max_ref</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2"> km/h&quot;</span><span class="p">)</span>
+<span class="linenos">125</span>
+<span class="linenos">126</span><span class="c1"># --- Si itinéraire de référence disponible, proposer un avion ---</span>
+<span class="linenos">127</span><span class="k">if</span> <span class="n">st</span><span class="o">.</span><span class="n">session_state</span><span class="o">.</span><span class="n">itin_droit_lisse</span><span class="p">:</span>
+<span class="linenos">128</span>    <span class="n">vent_max_ref</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">session_state</span><span class="o">.</span><span class="n">vent_max_ref</span>
+<span class="linenos">129</span>    <span class="n">itin_droit_lisse</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">session_state</span><span class="o">.</span><span class="n">itin_droit_lisse</span>
+<span class="linenos">130</span>
+<span class="linenos">131</span>    <span class="n">st</span><span class="o">.</span><span class="n">subheader</span><span class="p">(</span><span class="s2">&quot;Choix de l&#39;avion&quot;</span><span class="p">)</span>
+<span class="linenos">132</span>    <span class="n">mode</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">radio</span><span class="p">(</span><span class="s2">&quot;Mode de sélection de l&#39;avion :&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;Choix libre (mode 1)&quot;</span><span class="p">,</span> <span class="s2">&quot;Filtré par conditions météo (mode 2)&quot;</span><span class="p">])</span>
+<span class="linenos">133</span>
+<span class="linenos">134</span>    <span class="n">type_avions</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;-- Sélectionner un type --&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="nb">list</span><span class="p">(</span><span class="n">avion_manager</span><span class="o">.</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;type&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">())</span>
+<span class="linenos">135</span>    <span class="n">type_choisi</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">selectbox</span><span class="p">(</span><span class="s2">&quot;Type d’avion :&quot;</span><span class="p">,</span> <span class="n">type_avions</span><span class="p">)</span>
+<span class="linenos">136</span>
+<span class="linenos">137</span>    <span class="k">if</span> <span class="n">type_choisi</span> <span class="o">==</span> <span class="s2">&quot;-- Sélectionner un type --&quot;</span><span class="p">:</span>
+<span class="linenos">138</span>        <span class="n">st</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;Veuillez sélectionner un type d’avion.&quot;</span><span class="p">)</span>
+<span class="linenos">139</span>        <span class="n">st</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+<span class="linenos">140</span>
+<span class="linenos">141</span>    <span class="k">if</span> <span class="n">mode</span> <span class="o">==</span> <span class="s2">&quot;Choix libre (mode 1)&quot;</span><span class="p">:</span>
+<span class="linenos">142</span>        <span class="n">avions_type</span> <span class="o">=</span> <span class="n">avion_manager</span><span class="o">.</span><span class="n">df</span><span class="p">[</span><span class="n">avion_manager</span><span class="o">.</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;type&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">type_choisi</span><span class="p">]</span>
+<span class="linenos">143</span>        <span class="k">if</span> <span class="n">avions_type</span><span class="o">.</span><span class="n">empty</span><span class="p">:</span>
+<span class="linenos">144</span>            <span class="n">st</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;Aucun avion de ce type n’est disponible.&quot;</span><span class="p">)</span>
+<span class="linenos">145</span>            <span class="n">st</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+<span class="linenos">146</span>        <span class="n">nom_avion</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">selectbox</span><span class="p">(</span><span class="s2">&quot;Modèle d’avion :&quot;</span><span class="p">,</span> <span class="n">avions_type</span><span class="p">[</span><span class="s1">&#39;nom&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+<span class="linenos">147</span>        <span class="n">avion</span> <span class="o">=</span> <span class="n">avions_type</span><span class="p">[</span><span class="n">avions_type</span><span class="p">[</span><span class="s1">&#39;nom&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">nom_avion</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="linenos">148</span>    <span class="k">else</span><span class="p">:</span>
+<span class="linenos">149</span>        <span class="c1"># Mode 2 : filtrer selon le vent détecté sur l’itinéraire de référence</span>
+<span class="linenos">150</span>        <span class="n">borne_min</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">vent_max_ref</span> <span class="o">-</span> <span class="mi">5</span><span class="p">))</span>
+<span class="linenos">151</span>        <span class="n">borne_max</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">vent_max_ref</span> <span class="o">-</span> <span class="mi">2</span><span class="p">)</span>
+<span class="linenos">152</span>        <span class="n">st</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Recherche des avions supportant entre </span><span class="si">{</span><span class="n">borne_min</span><span class="si">}</span><span class="s2"> et </span><span class="si">{</span><span class="n">borne_max</span><span class="si">}</span><span class="s2"> km/h de vent.&quot;</span><span class="p">)</span>
+<span class="linenos">153</span>
+<span class="linenos">154</span>        <span class="n">avions_filtres</span> <span class="o">=</span> <span class="n">avion_manager</span><span class="o">.</span><span class="n">df</span><span class="p">[</span>
+<span class="linenos">155</span>            <span class="p">(</span><span class="n">avion_manager</span><span class="o">.</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;type&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">type_choisi</span><span class="p">)</span> <span class="o">&amp;</span>
+<span class="linenos">156</span>            <span class="p">(</span><span class="n">avion_manager</span><span class="o">.</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;vitesse_vent_admissible&#39;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">borne_min</span><span class="p">)</span> <span class="o">&amp;</span>
+<span class="linenos">157</span>            <span class="p">(</span><span class="n">avion_manager</span><span class="o">.</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;vitesse_vent_admissible&#39;</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">borne_max</span><span class="p">)</span>
+<span class="linenos">158</span>        <span class="p">]</span>
+<span class="linenos">159</span>        <span class="k">if</span> <span class="n">avions_filtres</span><span class="o">.</span><span class="n">empty</span><span class="p">:</span>
+<span class="linenos">160</span>            <span class="n">st</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;Aucun avion de ce type ne supporte le vent détecté.&quot;</span><span class="p">)</span>
+<span class="linenos">161</span>            <span class="n">st</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+<span class="linenos">162</span>
+<span class="linenos">163</span>        <span class="n">avions_filtres</span><span class="p">[</span><span class="s1">&#39;affichage&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">avions_filtres</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span>
+<span class="linenos">164</span>            <span class="k">lambda</span> <span class="n">row</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;nom&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> (vent max: </span><span class="si">{</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;vitesse_vent_admissible&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> km/h)&quot;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span>
+<span class="linenos">165</span>        <span class="p">)</span>
+<span class="linenos">166</span>        <span class="n">nom_affichage</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">selectbox</span><span class="p">(</span><span class="s2">&quot;Modèle d’avion :&quot;</span><span class="p">,</span> <span class="n">avions_filtres</span><span class="p">[</span><span class="s1">&#39;affichage&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+<span class="linenos">167</span>        <span class="n">nom_avion</span> <span class="o">=</span> <span class="n">nom_affichage</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot; (&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<span class="linenos">168</span>        <span class="n">avion</span> <span class="o">=</span> <span class="n">avions_filtres</span><span class="p">[</span><span class="n">avions_filtres</span><span class="p">[</span><span class="s1">&#39;nom&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">nom_avion</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="linenos">169</span>
+<span class="linenos">170</span>    <span class="c1"># Récupération des caractéristiques de l&#39;avion</span>
+<span class="linenos">171</span>    <span class="n">vitesse_admi</span> <span class="o">=</span> <span class="n">avion</span><span class="p">[</span><span class="s1">&#39;vitesse_vent_admissible&#39;</span><span class="p">]</span>
+<span class="linenos">172</span>    <span class="n">vitesse_avion</span> <span class="o">=</span> <span class="n">avion</span><span class="p">[</span><span class="s1">&#39;vitesse_de_avion&#39;</span><span class="p">]</span>
+<span class="linenos">173</span>    <span class="n">st</span><span class="o">.</span><span class="n">success</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Avion sélectionné : </span><span class="si">{</span><span class="n">nom_avion</span><span class="si">}</span><span class="s2"> (Vent max admissible : </span><span class="si">{</span><span class="n">vitesse_admi</span><span class="si">}</span><span class="s2"> km/h)&quot;</span><span class="p">)</span>
+<span class="linenos">174</span>
+<span class="linenos">175</span>    <span class="c1"># --- Bouton : Calcul d’itinéraire dévié avec météo réelle ---</span>
+<span class="linenos">176</span>    <span class="k">if</span> <span class="n">st</span><span class="o">.</span><span class="n">button</span><span class="p">(</span><span class="s2">&quot;Lancer le calcul de l’itinéraire avec déviation&quot;</span><span class="p">):</span>
+<span class="linenos">177</span>        <span class="n">st</span><span class="o">.</span><span class="n">subheader</span><span class="p">(</span><span class="s2">&quot;Calcul de l’itinéraire déviée&quot;</span><span class="p">)</span>
+<span class="linenos">178</span>        <span class="k">with</span> <span class="n">st</span><span class="o">.</span><span class="n">spinner</span><span class="p">(</span><span class="s2">&quot;Déviation en cours (le calcul peut prendre quelques minutes)...&quot;</span><span class="p">):</span>
+<span class="linenos">179</span>            <span class="n">itin_devie</span><span class="p">,</span> <span class="n">meteo_devie</span><span class="p">,</span> <span class="n">vent_max_devie</span> <span class="o">=</span> <span class="n">navigation_manager</span><span class="o">.</span><span class="n">tracer_chemin</span><span class="p">(</span>
+<span class="linenos">180</span>                <span class="n">depart</span><span class="p">,</span> <span class="n">arrivee</span><span class="p">,</span> <span class="n">seuil</span><span class="o">=</span><span class="n">vitesse_admi</span><span class="p">,</span>
+<span class="linenos">181</span>                <span class="n">verifier_meteo_callback</span><span class="o">=</span><span class="k">lambda</span> <span class="n">coords</span><span class="p">,</span> <span class="n">seuil</span><span class="p">:</span> <span class="n">meteo_manager</span><span class="o">.</span><span class="n">verifier_conditions_meteo</span><span class="p">(</span><span class="n">coords</span><span class="p">,</span> <span class="n">seuil</span><span class="p">)</span>
+<span class="linenos">182</span>            <span class="p">)</span>
+<span class="linenos">183</span>            <span class="n">itin_devie_lisse</span> <span class="o">=</span> <span class="n">trajectoire_manager</span><span class="o">.</span><span class="n">trajectoire_lisse_avec_controles</span><span class="p">(</span><span class="n">itin_devie</span><span class="p">)</span>
+<span class="linenos">184</span>
+<span class="linenos">185</span>        <span class="n">st</span><span class="o">.</span><span class="n">success</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Itinéraire dévié terminé | Vent max détecté : </span><span class="si">{</span><span class="n">vent_max_devie</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2"> km/h&quot;</span><span class="p">)</span>
+<span class="linenos">186</span>
+<span class="linenos">187</span>        <span class="c1"># Visualisation de la carte contenant les deux itinéraires</span>
+<span class="linenos">188</span>        <span class="n">st</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Le trajet **bleu** correspond à l’itinéraire **de référence**, </span><span class="se">\n</span><span class="s2">&quot;</span>
+<span class="linenos">189</span>                 <span class="s2">&quot;et le trajet **violet** correspond à l’itinéraire **dévié**.&quot;</span><span class="p">)</span>
+<span class="linenos">190</span>
+<span class="linenos">191</span>        <span class="n">st</span><span class="o">.</span><span class="n">subheader</span><span class="p">(</span><span class="s2">&quot;Visualisation&quot;</span><span class="p">)</span>
+<span class="linenos">192</span>        <span class="n">carte_html</span> <span class="o">=</span> <span class="n">visualisation_manager</span><span class="o">.</span><span class="n">afficher_double_itineraire</span><span class="p">(</span>
+<span class="linenos">193</span>            <span class="n">itin_droit_lisse</span><span class="p">,</span> <span class="n">itin_devie_lisse</span><span class="p">,</span> <span class="n">meteo_devie</span><span class="p">,</span> <span class="n">seuil</span><span class="o">=</span><span class="n">vitesse_admi</span>
+<span class="linenos">194</span>        <span class="p">)</span>
+<span class="linenos">195</span>        <span class="n">carte_html</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s2">&quot;Cartes/carte_resultat.html&quot;</span><span class="p">)</span>
+<span class="linenos">196</span>
+<span class="linenos">197</span>        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;Cartes/carte_resultat.html&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+<span class="linenos">198</span>            <span class="n">html_map</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+<span class="linenos">199</span>        <span class="n">html</span><span class="p">(</span><span class="n">html_map</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">600</span><span class="p">)</span>
+<span class="linenos">200</span>
+<span class="linenos">201</span>        <span class="c1"># Résumé synthétique de la simulation</span>
+<span class="linenos">202</span>        <span class="n">st</span><span class="o">.</span><span class="n">subheader</span><span class="p">(</span><span class="s2">&quot;Résumé de la simulation&quot;</span><span class="p">)</span>
+<span class="linenos">203</span>        <span class="n">st</span><span class="o">.</span><span class="n">markdown</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="linenos">204</span><span class="s2">        - Ville de départ : `</span><span class="si">{</span><span class="n">ville_depart</span><span class="si">}</span><span class="s2">`</span>
+<span class="linenos">205</span><span class="s2">        - Ville d’arrivée : `</span><span class="si">{</span><span class="n">ville_arrivee</span><span class="si">}</span><span class="s2">`</span>
+<span class="linenos">206</span><span class="s2">        - Avion sélectionné : `</span><span class="si">{</span><span class="n">nom_avion</span><span class="si">}</span><span class="s2">`</span>
+<span class="linenos">207</span><span class="s2">        - Vent max admissible avion : `</span><span class="si">{</span><span class="n">vitesse_admi</span><span class="si">}</span><span class="s2"> km/h`</span>
+<span class="linenos">208</span><span class="s2">        - Vent max sur itinéraire direct : `</span><span class="si">{</span><span class="n">vent_max_ref</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2"> km/h`</span>
+<span class="linenos">209</span><span class="s2">        - Vent max sur itinéraire dévié : `</span><span class="si">{</span><span class="n">vent_max_devie</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2"> km/h`</span>
+<span class="linenos">210</span><span class="s2">        &quot;&quot;&quot;</span><span class="p">)</span>
+<span class="linenos">211</span>
+<span class="linenos">212</span>        <span class="c1"># Bouton pour relancer une simulation depuis le début</span>
+<span class="linenos">213</span>        <span class="k">if</span> <span class="n">st</span><span class="o">.</span><span class="n">button</span><span class="p">(</span><span class="s2">&quot;🔁 Nouvelle simulation&quot;</span><span class="p">):</span>
+<span class="linenos">214</span>            <span class="n">st</span><span class="o">.</span><span class="n">session_state</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+<span class="linenos">215</span>            <span class="n">st</span><span class="o">.</span><span class="n">experimental_rerun</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Pied de page">
+        <a href="index.html" class="btn btn-neutral float-left" title="ITINÉRAIRE AÉRIEN SÉCURISÉ PAR METEO documentation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Précédent</a>
+        <a href="modules.html" class="btn btn-neutral float-right" title="Modules du projet" accesskey="n" rel="next">Suivant <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Droits d'auteur 2025, Romuald TIAKO - Elsa KUPFER - Enzo VILLAMANDOS - Lucas BONNEAUD.</p>
+  </div>
+
+  Compilé avec <a href="https://www.sphinx-doc.org/">Sphinx</a> en utilisant un
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">thème</a>
+    fourni par <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

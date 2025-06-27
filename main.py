@@ -78,7 +78,7 @@ visualisation_manager = VisualisationManager()  #: Génération de cartes
 # Configuration de la page Streamlit
 st.set_page_config(page_title="Simulation de Trajectoire Aérienne", layout="wide")
 st.title("Simulation de Trajectoire Aérienne avec Météo")
-st.sidebar.markdown("[📄 Consulter la documentation Sphinx](http://localhost:63342/Projet_Special_Rendu_D/docs/build/html/index.html?_ijt=6emfc9ru0ec4e650633gegt3ij&_ij_reload=RELOAD_ON_SAVE)")
+st.sidebar.markdown("[📄 Consulter la documentation Sphinx](http://localhost:63342/Projet_Special_Rendu_D/docs/build/html/index.html)")
 st.sidebar.header("Paramètres de vol")
 
 # === Sélection des villes de départ et d'arrivée ===

@@ -1,0 +1,11 @@
+Module principal (main)
+========================
+Ce script constitue le cœur de l'application Streamlit pour la simulation de trajectoires aériennes
+en fonction des conditions météorologiques et des avions disponibles.
+
+En tant que script Streamlit principal, il n’a pas vocation à être importé comme module. Le script sera donc affiché en entier.
+Cela permet d'éviter les erreurs d'import sphinx
+
+.. literalinclude:: ../../main.py
+   :language: python
+   :linenos:
