@@ -111,7 +111,9 @@ Une documentation complète du code (générée avec Sphinx) est disponible.
 ### 1. Consulter la documentation
 Consultation directement via-streamlit
 ou
-Lien actuel vers le blog: ` <http://localhost:63342/Projet_Special_Rendu_D/docs/build/html/index.html?_ijt=fo8dsai2mqgnu6illh8valgtbn&_ij_reload=RELOAD_ON_SAVE>`
+
+Lien actuel vers le blog: ` <http://localhost:63342/Projet_Special_Rendu_D/docs/build/html/index.html?_ijt=6emfc9ru0ec4e650633gegt3ij&_ij_reload=RELOAD_ON_SAVE>`
+
 ou
 
 Ouvrez le fichier suivant dans votre navigateur :
