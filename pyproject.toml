@@ -16,7 +16,6 @@ dependencies = [
     "numpy",
     "folium",
     "streamlit",
-    "math",
     "requests",
     "time",
 
