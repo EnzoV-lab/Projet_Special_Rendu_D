@@ -65,11 +65,12 @@ L'application s’ouvre dans le navigateur. Utilisez la barre latérale pour dé
 
 ##  Exemple d’utilisation
 
-1. Choisissez une ville de départ et d’arrivée.
+1. Choisissez une ville de départ et d’arrivée (New York - Charlotte pour un temps de chargement relativement court).
 2. Lancez le calcul de l’itinéraire de référence.
-3. Sélectionnez un type d’avion (libre ou filtré).
+3. Choisissez le mode : le mode libre permet de sélectionner n’importe quel avion, sans garantir son arrivée à destination ou sa déviation, tandis que le mode choix par condition météo propose uniquement les avions les plus susceptibles d’être déviés.
 4. Lancez le calcul d’itinéraire dévié.
 5. Visualisez les deux itinéraires superposés avec les informations météo.
+6. Lancez une nouvelle simulation en cliquant sur le bouton prévu à cet effet si cella est souhaiter.
 
 ## Exemple de données attendues (`avions.csv`)
 
@@ -97,7 +98,10 @@ Cessna208,light,350,60
 ## À savoir
 
 * Il est possible que certaines coordonnées de villes ou waypoints soient absentes ou incorrectes — vous pouvez compléter les fichiers CSV à votre convenance.
-* Le système vérifie le vent tous les \~100 km sur le trajet.
+* Le choix des villes se situe uniquements aux Etats-Unis
+* Les Waypoints et donc les trajet sont uniquement réaliser aux dessus de la terre.
+* Les vitesses de vents admissible des avions ne sont pas réelles, elles sont plus basses que la réaliter pour avoir des déviation (les valeurs peuvent etre modifier dans le fichier "avions.csv").
+* Les données météo prises sur l'API sont des données météo au sol et non en altitude 
 * Le seuil météo est défini par les capacités de l’avion choisi.
 
 ##  Public cible
@@ -133,9 +137,13 @@ pip install sphinx-rtd-theme
 Dans le terminal ecrivez ce qu'il y'a ci-dessous afin de générer un nouveau fichier html si on modifie les fichiers
 ``` bash
 cd docs
-sphinx-apidoc -o source ../modules
-sphinx-apidoc -o source ../outils
-sphinx-apidoc -o source ../
+sys.path.insert(0, os.path.abspath('../../Itineraire-aérien-package'))
+sys.path.insert(0, os.path.abspath('../../ItineraireAerien'))
+sys.path.insert(0, os.path.abspath('../../Avion'))
+sys.path.insert(0, os.path.abspath('../../coordonnees'))
+sys.path.insert(0, os.path.abspath('../../Meteo'))
+sys.path.insert(0, os.path.abspath('../../Visualisation'))
+sys.path.insert(0, os.path.abspath('../..'))
 ./make.bat html   # Windows
 # ou
 make html         # Mac/Linux
