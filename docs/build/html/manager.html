@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+
+<html lang="fr" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>manager package &#8212; Documentation ITINÉRAIRE AÉRIEN SÉCURISÉ PAR METEO 27/06/2025</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=5ecbeea2" />
+    <link rel="stylesheet" type="text/css" href="_static/basic.css?v=b08954a9" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=27fed22d" />
+    <script src="_static/documentation_options.js?v=e7829b41"></script>
+    <script src="_static/doctools.js?v=9bcbadda"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/translations.js?v=e6b791cb"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Recherche" href="search.html" />
+    <link rel="next" title="coordonees package" href="coordonees.html" />
+    <link rel="prev" title="modules" href="modules.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="manager-package">
+<h1>manager package<a class="headerlink" href="#manager-package" title="Lien vers cette rubrique">¶</a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Lien vers cette rubrique">¶</a></h2>
+</section>
+<section id="module-manager.avion_manager">
+<span id="manager-avion-manager-module"></span><h2>manager.avion_manager module<a class="headerlink" href="#module-manager.avion_manager" title="Lien vers cette rubrique">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="manager.avion_manager.AvionManager">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">manager.avion_manager.</span></span><span class="sig-name descname"><span class="pre">AvionManager</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fichier_csv</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Data/avions.csv'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#manager.avion_manager.AvionManager" title="Lien vers cette définition">¶</a></dt>
+<dd><p>Bases : <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Classe permettant de gérer la sélection d’avions à partir d’un fichier CSV.</p>
+<p>Cette classe propose deux modes de sélection :
+- Mode 1 : Choix libre parmi tous les avions disponibles.
+- Mode 2 : Filtrage par plage de vent admissible.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Paramètres<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>fichier_csv</strong> (<em>str</em>) – Chemin vers le fichier CSV contenant les données des avions.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="manager.avion_manager.AvionManager.choix_avion_mode_1">
+<span class="sig-name descname"><span class="pre">choix_avion_mode_1</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#manager.avion_manager.AvionManager.choix_avion_mode_1" title="Lien vers cette définition">¶</a></dt>
+<dd><p>Mode 1 : Permet de choisir un avion librement sans contrainte météo.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Renvoie<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Vitesse maximale de vent admissible et vitesse propre de l’avion choisi.</p>
+</dd>
+<dt class="field-even">Type renvoyé<span class="colon">:</span></dt>
+<dd class="field-even"><p>tuple(float, float)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="manager.avion_manager.AvionManager.choix_avion_mode_2">
+<span class="sig-name descname"><span class="pre">choix_avion_mode_2</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">borne_min</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">borne_max</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#manager.avion_manager.AvionManager.choix_avion_mode_2" title="Lien vers cette définition">¶</a></dt>
+<dd><p>Mode 2 : Propose uniquement les avions avec une vitesse de vent admissible comprise dans un intervalle.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Paramètres<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>borne_min</strong> (<em>int</em>) – Borne minimale de vent admissible.</p></li>
+<li><p><strong>borne_max</strong> (<em>int</em>) – Borne maximale de vent admissible.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Renvoie<span class="colon">:</span></dt>
+<dd class="field-even"><p>Vitesse maximale de vent admissible et vitesse propre de l’avion choisi.</p>
+</dd>
+<dt class="field-odd">Type renvoyé<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tuple(float, float)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="manager.avion_manager.AvionManager.choix_du_mode">
+<span class="sig-name descname"><span class="pre">choix_du_mode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">borne_min</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">borne_max</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#manager.avion_manager.AvionManager.choix_du_mode" title="Lien vers cette définition">¶</a></dt>
+<dd><p>Permet à l’utilisateur de choisir entre les deux modes de sélection d’avion.</p>
+<ul class="simple">
+<li><p>Mode 1 : Choix libre (aucune contrainte météo)</p></li>
+<li><p>Mode 2 : Filtrage par plage de vent admissible</p></li>
+</ul>
+<dl class="field-list simple">
+<dt class="field-odd">Paramètres<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>borne_min</strong> (<em>int</em>) – Borne minimale pour la vitesse de vent admissible.</p></li>
+<li><p><strong>borne_max</strong> (<em>int</em>) – Borne maximale pour la vitesse de vent admissible.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Renvoie<span class="colon">:</span></dt>
+<dd class="field-even"><p>Vitesse admissible maximale et vitesse propre de l’avion.</p>
+</dd>
+<dt class="field-odd">Type renvoyé<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tuple(float, float)</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-manager.donnees_meteo">
+<span id="manager-donnees-meteo-module"></span><h2>manager.donnees_meteo module<a class="headerlink" href="#module-manager.donnees_meteo" title="Lien vers cette rubrique">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="manager.donnees_meteo.DonneesMeteo">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">manager.donnees_meteo.</span></span><span class="sig-name descname"><span class="pre">DonneesMeteo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cle_api</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">coordonnees</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#manager.donnees_meteo.DonneesMeteo" title="Lien vers cette définition">¶</a></dt>
+<dd><p>Bases : <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Classe pour interroger l’API WeatherAPI et récupérer les données météo actuelles
+pour une position géographique donnée.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Paramètres<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>cle_api</strong> (<em>str</em>) – Clé API valide pour accéder à weatherapi.com.</p></li>
+<li><p><strong>coordonnees</strong> (<em>tuple</em><em>[</em><em>float</em><em>, </em><em>float</em><em>] or </em><em>None</em>) – Coordonnées GPS au format (latitude, longitude).</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="manager.donnees_meteo.DonneesMeteo.fetch">
+<span class="sig-name descname"><span class="pre">fetch</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#manager.donnees_meteo.DonneesMeteo.fetch" title="Lien vers cette définition">¶</a></dt>
+<dd><p>Récupère les données météo actuelles pour les coordonnées fournies,
+en interrogeant l’API WeatherAPI.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Lève<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ValueError</strong> – Si aucune coordonnée n’est spécifiée.</p></li>
+<li><p><strong>RuntimeError</strong> – Si la réponse de l’API est invalide ou échoue.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="manager.donnees_meteo.DonneesMeteo.get_donnees">
+<span class="sig-name descname"><span class="pre">get_donnees</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#manager.donnees_meteo.DonneesMeteo.get_donnees" title="Lien vers cette définition">¶</a></dt>
+<dd><p>Extrait et retourne les informations météo principales de la réponse de l’API.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Renvoie<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Un dictionnaire contenant :
+- vent_kph (float) : Vitesse du vent en km/h.
+- direction_cardinal (str) : Direction du vent (ex: « NE »).
+- direction_deg (int) : Direction du vent en degrés.
+- condition (str) : Description du temps (ex: « Sunny »).
+- precip_mm (float) : Précipitations en millimètres.</p>
+</dd>
+<dt class="field-even">Type renvoyé<span class="colon">:</span></dt>
+<dd class="field-even"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-manager.meteo_manager">
+<span id="manager-meteo-manager-module"></span><h2>manager.meteo_manager module<a class="headerlink" href="#module-manager.meteo_manager" title="Lien vers cette rubrique">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="manager.meteo_manager.MeteoManager">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">manager.meteo_manager.</span></span><span class="sig-name descname"><span class="pre">MeteoManager</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cle_api</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#manager.meteo_manager.MeteoManager" title="Lien vers cette définition">¶</a></dt>
+<dd><p>Bases : <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Classe de gestion des conditions météorologiques sur des segments de trajectoire.</p>
+<p>Cette classe utilise l’API WeatherAPI via la classe <cite>DonneesMeteo</cite> pour interroger
+les conditions météo sur une série de coordonnées GPS et déterminer si elles
+respectent un seuil de vent défini.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Paramètres<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>cle_api</strong> (<em>str</em>) – Clé API pour accéder au service météo (ex: weatherapi.com)</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="manager.meteo_manager.MeteoManager.verifier_conditions_meteo">
+<span class="sig-name descname"><span class="pre">verifier_conditions_meteo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">coordonnees</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seuil_vent_kph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_depassements</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pause</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#manager.meteo_manager.MeteoManager.verifier_conditions_meteo" title="Lien vers cette définition">¶</a></dt>
+<dd><p>Vérifie les conditions météorologiques sur une série de coordonnées GPS.</p>
+<p>Pour chaque point, récupère les données météo et vérifie si la vitesse du vent
+dépasse un seuil défini. Si trop de points dépassent ce seuil, le segment est rejeté.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Paramètres<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>coordonnees</strong> (<em>list</em><em>[</em><em>tuple</em><em>[</em><em>float</em><em>, </em><em>float</em><em>]</em><em>]</em>) – Liste de tuples représentant les coordonnées GPS (latitude, longitude).</p></li>
+<li><p><strong>seuil_vent_kph</strong> (<em>float</em>) – Seuil maximal de vent admissible (en km/h).</p></li>
+<li><p><strong>max_depassements</strong> (<em>int</em><em>, </em><em>optional</em>) – Nombre maximal de points autorisés à dépasser le seuil de vent.</p></li>
+<li><p><strong>pause</strong> (<em>float</em><em>, </em><em>optional</em>) – Temps d’attente entre deux requêtes API, en secondes.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Renvoie<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><cite>bool</cite> : True si le segment est accepté, False sinon.</p></li>
+<li><p><cite>list[tuple[float, float]]</cite> : Coordonnées vérifiées.</p></li>
+<li><p><cite>list[tuple[float, float, float|None]]</cite> : Données météo par point.</p></li>
+<li><p><cite>float</cite> : Vent maximal rencontré sur le segment.</p></li>
+</ul>
+</p>
+</dd>
+<dt class="field-odd">Type renvoyé<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tuple[bool, list, list, float]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-manager.navigation_manager">
+<span id="manager-navigation-manager-module"></span><h2>manager.navigation_manager module<a class="headerlink" href="#module-manager.navigation_manager" title="Lien vers cette rubrique">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="manager.navigation_manager.NavigationManager">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">manager.navigation_manager.</span></span><span class="sig-name descname"><span class="pre">NavigationManager</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">waypoint_csv</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Data/Waypoints.csv'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rayon_max_km</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">200</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#manager.navigation_manager.NavigationManager" title="Lien vers cette définition">¶</a></dt>
+<dd><p>Bases : <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Classe de gestion de la navigation entre deux points géographiques en utilisant des waypoints.</p>
+<p>Permet de charger des points de navigation depuis un fichier CSV, calculer des distances et angles,
+et construire un itinéraire en respectant des contraintes géographiques et météorologiques.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Paramètres<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>waypoint_csv</strong> (<em>str</em>) – Chemin vers le fichier CSV contenant les waypoints.</p></li>
+<li><p><strong>rayon_max_km</strong> (<em>float</em>) – Distance maximale autorisée entre deux waypoints.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="manager.navigation_manager.NavigationManager.calcul_angle">
+<span class="sig-name descname"><span class="pre">calcul_angle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">depart</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">waypoint</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">arrivee</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#manager.navigation_manager.NavigationManager.calcul_angle" title="Lien vers cette définition">¶</a></dt>
+<dd><p>Calcule l’angle entre les vecteurs (départ → waypoint) et (départ → arrivée).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Paramètres<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>depart</strong> (<em>tuple</em><em>[</em><em>float</em><em>, </em><em>float</em><em>]</em>) – Coordonnée de départ.</p></li>
+<li><p><strong>waypoint</strong> (<em>tuple</em><em>[</em><em>float</em><em>, </em><em>float</em><em>]</em>) – Coordonnée intermédiaire (waypoint).</p></li>
+<li><p><strong>arrivee</strong> (<em>tuple</em><em>[</em><em>float</em><em>, </em><em>float</em><em>]</em>) – Coordonnée finale (destination).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Renvoie<span class="colon">:</span></dt>
+<dd class="field-even"><p>Angle en radians entre les deux vecteurs.</p>
+</dd>
+<dt class="field-odd">Type renvoyé<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="manager.navigation_manager.NavigationManager.charger_waypoints">
+<span class="sig-name descname"><span class="pre">charger_waypoints</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#manager.navigation_manager.NavigationManager.charger_waypoints" title="Lien vers cette définition">¶</a></dt>
+<dd><p>Charge les waypoints depuis le fichier CSV.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Renvoie<span class="colon">:</span></dt>
+<dd class="field-odd"><p>DataFrame contenant les colonnes : ident, latitude_deg, longitude_deg.</p>
+</dd>
+<dt class="field-even">Type renvoyé<span class="colon">:</span></dt>
+<dd class="field-even"><p>pandas.DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="manager.navigation_manager.NavigationManager.distance">
+<span class="sig-name descname"><span class="pre">distance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p2</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#manager.navigation_manager.NavigationManager.distance" title="Lien vers cette définition">¶</a></dt>
+<dd><p>Calcule la distance entre deux coordonnées géographiques en kilomètres (formule de Haversine).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Paramètres<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>p1</strong> (<em>tuple</em><em>[</em><em>float</em><em>, </em><em>float</em><em>]</em>) – Première coordonnée (latitude, longitude).</p></li>
+<li><p><strong>p2</strong> (<em>tuple</em><em>[</em><em>float</em><em>, </em><em>float</em><em>]</em>) – Deuxième coordonnée (latitude, longitude).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Renvoie<span class="colon">:</span></dt>
+<dd class="field-even"><p>Distance en kilomètres.</p>
+</dd>
+<dt class="field-odd">Type renvoyé<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="manager.navigation_manager.NavigationManager.intercaler_points">
+<span class="sig-name descname"><span class="pre">intercaler_points</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lat1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lon1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lat2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lon2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#manager.navigation_manager.NavigationManager.intercaler_points" title="Lien vers cette définition">¶</a></dt>
+<dd><p>Génère <cite>n</cite> points intermédiaires équidistants entre deux points.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Paramètres<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>lat1</strong> – Latitude du point de départ.</p></li>
+<li><p><strong>lon1</strong> – Longitude du point de départ.</p></li>
+<li><p><strong>lat2</strong> – Latitude du point d’arrivée.</p></li>
+<li><p><strong>lon2</strong> – Longitude du point d’arrivée.</p></li>
+<li><p><strong>n</strong> (<em>int</em>) – Nombre de points à générer.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Renvoie<span class="colon">:</span></dt>
+<dd class="field-even"><p>Liste de coordonnées (lat, lon).</p>
+</dd>
+<dt class="field-odd">Type renvoyé<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[tuple[float, float]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="manager.navigation_manager.NavigationManager.tracer_chemin">
+<span class="sig-name descname"><span class="pre">tracer_chemin</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">depart</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">arrivee</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seuil</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verifier_meteo_callback</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#manager.navigation_manager.NavigationManager.tracer_chemin" title="Lien vers cette définition">¶</a></dt>
+<dd><p>Construit une trajectoire entre deux points, en choisissant des waypoints,
+en vérifiant les conditions météo sur les segments et en s’arrêtant
+en cas d’obstacle météo.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Paramètres<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>depart</strong> (<em>tuple</em><em>[</em><em>float</em><em>, </em><em>float</em><em>]</em>) – Coordonnée de départ (latitude, longitude).</p></li>
+<li><p><strong>arrivee</strong> (<em>tuple</em><em>[</em><em>float</em><em>, </em><em>float</em><em>]</em>) – Coordonnée de destination (latitude, longitude).</p></li>
+<li><p><strong>seuil</strong> (<em>float</em>) – Seuil météorologique à ne pas dépasser (ex: vent maximal en km/h).</p></li>
+<li><p><strong>verifier_meteo_callback</strong> (<em>Callable</em>) – Fonction callback qui prend une liste de points et un seuil,
+et retourne (bool, coordonnées, données météo, vent max).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Renvoie<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><cite>list[list[tuple[float, float]]]</cite> : Liste de segments valides.</p></li>
+<li><p><cite>list[tuple[float, float, float]]</cite> : Données météo par point.</p></li>
+<li><p><cite>float</cite> : Vent max détecté.</p></li>
+</ul>
+</p>
+</dd>
+<dt class="field-odd">Type renvoyé<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tuple[list, list, float]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="manager.navigation_manager.NavigationManager.trouver_point_suivant">
+<span class="sig-name descname"><span class="pre">trouver_point_suivant</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">depart</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">arrivee</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">points_utilises</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#manager.navigation_manager.NavigationManager.trouver_point_suivant" title="Lien vers cette définition">¶</a></dt>
+<dd><p>Sélectionne le prochain waypoint le plus pertinent :
+- non utilisé précédemment
+- situé dans le rayon maximal
+- orienté dans la bonne direction</p>
+<dl class="field-list simple">
+<dt class="field-odd">Paramètres<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>depart</strong> (<em>tuple</em><em>[</em><em>float</em><em>, </em><em>float</em><em>]</em>) – Coordonnée actuelle (latitude, longitude).</p></li>
+<li><p><strong>arrivee</strong> (<em>tuple</em><em>[</em><em>float</em><em>, </em><em>float</em><em>]</em>) – Coordonnée cible (latitude, longitude).</p></li>
+<li><p><strong>points_utilises</strong> (<em>list</em><em>[</em><em>tuple</em><em>[</em><em>float</em><em>, </em><em>float</em><em>]</em><em>]</em>) – Liste des points déjà parcourus.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Renvoie<span class="colon">:</span></dt>
+<dd class="field-even"><p>Coordonnée du prochain waypoint ou None si aucun trouvé.</p>
+</dd>
+<dt class="field-odd">Type renvoyé<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tuple[float, float] or None</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-manager.trajectoire_manager">
+<span id="manager-trajectoire-manager-module"></span><h2>manager.trajectoire_manager module<a class="headerlink" href="#module-manager.trajectoire_manager" title="Lien vers cette rubrique">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="manager.trajectoire_manager.TrajectoireManager">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">manager.trajectoire_manager.</span></span><span class="sig-name descname"><span class="pre">TrajectoireManager</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n_points_bezier</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">40</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">auto_ctrl_ratio</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#manager.trajectoire_manager.TrajectoireManager" title="Lien vers cette définition">¶</a></dt>
+<dd><p>Bases : <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Classe permettant de lisser une trajectoire composée de segments en utilisant des courbes de Bézier quadratiques.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Paramètres<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n_points_bezier</strong> (<em>int</em>) – Nombre de points générés pour chaque courbe de Bézier.</p></li>
+<li><p><strong>auto_ctrl_ratio</strong> (<em>float</em>) – Position relative du point de contrôle sur le segment p1 → p2.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="manager.trajectoire_manager.TrajectoireManager.auto_ctrl">
+<span class="sig-name descname"><span class="pre">auto_ctrl</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p2</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#manager.trajectoire_manager.TrajectoireManager.auto_ctrl" title="Lien vers cette définition">¶</a></dt>
+<dd><p>Calcule automatiquement un point de contrôle intermédiaire entre deux points.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Paramètres<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>p1</strong> (<em>tuple</em><em>[</em><em>float</em><em>, </em><em>float</em><em>]</em>) – Point de départ (latitude, longitude).</p></li>
+<li><p><strong>p2</strong> (<em>tuple</em><em>[</em><em>float</em><em>, </em><em>float</em><em>]</em>) – Point d’arrivée (latitude, longitude).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Renvoie<span class="colon">:</span></dt>
+<dd class="field-even"><p>Point de contrôle calculé selon le ratio défini.</p>
+</dd>
+<dt class="field-odd">Type renvoyé<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tuple[float, float]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="manager.trajectoire_manager.TrajectoireManager.bezier_curve">
+<span class="sig-name descname"><span class="pre">bezier_curve</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p2</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#manager.trajectoire_manager.TrajectoireManager.bezier_curve" title="Lien vers cette définition">¶</a></dt>
+<dd><p>Génère une courbe de Bézier quadratique à partir de trois points.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Paramètres<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>p0</strong> (<em>tuple</em><em>[</em><em>float</em><em>, </em><em>float</em><em>]</em>) – Point de départ de la courbe (latitude, longitude).</p></li>
+<li><p><strong>p1</strong> (<em>tuple</em><em>[</em><em>float</em><em>, </em><em>float</em><em>]</em>) – Point de contrôle (influence la courbure).</p></li>
+<li><p><strong>p2</strong> (<em>tuple</em><em>[</em><em>float</em><em>, </em><em>float</em><em>]</em>) – Point d’arrivée de la courbe (latitude, longitude).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Renvoie<span class="colon">:</span></dt>
+<dd class="field-even"><p>Liste de points interpolés (latitude, longitude).</p>
+</dd>
+<dt class="field-odd">Type renvoyé<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[tuple[float, float]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="manager.trajectoire_manager.TrajectoireManager.trajectoire_lisse_avec_controles">
+<span class="sig-name descname"><span class="pre">trajectoire_lisse_avec_controles</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#manager.trajectoire_manager.TrajectoireManager.trajectoire_lisse_avec_controles" title="Lien vers cette définition">¶</a></dt>
+<dd><p>Lisse une trajectoire en remplaçant les jonctions entre segments par des courbes de Bézier.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Paramètres<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>data</strong> (<em>list</em><em>[</em><em>list</em><em>[</em><em>tuple</em><em>[</em><em>float</em><em>, </em><em>float</em><em>]</em><em>]</em><em>]</em>) – Liste de segments, chaque segment étant une liste de points [(lat, lon), …].</p>
+</dd>
+<dt class="field-even">Renvoie<span class="colon">:</span></dt>
+<dd class="field-even"><p>Trajectoire complète lissée sous forme de liste de points (latitude, longitude).</p>
+</dd>
+<dt class="field-odd">Type renvoyé<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[tuple[float, float]]</p>
+</dd>
+<dt class="field-even">Lève<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Si moins de deux segments sont fournis.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-manager.visualisation_manager">
+<span id="manager-visualisation-manager-module"></span><h2>manager.visualisation_manager module<a class="headerlink" href="#module-manager.visualisation_manager" title="Lien vers cette rubrique">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="manager.visualisation_manager.VisualisationManager">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">manager.visualisation_manager.</span></span><span class="sig-name descname"><span class="pre">VisualisationManager</span></span><a class="headerlink" href="#manager.visualisation_manager.VisualisationManager" title="Lien vers cette définition">¶</a></dt>
+<dd><p>Bases : <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Classe responsable de l’affichage de cartes interactives contenant des itinéraires
+et des données météo (notamment le vent) à l’aide de la bibliothèque Folium.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="manager.visualisation_manager.VisualisationManager.afficher_double_itineraire">
+<span class="sig-name descname"><span class="pre">afficher_double_itineraire</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">itin1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">itin2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">points_meteo</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seuil</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#manager.visualisation_manager.VisualisationManager.afficher_double_itineraire" title="Lien vers cette définition">¶</a></dt>
+<dd><p>Affiche une carte avec deux itinéraires superposés (référence et dévié), ainsi que les points météo.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Paramètres<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>itin1</strong> (<em>list</em><em>[</em><em>tuple</em><em>[</em><em>float</em><em>, </em><em>float</em><em>]</em><em>]</em>) – Liste de points représentant l’itinéraire de référence.</p></li>
+<li><p><strong>itin2</strong> (<em>list</em><em>[</em><em>tuple</em><em>[</em><em>float</em><em>, </em><em>float</em><em>]</em><em>]</em>) – Liste de points représentant l’itinéraire dévié.</p></li>
+<li><p><strong>points_meteo</strong> (<em>list</em><em>[</em><em>tuple</em><em>[</em><em>float</em><em>, </em><em>float</em><em>, </em><em>float</em><em> or </em><em>None</em><em>]</em><em>]</em>) – Liste des points météo à afficher, avec vitesse du vent.
+Format : [(lat, lon, vent_kph), …]</p></li>
+<li><p><strong>seuil</strong> (<em>float</em>) – Seuil de vent maximal admissible (km/h) à représenter.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Renvoie<span class="colon">:</span></dt>
+<dd class="field-even"><p>Carte Folium représentant les deux trajets et les conditions météo.</p>
+</dd>
+<dt class="field-odd">Type renvoyé<span class="colon">:</span></dt>
+<dd class="field-odd"><p>folium.Map</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="manager.visualisation_manager.VisualisationManager.afficher_meteo_sur_carte">
+<span class="sig-name descname"><span class="pre">afficher_meteo_sur_carte</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">points_meteo</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seuil</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">itineraire</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#manager.visualisation_manager.VisualisationManager.afficher_meteo_sur_carte" title="Lien vers cette définition">¶</a></dt>
+<dd><p>Affiche une carte interactive avec un itinéraire et les points météo associés.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Paramètres<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>points_meteo</strong> (<em>list</em><em>[</em><em>tuple</em><em>[</em><em>float</em><em>, </em><em>float</em><em>, </em><em>float</em><em> or </em><em>None</em><em>]</em><em>]</em>) – Liste de tuples contenant latitude, longitude et vitesse du vent (km/h).
+Format : [(lat, lon, vent_kph), …]</p></li>
+<li><p><strong>seuil</strong> (<em>float</em>) – Seuil de vent maximal admissible (km/h) pour le tracé.</p></li>
+<li><p><strong>itineraire</strong> (<em>list</em><em>[</em><em>tuple</em><em>[</em><em>float</em><em>, </em><em>float</em><em>]</em><em>]</em>) – Liste de coordonnées GPS représentant l’itinéraire.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Renvoie<span class="colon">:</span></dt>
+<dd class="field-even"><p>Carte Folium avec tracé et points météo.</p>
+</dd>
+<dt class="field-odd">Type renvoyé<span class="colon">:</span></dt>
+<dd class="field-odd"><p>folium.Map</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-manager">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-manager" title="Lien vers cette rubrique">¶</a></h2>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">ITINÉRAIRE AÉRIEN SÉCURISÉ PAR METEO</a></h1>
+
+
+
+
+
+
+
+
+
+<search id="searchbox" style="display: none" role="search">
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script><h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">modules</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">manager package</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="coordonees.html">coordonees package</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  <li><a href="modules.html">modules</a><ul>
+      <li>Previous: <a href="modules.html" title="Chapitre précédent">modules</a></li>
+      <li>Next: <a href="coordonees.html" title="Chapitre suivant">coordonees package</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2025, Romuald TIAKO - Elsa KUPFER - Enzo VILLAMANDOS - Lucas BONNEAUD.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 8.2.3</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
+      
+      |
+      <a href="_sources/manager.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
