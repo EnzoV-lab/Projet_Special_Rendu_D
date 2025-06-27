@@ -45,7 +45,7 @@ Notes :
 import pandas as pd  # Pour manipuler les fichiers CSV
 import streamlit as st  # Pour l'application web interactive
 from streamlit.components.v1 import html  # Pour afficher du HTML brut
-
+from pathlib import Path
 # === Importation des Itineraire-aérien-package personnalisés ===
 import ItineraireAerien
 from ItineraireAerien.Avion import AvionManager
@@ -58,9 +58,12 @@ from ItineraireAerien.Visualisation import VisualisationManager
 
 # Constantes globales du projet
 CLE_API = "d9ac5ac56f3d4768abd232315250506"
-WAYPOINT_CSV = "/Users/villamandos/PycharmProjects/Projet_Special_Rendu_D/Itineraire-aérien-package/Data/Waypoints.csv"
-VILLES_CSV = "/Users/villamandos/PycharmProjects/Projet_Special_Rendu_D/Itineraire-aérien-package/Data/Villes.csv"
-AVIONS_CSV = "/Users/villamandos/PycharmProjects/Projet_Special_Rendu_D/Itineraire-aérien-package/Data/avions.csv"
+
+BASE_DIR = Path(__file__).resolve().parent
+WAYPOINT_CSV = BASE_DIR / "Data" / "Waypoints.csv"
+VILLES_CSV = BASE_DIR / "Data" / "Villes.csv"
+AVIONS_CSV = BASE_DIR / "Data" / "avions.csv"
+
 
 # Chargement des villes disponibles depuis le CSV
 # (doit contenir les colonnes : city, lat, lng)
