@@ -114,7 +114,7 @@ Ouvrez le fichier suivant dans votre navigateur :
 ``` bash
   docs/build/html/index.html
 ```
-### 2.Naviguez dans les modules, classes et fonctions documentées.
+### 2. Naviguez dans les modules, classes et fonctions documentées.
 
 --> Régénérer la documentation
 
