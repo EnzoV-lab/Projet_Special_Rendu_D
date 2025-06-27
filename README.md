@@ -112,7 +112,7 @@ Une documentation complète du code (générée avec Sphinx) est disponible.
 1- Consultation directement via-streamlit
 ou
 
-2- Lien actuel vers le blog: ` <http://localhost:63342/Projet_Special_Rendu_D/docs/build/html/index.html?_ijt=6emfc9ru0ec4e650633gegt3ij&_ij_reload=RELOAD_ON_SAVE>`
+2- Lien actuel vers le blog: ` <http://localhost:63342/Projet_Special_Rendu_D/docs/build/html/index.html>`
 
 ou
 
@@ -125,10 +125,17 @@ ou
 --> Régénérer la documentation
 
 Si vous modifiez le code et souhaitez mettre à jour la documentation :
-Dans le terminal ecrivez:
+Dans un premier temps le terminal il faut installer le module sphinx et le module qui permet de gérer les thèmes.
+``` bash
+pip install sphinx
+pip install sphinx-rtd-theme
+``` 
+Dans le terminal ecrivez ce qu'il y'a ci-dessous afin de générer un nouveau fichier html si on modifie les fichiers
 ``` bash
 cd docs
 sphinx-apidoc -o source ../modules
+sphinx-apidoc -o source ../outils
+sphinx-apidoc -o source ../
 ./make.bat html   # Windows
 # ou
 make html         # Mac/Linux
