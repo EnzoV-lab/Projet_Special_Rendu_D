@@ -41,7 +41,7 @@ Le projet est principalement destiné à des simulations d’itinéraires aérie
   pip install -r requirements.txt
 ```
 
-### 3. Créer les dossiers nécessaires
+### 3. Créer les dossiers si nécessaires
 
 ``` bash
   mkdir Data Cartes
