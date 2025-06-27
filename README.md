@@ -34,30 +34,20 @@ Le projet est principalement destiné à des simulations d’itinéraires aérie
   git clone https://github.com/EnzoV-lab/Projet_Special_Rendu_D
 ```
 
-### 2. Installer les dépendances
+### 2. Installer le package
+
+``` bash
+  pip install -e .
+```
+### 2.1. En cas de problème utiliser la commande suivante
 
 ``` bash
   pip install -r requirements.txt
 ```
-
-### 3. Créer les dossiers si nécessaires
-
-``` bash
-  mkdir Data Cartes
-```
-
-### 4. Fournir les fichiers de données :
-
-Placez les fichiers suivants dans le dossier `Data/` :
-
-* `avions.csv` : base de données des avions avec type, vitesse admissible, etc.
-* `Waypoints.csv` : base de données géographiques des points de navigation.
-* `Villes.csv` : coordonnées des villes utilisées.
-
 ## Lancer l’application
 
 ``` bash
-  streamlit run main.py
+  streamlit run Itineraire-aérien-package/main.py
 ```
 
 L'application s’ouvre dans le navigateur. Utilisez la barre latérale pour définir les paramètres de simulation.
@@ -100,7 +90,8 @@ Cessna208,light,350,60
 * Le choix des villes se situe uniquements aux Etats-Unis
 * Les Waypoints et donc les trajet sont uniquement réaliser aux dessus de la terre.
 * Les vitesses de vents admissible des avions ne sont pas réelles, elles sont plus basses que la réaliter pour avoir des déviation (les valeurs peuvent etre modifier dans le fichier "avions.csv").
-* Les données météo prises sur l'API sont des données météo au sol et non en altitude 
+* Les données météo prises sur l'API sont des données météo au sol et non en altitude
+* L'avion est considerer arrivée a destination lorsqu'iul se trouve a 70 Km de l'arrivée pour eviter des problème de non atterrissage.
 * Le seuil météo est défini par les capacités de l’avion choisi.
 
 ##  Public cible
@@ -117,12 +108,6 @@ ou
 
 2- Lien actuel vers le blog: ` <http://localhost:63342/Projet_Special_Rendu_D/docs/build/html/index.html>`
 
-ou
-
-3- Ouvrez le fichier suivant dans votre navigateur :
-``` bash
-  docs/build/html/index.html
-```
 ### 2. Naviguez dans les modules, classes et fonctions documentées.
 
 --> Régénérer la documentation
