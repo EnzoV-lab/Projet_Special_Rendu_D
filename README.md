@@ -31,8 +31,8 @@ Le projet est principalement destiné à des simulations d’itinéraires aérie
 ### 1. Cloner le dépôt
 
 ``` bash
-  git clone https://github.com/votre-utilisateur/nom-du-projet.git
-  cd nom-du-projet
+  git clone https://github.com/EnzoV-lab/Projet_Special_Rendu_D
+  cd Projet_Special_Rendu_D
 ```
 
 ### 2. Installer les dépendances
