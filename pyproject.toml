@@ -16,8 +16,7 @@ dependencies = [
     "numpy",
     "folium",
     "streamlit",
-    "requests",
-    "time",
+    "requests"
 
 ]
 license = {text = "MIT"}
