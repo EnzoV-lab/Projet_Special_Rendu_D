@@ -14,7 +14,10 @@ df_villes : pandas.DataFrame
 import pandas as pd  # Pour lire et manipuler des fichiers CSV
 
 # Chargement du fichier contenant les villes et leurs coordonnées géographiques
-VILLES_CSV = "Data/Villes.csv"  # Le chemin vers le fichier CSV
+import os
+# Le chemin vers le fichier CSV
+VILLES_CSV = os.path.join(os.path.dirname(__file__), "../../Data/Villes.csv")
+VILLES_CSV = os.path.abspath(VILLES_CSV)
 df_villes = pd.read_csv(VILLES_CSV)  # Chargement des données dans un DataFrame
 
 def transformer_nom_en_coordonnees(ville):

@@ -1,3 +1,46 @@
+"""
+main.py
+=======
+
+Ce script constitue le cœur de l'application Streamlit pour la simulation de trajectoires aériennes
+en fonction des conditions météorologiques et des avions disponibles.
+
+Fonctionnalités principales :
+-----------------------------
+- Sélection interactive des villes de départ et d’arrivée.
+- Calcul d’un itinéraire direct (sans contrainte météo).
+- Choix de l’avion (libre ou filtré par vent admissible).
+- Calcul d’un itinéraire dévié basé sur les contraintes météo réelles.
+- Affichage d’une carte interactive avec les trajets (via Folium).
+- Résumé synthétique de la simulation.
+
+Modules utilisés :
+------------------
+- :mod:`pandas` pour la lecture des CSV.
+- :mod:`streamlit` pour l’interface web.
+- :mod:`folium` pour la cartographie interactive.
+- :mod:`modules.manager.*` pour la logique de calcul métier.
+- :mod:`outils.coordonees.coordonees_villes` pour la géolocalisation.
+
+Variables globales :
+--------------------
+CLE_API : str
+    Clé API pour accéder au service météo.
+WAYPOINT_CSV : str
+    Fichier contenant les waypoints (points intermédiaires de navigation).
+VILLES_CSV : str
+    Fichier contenant les villes et leurs coordonnées.
+AVIONS_CSV : str
+    Fichier contenant les données sur les avions disponibles.
+
+Notes :
+-------
+- Le fichier doit être exécuté avec `streamlit run main.py`.
+- Nécessite une connexion Internet pour interroger l’API météo.
+- L’utilisateur doit sélectionner deux villes différentes.
+
+"""
+
 # === Import des bibliothèques nécessaires ===
 import pandas as pd  # Pour manipuler les fichiers CSV
 from geopy.distance import geodesic  # (Non utilisé ici, pourrait être supprimé)
