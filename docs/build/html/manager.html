@@ -1,49 +1,120 @@
+
+
 <!DOCTYPE html>
+<html class="writer-html5" lang="fr" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-<html lang="fr" data-content_root="./">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>manager package &mdash; Documentation ITINÉRAIRE AÉRIEN SÉCURISÉ PAR METEO 27/06/2025</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
 
-    <title>manager package &#8212; Documentation ITINÉRAIRE AÉRIEN SÉCURISÉ PAR METEO 27/06/2025</title>
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=5ecbeea2" />
-    <link rel="stylesheet" type="text/css" href="_static/basic.css?v=b08954a9" />
-    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=27fed22d" />
-    <script src="_static/documentation_options.js?v=e7829b41"></script>
-    <script src="_static/doctools.js?v=9bcbadda"></script>
-    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
-    <script src="_static/translations.js?v=e6b791cb"></script>
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=e7829b41"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/translations.js?v=e6b791cb"></script>
+    <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Recherche" href="search.html" />
     <link rel="next" title="coordonees package" href="coordonees.html" />
-    <link rel="prev" title="modules" href="modules.html" />
-   
-  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
-  
+    <link rel="prev" title="modules" href="modules.html" /> 
+</head>
 
-  
-  
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
 
-  </head><body>
-  
-
-    <div class="document">
-      <div class="documentwrapper">
-        <div class="bodywrapper">
           
+          
+          <a href="index.html" class="icon icon-home">
+            ITINÉRAIRE AÉRIEN SÉCURISÉ PAR METEO
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Rechercher docs" aria-label="Rechercher docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">modules</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">manager package</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-manager.avion_manager">manager.avion_manager module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#manager.avion_manager.AvionManager"><code class="docutils literal notranslate"><span class="pre">AvionManager</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-manager.donnees_meteo">manager.donnees_meteo module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#manager.donnees_meteo.DonneesMeteo"><code class="docutils literal notranslate"><span class="pre">DonneesMeteo</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-manager.meteo_manager">manager.meteo_manager module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#manager.meteo_manager.MeteoManager"><code class="docutils literal notranslate"><span class="pre">MeteoManager</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-manager.navigation_manager">manager.navigation_manager module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#manager.navigation_manager.NavigationManager"><code class="docutils literal notranslate"><span class="pre">NavigationManager</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-manager.trajectoire_manager">manager.trajectoire_manager module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#manager.trajectoire_manager.TrajectoireManager"><code class="docutils literal notranslate"><span class="pre">TrajectoireManager</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-manager.visualisation_manager">manager.visualisation_manager module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#manager.visualisation_manager.VisualisationManager"><code class="docutils literal notranslate"><span class="pre">VisualisationManager</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-manager">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="coordonees.html">coordonees package</a></li>
+</ul>
 
-          <div class="body" role="main">
-            
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">ITINÉRAIRE AÉRIEN SÉCURISÉ PAR METEO</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="modules.html">modules</a></li>
+      <li class="breadcrumb-item active">manager package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/manager.rst.txt" rel="nofollow"> Afficher la source de la page</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
   <section id="manager-package">
-<h1>manager package<a class="headerlink" href="#manager-package" title="Lien vers cette rubrique">¶</a></h1>
+<h1>manager package<a class="headerlink" href="#manager-package" title="Lien vers cette rubrique"></a></h1>
 <section id="submodules">
-<h2>Submodules<a class="headerlink" href="#submodules" title="Lien vers cette rubrique">¶</a></h2>
+<h2>Submodules<a class="headerlink" href="#submodules" title="Lien vers cette rubrique"></a></h2>
 </section>
 <section id="module-manager.avion_manager">
-<span id="manager-avion-manager-module"></span><h2>manager.avion_manager module<a class="headerlink" href="#module-manager.avion_manager" title="Lien vers cette rubrique">¶</a></h2>
+<span id="manager-avion-manager-module"></span><h2>manager.avion_manager module<a class="headerlink" href="#module-manager.avion_manager" title="Lien vers cette rubrique"></a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="manager.avion_manager.AvionManager">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">manager.avion_manager.</span></span><span class="sig-name descname"><span class="pre">AvionManager</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fichier_csv</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Data/avions.csv'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#manager.avion_manager.AvionManager" title="Lien vers cette définition">¶</a></dt>
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">manager.avion_manager.</span></span><span class="sig-name descname"><span class="pre">AvionManager</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fichier_csv</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Data/avions.csv'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#manager.avion_manager.AvionManager" title="Lien vers cette définition"></a></dt>
 <dd><p>Bases : <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Classe permettant de gérer la sélection d’avions à partir d’un fichier CSV.</p>
 <p>Cette classe propose deux modes de sélection :
@@ -56,7 +127,7 @@
 </dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="manager.avion_manager.AvionManager.choix_avion_mode_1">
-<span class="sig-name descname"><span class="pre">choix_avion_mode_1</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#manager.avion_manager.AvionManager.choix_avion_mode_1" title="Lien vers cette définition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">choix_avion_mode_1</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#manager.avion_manager.AvionManager.choix_avion_mode_1" title="Lien vers cette définition"></a></dt>
 <dd><p>Mode 1 : Permet de choisir un avion librement sans contrainte météo.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Renvoie<span class="colon">:</span></dt>
@@ -70,7 +141,7 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="manager.avion_manager.AvionManager.choix_avion_mode_2">
-<span class="sig-name descname"><span class="pre">choix_avion_mode_2</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">borne_min</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">borne_max</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#manager.avion_manager.AvionManager.choix_avion_mode_2" title="Lien vers cette définition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">choix_avion_mode_2</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">borne_min</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">borne_max</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#manager.avion_manager.AvionManager.choix_avion_mode_2" title="Lien vers cette définition"></a></dt>
 <dd><p>Mode 2 : Propose uniquement les avions avec une vitesse de vent admissible comprise dans un intervalle.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Paramètres<span class="colon">:</span></dt>
@@ -90,7 +161,7 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="manager.avion_manager.AvionManager.choix_du_mode">
-<span class="sig-name descname"><span class="pre">choix_du_mode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">borne_min</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">borne_max</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#manager.avion_manager.AvionManager.choix_du_mode" title="Lien vers cette définition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">choix_du_mode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">borne_min</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">borne_max</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#manager.avion_manager.AvionManager.choix_du_mode" title="Lien vers cette définition"></a></dt>
 <dd><p>Permet à l’utilisateur de choisir entre les deux modes de sélection d’avion.</p>
 <ul class="simple">
 <li><p>Mode 1 : Choix libre (aucune contrainte météo)</p></li>
@@ -116,10 +187,10 @@
 
 </section>
 <section id="module-manager.donnees_meteo">
-<span id="manager-donnees-meteo-module"></span><h2>manager.donnees_meteo module<a class="headerlink" href="#module-manager.donnees_meteo" title="Lien vers cette rubrique">¶</a></h2>
+<span id="manager-donnees-meteo-module"></span><h2>manager.donnees_meteo module<a class="headerlink" href="#module-manager.donnees_meteo" title="Lien vers cette rubrique"></a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="manager.donnees_meteo.DonneesMeteo">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">manager.donnees_meteo.</span></span><span class="sig-name descname"><span class="pre">DonneesMeteo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cle_api</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">coordonnees</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#manager.donnees_meteo.DonneesMeteo" title="Lien vers cette définition">¶</a></dt>
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">manager.donnees_meteo.</span></span><span class="sig-name descname"><span class="pre">DonneesMeteo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cle_api</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">coordonnees</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#manager.donnees_meteo.DonneesMeteo" title="Lien vers cette définition"></a></dt>
 <dd><p>Bases : <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Classe pour interroger l’API WeatherAPI et récupérer les données météo actuelles
 pour une position géographique donnée.</p>
@@ -133,7 +204,7 @@ pour une position géographique donnée.</p>
 </dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="manager.donnees_meteo.DonneesMeteo.fetch">
-<span class="sig-name descname"><span class="pre">fetch</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#manager.donnees_meteo.DonneesMeteo.fetch" title="Lien vers cette définition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">fetch</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#manager.donnees_meteo.DonneesMeteo.fetch" title="Lien vers cette définition"></a></dt>
 <dd><p>Récupère les données météo actuelles pour les coordonnées fournies,
 en interrogeant l’API WeatherAPI.</p>
 <dl class="field-list simple">
@@ -148,7 +219,7 @@ en interrogeant l’API WeatherAPI.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="manager.donnees_meteo.DonneesMeteo.get_donnees">
-<span class="sig-name descname"><span class="pre">get_donnees</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#manager.donnees_meteo.DonneesMeteo.get_donnees" title="Lien vers cette définition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">get_donnees</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#manager.donnees_meteo.DonneesMeteo.get_donnees" title="Lien vers cette définition"></a></dt>
 <dd><p>Extrait et retourne les informations météo principales de la réponse de l’API.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Renvoie<span class="colon">:</span></dt>
@@ -169,10 +240,10 @@ en interrogeant l’API WeatherAPI.</p>
 
 </section>
 <section id="module-manager.meteo_manager">
-<span id="manager-meteo-manager-module"></span><h2>manager.meteo_manager module<a class="headerlink" href="#module-manager.meteo_manager" title="Lien vers cette rubrique">¶</a></h2>
+<span id="manager-meteo-manager-module"></span><h2>manager.meteo_manager module<a class="headerlink" href="#module-manager.meteo_manager" title="Lien vers cette rubrique"></a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="manager.meteo_manager.MeteoManager">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">manager.meteo_manager.</span></span><span class="sig-name descname"><span class="pre">MeteoManager</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cle_api</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#manager.meteo_manager.MeteoManager" title="Lien vers cette définition">¶</a></dt>
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">manager.meteo_manager.</span></span><span class="sig-name descname"><span class="pre">MeteoManager</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cle_api</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#manager.meteo_manager.MeteoManager" title="Lien vers cette définition"></a></dt>
 <dd><p>Bases : <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Classe de gestion des conditions météorologiques sur des segments de trajectoire.</p>
 <p>Cette classe utilise l’API WeatherAPI via la classe <cite>DonneesMeteo</cite> pour interroger
@@ -185,7 +256,7 @@ respectent un seuil de vent défini.</p>
 </dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="manager.meteo_manager.MeteoManager.verifier_conditions_meteo">
-<span class="sig-name descname"><span class="pre">verifier_conditions_meteo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">coordonnees</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seuil_vent_kph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_depassements</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pause</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#manager.meteo_manager.MeteoManager.verifier_conditions_meteo" title="Lien vers cette définition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">verifier_conditions_meteo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">coordonnees</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seuil_vent_kph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_depassements</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pause</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#manager.meteo_manager.MeteoManager.verifier_conditions_meteo" title="Lien vers cette définition"></a></dt>
 <dd><p>Vérifie les conditions météorologiques sur une série de coordonnées GPS.</p>
 <p>Pour chaque point, récupère les données météo et vérifie si la vitesse du vent
 dépasse un seuil défini. Si trop de points dépassent ce seuil, le segment est rejeté.</p>
@@ -217,10 +288,10 @@ dépasse un seuil défini. Si trop de points dépassent ce seuil, le segment est
 
 </section>
 <section id="module-manager.navigation_manager">
-<span id="manager-navigation-manager-module"></span><h2>manager.navigation_manager module<a class="headerlink" href="#module-manager.navigation_manager" title="Lien vers cette rubrique">¶</a></h2>
+<span id="manager-navigation-manager-module"></span><h2>manager.navigation_manager module<a class="headerlink" href="#module-manager.navigation_manager" title="Lien vers cette rubrique"></a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="manager.navigation_manager.NavigationManager">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">manager.navigation_manager.</span></span><span class="sig-name descname"><span class="pre">NavigationManager</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">waypoint_csv</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Data/Waypoints.csv'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rayon_max_km</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">200</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#manager.navigation_manager.NavigationManager" title="Lien vers cette définition">¶</a></dt>
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">manager.navigation_manager.</span></span><span class="sig-name descname"><span class="pre">NavigationManager</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">waypoint_csv</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Data/Waypoints.csv'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rayon_max_km</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">200</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#manager.navigation_manager.NavigationManager" title="Lien vers cette définition"></a></dt>
 <dd><p>Bases : <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Classe de gestion de la navigation entre deux points géographiques en utilisant des waypoints.</p>
 <p>Permet de charger des points de navigation depuis un fichier CSV, calculer des distances et angles,
@@ -235,7 +306,7 @@ et construire un itinéraire en respectant des contraintes géographiques et mé
 </dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="manager.navigation_manager.NavigationManager.calcul_angle">
-<span class="sig-name descname"><span class="pre">calcul_angle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">depart</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">waypoint</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">arrivee</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#manager.navigation_manager.NavigationManager.calcul_angle" title="Lien vers cette définition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">calcul_angle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">depart</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">waypoint</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">arrivee</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#manager.navigation_manager.NavigationManager.calcul_angle" title="Lien vers cette définition"></a></dt>
 <dd><p>Calcule l’angle entre les vecteurs (départ → waypoint) et (départ → arrivée).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Paramètres<span class="colon">:</span></dt>
@@ -256,7 +327,7 @@ et construire un itinéraire en respectant des contraintes géographiques et mé
 
 <dl class="py method">
 <dt class="sig sig-object py" id="manager.navigation_manager.NavigationManager.charger_waypoints">
-<span class="sig-name descname"><span class="pre">charger_waypoints</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#manager.navigation_manager.NavigationManager.charger_waypoints" title="Lien vers cette définition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">charger_waypoints</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#manager.navigation_manager.NavigationManager.charger_waypoints" title="Lien vers cette définition"></a></dt>
 <dd><p>Charge les waypoints depuis le fichier CSV.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Renvoie<span class="colon">:</span></dt>
@@ -270,7 +341,7 @@ et construire un itinéraire en respectant des contraintes géographiques et mé
 
 <dl class="py method">
 <dt class="sig sig-object py" id="manager.navigation_manager.NavigationManager.distance">
-<span class="sig-name descname"><span class="pre">distance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p2</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#manager.navigation_manager.NavigationManager.distance" title="Lien vers cette définition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">distance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p2</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#manager.navigation_manager.NavigationManager.distance" title="Lien vers cette définition"></a></dt>
 <dd><p>Calcule la distance entre deux coordonnées géographiques en kilomètres (formule de Haversine).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Paramètres<span class="colon">:</span></dt>
@@ -290,7 +361,7 @@ et construire un itinéraire en respectant des contraintes géographiques et mé
 
 <dl class="py method">
 <dt class="sig sig-object py" id="manager.navigation_manager.NavigationManager.intercaler_points">
-<span class="sig-name descname"><span class="pre">intercaler_points</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lat1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lon1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lat2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lon2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#manager.navigation_manager.NavigationManager.intercaler_points" title="Lien vers cette définition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">intercaler_points</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lat1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lon1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lat2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lon2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#manager.navigation_manager.NavigationManager.intercaler_points" title="Lien vers cette définition"></a></dt>
 <dd><p>Génère <cite>n</cite> points intermédiaires équidistants entre deux points.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Paramètres<span class="colon">:</span></dt>
@@ -313,7 +384,7 @@ et construire un itinéraire en respectant des contraintes géographiques et mé
 
 <dl class="py method">
 <dt class="sig sig-object py" id="manager.navigation_manager.NavigationManager.tracer_chemin">
-<span class="sig-name descname"><span class="pre">tracer_chemin</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">depart</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">arrivee</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seuil</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verifier_meteo_callback</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#manager.navigation_manager.NavigationManager.tracer_chemin" title="Lien vers cette définition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">tracer_chemin</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">depart</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">arrivee</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seuil</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verifier_meteo_callback</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#manager.navigation_manager.NavigationManager.tracer_chemin" title="Lien vers cette définition"></a></dt>
 <dd><p>Construit une trajectoire entre deux points, en choisissant des waypoints,
 en vérifiant les conditions météo sur les segments et en s’arrêtant
 en cas d’obstacle météo.</p>
@@ -343,7 +414,7 @@ et retourne (bool, coordonnées, données météo, vent max).</p></li>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="manager.navigation_manager.NavigationManager.trouver_point_suivant">
-<span class="sig-name descname"><span class="pre">trouver_point_suivant</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">depart</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">arrivee</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">points_utilises</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#manager.navigation_manager.NavigationManager.trouver_point_suivant" title="Lien vers cette définition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">trouver_point_suivant</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">depart</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">arrivee</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">points_utilises</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#manager.navigation_manager.NavigationManager.trouver_point_suivant" title="Lien vers cette définition"></a></dt>
 <dd><p>Sélectionne le prochain waypoint le plus pertinent :
 - non utilisé précédemment
 - situé dans le rayon maximal
@@ -369,10 +440,10 @@ et retourne (bool, coordonnées, données météo, vent max).</p></li>
 
 </section>
 <section id="module-manager.trajectoire_manager">
-<span id="manager-trajectoire-manager-module"></span><h2>manager.trajectoire_manager module<a class="headerlink" href="#module-manager.trajectoire_manager" title="Lien vers cette rubrique">¶</a></h2>
+<span id="manager-trajectoire-manager-module"></span><h2>manager.trajectoire_manager module<a class="headerlink" href="#module-manager.trajectoire_manager" title="Lien vers cette rubrique"></a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="manager.trajectoire_manager.TrajectoireManager">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">manager.trajectoire_manager.</span></span><span class="sig-name descname"><span class="pre">TrajectoireManager</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n_points_bezier</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">40</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">auto_ctrl_ratio</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#manager.trajectoire_manager.TrajectoireManager" title="Lien vers cette définition">¶</a></dt>
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">manager.trajectoire_manager.</span></span><span class="sig-name descname"><span class="pre">TrajectoireManager</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n_points_bezier</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">40</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">auto_ctrl_ratio</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#manager.trajectoire_manager.TrajectoireManager" title="Lien vers cette définition"></a></dt>
 <dd><p>Bases : <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Classe permettant de lisser une trajectoire composée de segments en utilisant des courbes de Bézier quadratiques.</p>
 <dl class="field-list simple">
@@ -385,7 +456,7 @@ et retourne (bool, coordonnées, données météo, vent max).</p></li>
 </dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="manager.trajectoire_manager.TrajectoireManager.auto_ctrl">
-<span class="sig-name descname"><span class="pre">auto_ctrl</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p2</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#manager.trajectoire_manager.TrajectoireManager.auto_ctrl" title="Lien vers cette définition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">auto_ctrl</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p2</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#manager.trajectoire_manager.TrajectoireManager.auto_ctrl" title="Lien vers cette définition"></a></dt>
 <dd><p>Calcule automatiquement un point de contrôle intermédiaire entre deux points.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Paramètres<span class="colon">:</span></dt>
@@ -405,7 +476,7 @@ et retourne (bool, coordonnées, données météo, vent max).</p></li>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="manager.trajectoire_manager.TrajectoireManager.bezier_curve">
-<span class="sig-name descname"><span class="pre">bezier_curve</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p2</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#manager.trajectoire_manager.TrajectoireManager.bezier_curve" title="Lien vers cette définition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">bezier_curve</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p2</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#manager.trajectoire_manager.TrajectoireManager.bezier_curve" title="Lien vers cette définition"></a></dt>
 <dd><p>Génère une courbe de Bézier quadratique à partir de trois points.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Paramètres<span class="colon">:</span></dt>
@@ -426,7 +497,7 @@ et retourne (bool, coordonnées, données météo, vent max).</p></li>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="manager.trajectoire_manager.TrajectoireManager.trajectoire_lisse_avec_controles">
-<span class="sig-name descname"><span class="pre">trajectoire_lisse_avec_controles</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#manager.trajectoire_manager.TrajectoireManager.trajectoire_lisse_avec_controles" title="Lien vers cette définition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">trajectoire_lisse_avec_controles</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#manager.trajectoire_manager.TrajectoireManager.trajectoire_lisse_avec_controles" title="Lien vers cette définition"></a></dt>
 <dd><p>Lisse une trajectoire en remplaçant les jonctions entre segments par des courbes de Bézier.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Paramètres<span class="colon">:</span></dt>
@@ -448,16 +519,16 @@ et retourne (bool, coordonnées, données météo, vent max).</p></li>
 
 </section>
 <section id="module-manager.visualisation_manager">
-<span id="manager-visualisation-manager-module"></span><h2>manager.visualisation_manager module<a class="headerlink" href="#module-manager.visualisation_manager" title="Lien vers cette rubrique">¶</a></h2>
+<span id="manager-visualisation-manager-module"></span><h2>manager.visualisation_manager module<a class="headerlink" href="#module-manager.visualisation_manager" title="Lien vers cette rubrique"></a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="manager.visualisation_manager.VisualisationManager">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">manager.visualisation_manager.</span></span><span class="sig-name descname"><span class="pre">VisualisationManager</span></span><a class="headerlink" href="#manager.visualisation_manager.VisualisationManager" title="Lien vers cette définition">¶</a></dt>
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">manager.visualisation_manager.</span></span><span class="sig-name descname"><span class="pre">VisualisationManager</span></span><a class="headerlink" href="#manager.visualisation_manager.VisualisationManager" title="Lien vers cette définition"></a></dt>
 <dd><p>Bases : <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Classe responsable de l’affichage de cartes interactives contenant des itinéraires
 et des données météo (notamment le vent) à l’aide de la bibliothèque Folium.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="manager.visualisation_manager.VisualisationManager.afficher_double_itineraire">
-<span class="sig-name descname"><span class="pre">afficher_double_itineraire</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">itin1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">itin2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">points_meteo</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seuil</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#manager.visualisation_manager.VisualisationManager.afficher_double_itineraire" title="Lien vers cette définition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">afficher_double_itineraire</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">itin1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">itin2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">points_meteo</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seuil</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#manager.visualisation_manager.VisualisationManager.afficher_double_itineraire" title="Lien vers cette définition"></a></dt>
 <dd><p>Affiche une carte avec deux itinéraires superposés (référence et dévié), ainsi que les points météo.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Paramètres<span class="colon">:</span></dt>
@@ -480,7 +551,7 @@ Format : [(lat, lon, vent_kph), …]</p></li>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="manager.visualisation_manager.VisualisationManager.afficher_meteo_sur_carte">
-<span class="sig-name descname"><span class="pre">afficher_meteo_sur_carte</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">points_meteo</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seuil</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">itineraire</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#manager.visualisation_manager.VisualisationManager.afficher_meteo_sur_carte" title="Lien vers cette définition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">afficher_meteo_sur_carte</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">points_meteo</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seuil</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">itineraire</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#manager.visualisation_manager.VisualisationManager.afficher_meteo_sur_carte" title="Lien vers cette définition"></a></dt>
 <dd><p>Affiche une carte interactive avec un itinéraire et les points météo associés.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Paramètres<span class="colon">:</span></dt>
@@ -504,82 +575,39 @@ Format : [(lat, lon, vent_kph), …]</p></li>
 
 </section>
 <section id="module-manager">
-<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-manager" title="Lien vers cette rubrique">¶</a></h2>
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-manager" title="Lien vers cette rubrique"></a></h2>
 </section>
 </section>
 
 
+           </div>
           </div>
-          
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Pied de page">
+        <a href="modules.html" class="btn btn-neutral float-left" title="modules" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Précédent</a>
+        <a href="coordonees.html" class="btn btn-neutral float-right" title="coordonees package" accesskey="n" rel="next">Suivant <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Droits d'auteur 2025, Romuald TIAKO - Elsa KUPFER - Enzo VILLAMANDOS - Lucas BONNEAUD.</p>
+  </div>
+
+  Compilé avec <a href="https://www.sphinx-doc.org/">Sphinx</a> en utilisant un
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">thème</a>
+    fourni par <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
         </div>
       </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="Main">
-        <div class="sphinxsidebarwrapper">
-<h1 class="logo"><a href="index.html">ITINÉRAIRE AÉRIEN SÉCURISÉ PAR METEO</a></h1>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
 
-
-
-
-
-
-
-
-
-<search id="searchbox" style="display: none" role="search">
-    <div class="searchformwrapper">
-    <form class="search" action="search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search"/>
-      <input type="submit" value="Go" />
-    </form>
-    </div>
-</search>
-<script>document.getElementById('searchbox').style.display = "block"</script><h3>Navigation</h3>
-<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
-<ul class="current">
-<li class="toctree-l1 current"><a class="reference internal" href="modules.html">modules</a><ul class="current">
-<li class="toctree-l2 current"><a class="current reference internal" href="#">manager package</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="coordonees.html">coordonees package</a></li>
-</ul>
-
-<div class="relations">
-<h3>Related Topics</h3>
-<ul>
-  <li><a href="index.html">Documentation overview</a><ul>
-  <li><a href="modules.html">modules</a><ul>
-      <li>Previous: <a href="modules.html" title="Chapitre précédent">modules</a></li>
-      <li>Next: <a href="coordonees.html" title="Chapitre suivant">coordonees package</a></li>
-  </ul></li>
-  </ul></li>
-</ul>
-</div>
-
-
-
-
-
-
-
-
-        </div>
-      </div>
-      <div class="clearer"></div>
-    </div>
-    <div class="footer">
-      &#169;2025, Romuald TIAKO - Elsa KUPFER - Enzo VILLAMANDOS - Lucas BONNEAUD.
-      
-      |
-      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 8.2.3</a>
-      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
-      
-      |
-      <a href="_sources/manager.rst.txt"
-          rel="nofollow">Page source</a>
-    </div>
-
-    
-
-    
-  </body>
+</body>
 </html>
