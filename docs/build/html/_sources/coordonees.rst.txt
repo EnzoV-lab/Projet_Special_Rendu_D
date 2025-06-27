@@ -1,5 +1,5 @@
-coordonees package
-==================
+Module d'obtention des coordonnées géographiques des villes
+========================================================================
 
 Submodules
 ----------
