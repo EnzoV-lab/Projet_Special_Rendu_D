@@ -6,12 +6,14 @@
 ITINÉRAIRE AÉRIEN SÉCURISÉ PAR METEO documentation
 ==================================================
 
-Bienvenue dans la documentation de notre projet
+Bienvenue dans la documentation de notre projet, vous y trouverez des explications
+sur notre code
 
 
 .. toctree::
    :maxdepth: 2
-   :caption: Contents:
+   :caption: Contenu:
 
+   main3
    modules
    coordonees
