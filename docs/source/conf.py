@@ -1,7 +1,11 @@
 import os
 import sys
-sys.path.insert(0, os.path.abspath('../../modules'))
-sys.path.insert(0, os.path.abspath('../../outils'))
+sys.path.insert(0, os.path.abspath('../../Itineraire-aérien-package'))
+sys.path.insert(0, os.path.abspath('../../ItineraireAerien'))
+sys.path.insert(0, os.path.abspath('../../Avion'))
+sys.path.insert(0, os.path.abspath('../../coordonnees'))
+sys.path.insert(0, os.path.abspath('../../Meteo'))
+sys.path.insert(0, os.path.abspath('../../Visualisation'))
 sys.path.insert(0, os.path.abspath('../..'))
 
 # Configuration file for the Sphinx documentation builder.

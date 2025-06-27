@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "itineraire-aerien"
+version = "0.1.0"
+description = "Simulation de trajectoires aériennes avec données météo"
+readme = "README.md"
+authors = [
+    { name = "Enzo Villamandos-Romuald Tiako-Lucas Bonneaud-Elsa Kupfer"}
+]
+
+dependencies = [
+    "pandas",
+    "numpy",
+    "folium",
+    "streamlit",
+    "math",
+    "requests",
+    "time",
+
+]
+license = {text = "MIT"}
+[tool.setuptools]
+py-modules = ["ItineraireAerien"]

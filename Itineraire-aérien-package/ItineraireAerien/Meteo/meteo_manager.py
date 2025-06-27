@@ -1,4 +1,4 @@
-from modules.manager.donnees_meteo import DonneesMeteo  # Classe pour interagir avec l'API météo
+from .donnees_meteo import DonneesMeteo  # Classe pour interagir avec l'API météo
 import time  # Permet de temporiser les requêtes (éviter surcharge de l'API)
 
 class MeteoManager:
@@ -56,7 +56,7 @@ class MeteoManager:
             try:
                 meteo.fetch()                              # Requête vers l'API
                 donnees = meteo.get_donnees()              # Données météo sous forme de dictionnaire
-                vent = donnees.get("vent_kph", None)       # Vitesse du vent (peut être None)
+                vent = donnees.get("vent_kph")       # Vitesse du vent (peut être None)
 
                 # Sauvegarde des résultats
                 liste_coords.append((lat, lon))

@@ -136,7 +136,7 @@ class NavigationManager:
 
         # Choisit le point avec le plus petit angle (donc le plus droit vers la cible)
         point_choisi = df_filtre.loc[df_filtre['angle'].idxmin()]
-        return (point_choisi['latitude_deg'], point_choisi['longitude_deg'])
+        return point_choisi['latitude_deg'], point_choisi['longitude_deg']
 
     def tracer_chemin(self, depart, arrivee, seuil, verifier_meteo_callback):
         """
