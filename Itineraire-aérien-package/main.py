@@ -152,7 +152,7 @@ if st.session_state.itin_droit_lisse:
         avion = avions_type[avions_type['nom'] == nom_avion].iloc[0]
     else:
         # Mode 2 : filtrer selon le vent détecté sur l’itinéraire de référence
-        borne_min = int(max(0, vent_max_ref - 5))
+        borne_min = int(max(0, vent_max_ref - 4))
         borne_max = int(vent_max_ref - 2)
         st.info(f"Recherche des avions supportant entre {borne_min} et {borne_max} km/h de vent.")
 
