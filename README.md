@@ -92,6 +92,7 @@ Cessna208,light,350,60
 * Les vitesses de vents admissible des avions ne sont pas réelles, elles sont plus basses que la réaliter pour avoir des déviation (les valeurs peuvent etre modifier dans le fichier "avions.csv").
 * Les données météo prises sur l'API sont des données météo au sol et non en altitude
 * L'avion est considerer arrivée a destination lorsqu'iul se trouve a 70 Km de l'arrivée pour eviter des problème de non atterrissage.
+* 
 * Le seuil météo est défini par les capacités de l’avion choisi.
 
 ##  Public cible
