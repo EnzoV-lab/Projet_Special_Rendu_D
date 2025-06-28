@@ -43,4 +43,4 @@ typing_extensions==4.14.0
 tzdata==2025.2
 urllib3==2.4.0
 xyzservices==2025.4.0
-pathlib==1.0.1
+
